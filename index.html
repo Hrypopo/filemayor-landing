@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileMayor — Your Digital Life Organizer</title>
+    <meta name="description"
+        content="Organize, scan, clean, and watch your filesystem from any terminal. Zero dependencies. Works everywhere.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090b;
+            --bg-card: #18181b;
+            --border: #27272a;
+            --text: #fafafa;
+            --text-dim: #a1a1aa;
+            --accent: #d4af37;
+            --accent-bg: rgba(212, 175, 55, 0.08);
+            --green: #4ade80;
+            --blue: #60a5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── Nav ─────────────────────────────── */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: #000 !important;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.9;
+        }
+
+        /* ─── Hero ────────────────────────────── */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 24px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 32px;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5em, 6vw, 4.5em);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 1.2em;
+            color: var(--text-dim);
+            max-width: 540px;
+            margin-bottom: 40px;
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+
+        .hero-install {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 1.05em;
+            animation: fadeUp 0.8s ease 0.3s both;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .hero-install:hover {
+            border-color: var(--accent);
+        }
+
+        .hero-install .prompt {
+            color: var(--accent);
+        }
+
+        .hero-install .copy-hint {
+            color: var(--text-dim);
+            font-size: 0.75em;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+            animation: fadeUp 0.8s ease 0.4s both;
+        }
+
+        .hero-stat-value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── Section ─────────────────────────── */
+
+        section {
+            padding: 100px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            font-size: 0.75em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 1.05em;
+            color: var(--text-dim);
+            max-width: 560px;
+            margin-bottom: 48px;
+        }
+
+        /* ─── Features ────────────────────────── */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 1.8em;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.05em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.9em;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            font-size: 0.65em;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* ─── Code Block ──────────────────────── */
+
+        .code-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-block .comment {
+            color: #6b7280;
+        }
+
+        .code-block .cmd {
+            color: var(--green);
+        }
+
+        .code-block .flag {
+            color: var(--blue);
+        }
+
+        /* ─── Pricing ─────────────────────────── */
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--accent);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .pricing-popular {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            padding: 4px 16px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pricing-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .pricing-price span {
+            font-size: 0.4em;
+            font-weight: 400;
+            color: var(--text-dim);
+        }
+
+        .pricing-desc {
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .pricing-features li {
+            padding: 6px 0;
+            font-size: 0.9em;
+            color: var(--text-dim);
+        }
+
+        .pricing-features li::before {
+            content: '✓ ';
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .pricing-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-bg);
+        }
+
+        .pricing-btn.primary {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .pricing-btn.primary:hover {
+            opacity: 0.9;
+        }
+
+        /* ─── Security ────────────────────────── */
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .security-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .security-icon {
+            font-size: 1.4em;
+            flex-shrink: 0;
+        }
+
+        .security-item h4 {
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+
+        .security-item p {
+            font-size: 0.85em;
+            color: var(--text-dim);
+        }
+
+        /* ─── Footer ──────────────────────────── */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .footer-author {
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85em;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ─── Responsive ──────────────────────── */
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 20px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .code-section {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav>
+        <a href="#" class="nav-brand">✨ FileMayor</a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#usage">Usage</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#security">Security</a>
+            <a href="https://www.npmjs.com/package/filemayor" class="nav-cta">Install →</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">✨ Now on npm — v2.0.3</div>
+        <h1>Organize your<br><span>digital life</span></h1>
+        <p class="hero-sub">Scan, organize, clean, and watch your filesystem from any terminal. Zero dependencies. Works
+            everywhere.</p>
+
+        <div class="hero-install" onclick="copyInstall()">
+            <span class="prompt">$</span>
+            <span>npm install -g filemayor</span>
+            <span class="copy-hint" id="copyHint">click to copy</span>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <div class="hero-stat-value" id="heroDownloads">75+</div>
+                <div class="hero-stat-label">Weekly Downloads</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">0</div>
+                <div class="hero-stat-label">Dependencies</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">180+</div>
+                <div class="hero-stat-label">File Extensions</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">12</div>
+                <div class="hero-stat-label">Categories</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Everything you need</h2>
+        <p class="section-desc">Six powerful commands. Zero configuration required. Works on Windows, macOS, and Linux.
+        </p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Scan</h3>
+                <p>Recursively scan directories with size, category, date, and extension filtering. Output as table,
+                    JSON, or CSV.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📂</div>
+                <h3>Organize</h3>
+                <p>Auto-sort files into 12 smart categories with configurable naming conventions and duplicate handling.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧹</div>
+                <h3>Clean</h3>
+                <p>Detect and remove temp files, cache directories, system junk, and logs. Reclaim disk space instantly.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👁️</div>
+                <h3>Watch <span class="feature-tag">PRO</span></h3>
+                <p>Real-time file monitoring with rules engine. Auto-organize new files as they appear in your folders.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">↩️</div>
+                <h3>Undo</h3>
+                <p>Full rollback journal for every operation. Safely undo any organization with a single command.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI SOP <span class="feature-tag">PRO</span></h3>
+                <p>AI-powered document parsing using Gemini. Generate organization rules from your standard operating
+                    procedures.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage -->
+    <section id="usage">
+        <div class="code-section">
+            <div>
+                <div class="section-label">Usage</div>
+                <h2 class="section-title">Simple by design</h2>
+                <p class="section-desc">No configuration needed. Just point at a folder and go. Everything works out of
+                    the box with sensible defaults.</p>
+            </div>
+            <div class="code-block">
+                <span class="comment"># See what's in a folder</span><br>
+                <span class="cmd">filemayor scan</span> ~/Downloads<br><br>
+                <span class="comment"># Preview organization</span><br>
+                <span class="cmd">filemayor organize</span> ~/Downloads <span class="flag">--dry-run</span><br><br>
+                <span class="comment"># Sort everything</span><br>
+                <span class="cmd">filemayor organize</span> ~/Downloads<br><br>
+                <span class="comment"># Delete junk files</span><br>
+                <span class="cmd">filemayor clean</span> /tmp <span class="flag">--yes</span><br><br>
+                <span class="comment"># Export as JSON</span><br>
+                <span class="cmd">filemayor scan</span> . <span class="flag">--json</span> | jq '.files'
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title">Start free, upgrade when ready</h2>
+        <p class="section-desc">Core features are free forever. Pro unlocks advanced automation and AI features.</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-name">Free</div>
+                <div class="pricing-price">$0</div>
+                <div class="pricing-desc">For individuals</div>
+                <ul class="pricing-features">
+                    <li>Directory scanning</li>
+                    <li>File organization</li>
+                    <li>Junk cleanup</li>
+                    <li>Undo operations</li>
+                    <li>Config file support</li>
+                    <li>Up to 50 files per operation</li>
+                </ul>
+                <a href="https://www.npmjs.com/package/filemayor" class="pricing-btn">Install Free →</a>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-popular">Most Popular</div>
+                <div class="pricing-name">Pro</div>
+                <div class="pricing-price">$9.99<span>/month</span></div>
+                <div class="pricing-desc">For power users</div>
+                <ul class="pricing-features">
+                    <li>Everything in Free</li>
+                    <li>Watch mode (real-time)</li>
+                    <li>AI SOP parsing</li>
+                    <li>Unlimited bulk operations</li>
+                    <li>CSV export</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="https://filemayor.lemonsqueezy.com/checkout/buy/d2795526-eb05-4272-8084-98b6c7a118bb"
+                    class="pricing-btn primary">Get Pro →</a>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-name">Enterprise</div>
+                <div class="pricing-price">$49.99<span>/month</span></div>
+                <div class="pricing-desc">For teams & companies</div>
+                <ul class="pricing-features">
+                    <li>Everything in Pro</li>
+                    <li>Team license management</li>
+                    <li>Custom categories</li>
+                    <li>API access</li>
+                    <li>Team sharing</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <a href="https://filemayor.lemonsqueezy.com/checkout/buy/7fdcc87f-0660-4c1c-b3db-99f94773b71a"
+                    class="pricing-btn">Get Enterprise →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security -->
+    <section id="security">
+        <div class="section-label">Security</div>
+        <h2 class="section-title">Built to be trusted</h2>
+        <p class="section-desc">Your files stay on your machine. Always.</p>
+
+        <div class="security-grid">
+            <div class="security-item">
+                <span class="security-icon">🔒</span>
+                <div>
+                    <h4>100% Local Processing</h4>
+                    <p>No data leaves your machine. No cloud, no servers, no tracking.</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">🛡️</span>
+                <div>
+                    <h4>Path Traversal Protection</h4>
+                    <p>Built-in guards prevent operations on system directories.</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">📦</span>
+                <div>
+                    <h4>Zero Dependencies</h4>
+                    <p>Pure Node.js core. No supply chain risk from third-party packages.</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">↩️</span>
+                <div>
+                    <h4>Full Rollback Journal</h4>
+                    <p>Every file operation is logged. Undo anything at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">✨ FileMayor</div>
+        <div class="footer-author">Created by Lehlohonolo Goodwill Nchefu (Chevza)</div>
+        <div class="footer-links">
+            <a href="https://www.npmjs.com/package/filemayor">npm</a>
+            <a href="https://github.com/Hrypopo">GitHub</a>
+            <a href="mailto:nchefuh@gmail.com">Support</a>
+        </div>
+    </footer>
+
+    <script>
+        function copyInstall() {
+            navigator.clipboard.writeText('npm install -g filemayor').then(() => {
+                document.getElementById('copyHint').textContent = '✓ copied!';
+                setTimeout(() => {
+                    document.getElementById('copyHint').textContent = 'click to copy';
+                }, 2000);
+            });
+        }
+
+        // Fetch live download count
+        fetch('https://api.npmjs.org/downloads/point/last-week/filemayor')
+            .then(r => r.json())
+            .then(d => {
+                if (d.downloads) {
+                    document.getElementById('heroDownloads').textContent = d.downloads.toLocaleString();
+                }
+            }).catch(() => { });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>
