@@ -7,6 +7,22 @@
     <title>FileMayor — Your Digital Life Organizer</title>
     <meta name="description"
         content="Organize, scan, clean, and watch your filesystem from any terminal. Zero dependencies. Works everywhere.">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="FileMayor — Your Digital Life Organizer">
+    <meta property="og:description"
+        content="Declutter your machine. Free your mind. A secure, local-first engine to organize your files, driven by AI.">
+    <meta property="og:image" content="https://filemayor.com/filemayor-logo-dark.png">
+    <meta property="og:url" content="https://filemayor.com">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FileMayor — Your Digital Life Organizer">
+    <meta name="twitter:description"
+        content="Declutter your machine. Free your mind. A secure, local-first engine to organize your files, driven by AI.">
+    <meta name="twitter:image" content="https://filemayor.com/filemayor-logo-dark.png">
+    <!-- Favicon -->
+    <link rel="icon" href="/filemayor-logo-dark.png" type="image/png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -181,6 +197,33 @@
             color: var(--text-dim);
             font-size: 0.75em;
             font-family: 'Inter', sans-serif;
+        }
+
+        .hero-platforms {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            animation: fadeUp 0.8s ease 0.35s both;
+        }
+
+        .platform-btn {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85em;
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .platform-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+            transform: translateY(-2px);
         }
 
         .hero-stats {
@@ -564,6 +607,21 @@
             <span class="prompt">$</span>
             <span>npm install -g filemayor</span>
             <span class="copy-hint" id="copyHint">click to copy</span>
+        </div>
+
+        <div class="hero-platforms">
+            <a href="https://github.com/Hrypopo/FileMayor/releases/download/v2.0.7/FileMayor-2.0.7-arm64-mac.zip"
+                class="platform-btn">
+                <span>🍏</span> Mac
+            </a>
+            <a href="https://github.com/Hrypopo/FileMayor/releases/download/v2.0.7/FileMayor-Setup-2.0.7.exe"
+                class="platform-btn">
+                <span>🪟</span> Windows
+            </a>
+            <a href="https://github.com/Hrypopo/FileMayor/releases/download/v2.0.7/filemayor_2.0.7_amd64.deb"
+                class="platform-btn">
+                <span>🐧</span> Linux (.deb)
+            </a>
         </div>
 
         <div class="hero-stats">
