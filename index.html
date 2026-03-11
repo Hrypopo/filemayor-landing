@@ -549,15 +549,98 @@
             color: var(--accent);
         }
 
-        /* ─── Responsive ──────────────────────── */
+        .why-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .before-after-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* ─── Responsive: Tablet (≤1024px) ──── */
+
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid,
+            .before-after-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(2em, 5vw, 3.5em);
+            }
+        }
+
+        /* ─── Responsive: Mobile (≤768px) ─────── */
 
         @media (max-width: 768px) {
             nav {
-                padding: 12px 20px;
+                padding: 12px 16px;
             }
 
             .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .nav-links a {
+                font-size: 0.8em;
+            }
+
+            .hero {
+                padding: 100px 16px 60px;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.8em, 7vw, 2.8em);
+            }
+
+            .hero-sub {
+                font-size: 1em;
+            }
+
+            .hero-install {
+                padding: 12px 20px;
+                font-size: 0.9em;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-platforms {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .platform-btn {
+                width: 100%;
+                max-width: 220px;
+                justify-content: center;
+            }
+
+            .hero-stats {
+                flex-direction: column;
                 gap: 16px;
+                align-items: center;
+            }
+
+            section {
+                padding: 60px 16px;
+            }
+
+            .section-title {
+                font-size: 1.6em;
             }
 
             .features-grid {
@@ -568,16 +651,42 @@
                 grid-template-columns: 1fr;
             }
 
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
             .security-grid {
                 grid-template-columns: 1fr;
             }
 
-            .hero-stats {
-                gap: 24px;
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+
+        /* ─── Responsive: Small Mobile (≤480px) ─ */
+
+        @media (max-width: 480px) {
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.6em;
+            }
+
+            .hero-sub {
+                font-size: 0.9em;
+            }
+
+            .hero-install {
+                padding: 10px 14px;
+                font-size: 0.8em;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .pricing-price {
+                font-size: 2em;
             }
         }
     </style>
@@ -644,15 +753,15 @@
         </div>
 
         <div class="hero-platforms" style="margin-top: 40px;">
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.1.0/FileMayor-2.1.0-arm64.1.dmg"
+            <a href="https://github.com/Hrypopo/FileMayor/releases/download/v2.1.0/FileMayor-2.1.0-arm64.dmg"
                 class="platform-btn">
                 <span>🍏</span> Mac
             </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.1.0/FileMayor-Setup-2.1.0.exe"
+            <a href="https://github.com/Hrypopo/FileMayor/releases/download/v2.1.0/FileMayor-Setup-2.1.0.exe"
                 class="platform-btn">
                 <span>🪟</span> Windows
             </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.1.0/filemayor_2.1.0_amd64.deb"
+            <a href="https://github.com/Hrypopo/FileMayor/releases/download/v2.1.0/filemayor_2.1.0_amd64.deb"
                 class="platform-btn">
                 <span>🐧</span> Linux
             </a>
@@ -663,7 +772,7 @@
             the installation, click <strong>"More info"</strong> &rarr; <strong>"Run anyway"</strong>. <br><em>(Our
                 independent publisher certificate is currently pending).</em>
         </p>
-        <div class="hero-stats" style="margin-top: 60px; grid-template-columns: repeat(4, 1fr);">
+        <div class="hero-stats" style="margin-top: 60px;">
             <div class="hero-stats">
                 <div class="stat-item">
                     <div class="stat-value">25k+</div>
@@ -691,8 +800,8 @@
                 FileMayor is the middle ground: Power of the CLI, Safety of an Undo button.
             </p>
 
-            <div
-                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; text-align: left;">
+            <div class="why-grid"
+                style="display: grid; gap: 24px; margin-top: 40px; text-align: left;">
                 <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
                     <h4 style="color: var(--accent); margin-bottom: 8px;">Zero Cloud Reliance</h4>
                     <p style="font-size: 0.9em; color: var(--text-dim);">Your data never leaves your machine. Perfect
@@ -729,7 +838,7 @@
                 Sifting through chaos to find one PDF is a drain on your productivity.
             </p>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px;">
+            <div class="before-after-grid" style="display: grid; gap: 32px; margin-top: 60px;">
                 <div
                     style="text-align: left; padding: 32px; border-radius: 16px; background: rgba(239, 68, 68, 0.03); border: 1px solid rgba(239, 68, 68, 0.1);">
                     <div style="font-size: 1.5em; margin-bottom: 12px;">🔴 Chaos</div>
