@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — FileMayor</title>
+    <meta name="description" content="FileMayor Privacy Policy. Your data stays local.">
+    <link rel="icon" href="/filemayor-logo-dark.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090b;
+            --bg-card: #18181b;
+            --border: #27272a;
+            --text: #fafafa;
+            --text-dim: #a1a1aa;
+            --accent: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-bottom: 32px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .effective {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        p,
+        li {
+            color: var(--text-dim);
+            font-size: 0.95em;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: rgba(78, 173, 128, 0.08);
+            border: 1px solid rgba(78, 173, 128, 0.2);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            margin: 0;
+            color: #4ade80;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-dim);
+            font-size: 0.8em;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to FileMayor</a>
+        <h1>Privacy Policy</h1>
+        <p class="effective">Effective Date: March 9, 2026 · Last Updated: March 11, 2026</p>
+
+        <p>FileMayor ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains what
+            information we collect, how we use it, and your rights regarding your data.</p>
+
+        <div class="highlight">
+            <p>🟢 Core Principle: FileMayor is a local-first application. Your files are never uploaded to external
+                servers. All file processing happens entirely on your device.</p>
+        </div>
+
+        <h2>1. Information We Collect</h2>
+        <p><strong>Data We DO NOT Collect:</strong></p>
+        <ul>
+            <li>File contents, documents, images, or personal files.</li>
+            <li>Filesystem paths or directory structures beyond what is displayed locally.</li>
+            <li>Keystrokes, screenshots, or screen recordings.</li>
+        </ul>
+        <p><strong>Data We May Collect:</strong></p>
+        <ul>
+            <li><strong>License Key Validation:</strong> When activating a Pro or Enterprise license, the key is
+                validated against our payment provider (Lemon Squeezy). No personal file data is transmitted.</li>
+            <li><strong>Anonymous Crash Reports:</strong> In the Desktop App, we may collect anonymous, non-identifiable
+                crash reports to improve stability. These contain no personal or file data.</li>
+            <li><strong>Website Analytics:</strong> Our website (filemayor.com) may use privacy-respecting analytics to
+                measure page views. No cookies are used for tracking.</li>
+        </ul>
+
+        <h2>2. How We Process Files</h2>
+        <p>FileMayor reads the following file metadata <strong>locally on your device only</strong>:</p>
+        <ul>
+            <li>File names and extensions</li>
+            <li>File sizes</li>
+            <li>File modification and creation dates</li>
+            <li>Directory structure</li>
+        </ul>
+        <p>This metadata is used exclusively to provide the scanning, organizing, cleaning, and analysis features. It is
+            never transmitted off your device.</p>
+
+        <h2>3. Third-Party Services</h2>
+        <ul>
+            <li><strong>Lemon Squeezy:</strong> Used for payment processing and license key management. Their privacy
+                policy applies to payment data: <a href="https://www.lemonsqueezy.com/privacy"
+                    style="color: var(--accent);">lemonsqueezy.com/privacy</a></li>
+            <li><strong>Google Gemini API (Pro Feature):</strong> The SOP parsing feature may send user-uploaded SOP
+                text to the Google Gemini API for AI-powered parsing. No filesystem data is sent. Users explicitly
+                trigger this feature.</li>
+        </ul>
+
+        <h2>4. Data Storage</h2>
+        <p>All application data (settings, rollback journals, organization history) is stored locally on your device in
+            your operating system's standard application data directory. We do not operate cloud databases for user
+            data.</p>
+
+        <h2>5. Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li><strong>Access:</strong> View all data stored locally by the application.</li>
+            <li><strong>Deletion:</strong> Uninstalling FileMayor removes all local application data.</li>
+            <li><strong>Portability:</strong> Your files remain on your device at all times; nothing is locked in.</li>
+            <li><strong>Opt-Out:</strong> You can disable anonymous crash reports in Settings.</li>
+        </ul>
+
+        <h2>6. Compliance</h2>
+        <p>FileMayor's local-first architecture is designed to be inherently compliant with:</p>
+        <ul>
+            <li><strong>GDPR</strong> (EU General Data Protection Regulation)</li>
+            <li><strong>POPIA</strong> (South Africa's Protection of Personal Information Act)</li>
+            <li><strong>CCPA</strong> (California Consumer Privacy Act)</li>
+        </ul>
+
+        <h2>7. Children's Privacy</h2>
+        <p>FileMayor is not directed at children under 13. We do not knowingly collect personal information from
+            children.</p>
+
+        <h2>8. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. The "Last Updated" date at the top reflects the most
+            recent revision.</p>
+
+        <h2>9. Contact</h2>
+        <p>For questions or concerns about this Privacy Policy, contact us at: <a href="mailto:nchefuh@gmail.com"
+                style="color: var(--accent);">nchefuh@gmail.com</a></p>
+
+        <footer>
+            © 2026 FileMayor. Created by Lehlohonolo Goodwill Nchefu (Chevza).
+            <br><a href="/terms.html">Terms & Conditions</a> · <a href="/">Home</a>
+        </footer>
+    </div>
+</body>
+
+</html>

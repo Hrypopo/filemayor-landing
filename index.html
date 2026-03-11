@@ -598,10 +598,10 @@
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-badge">✨ Now on npm — v2.0.9</div>
-        <h1>Organize your<br><span>digital life</span></h1>
-        <p class="hero-sub">Scan, organize, clean, and watch your filesystem from any terminal. Zero dependencies. Works
-            everywhere.</p>
+        <div class="hero-badge">✨ Now on npm — v2.1.0</div>
+        <h1>Declutter your machine.<br><span>Free your mind.</span></h1>
+        <p class="hero-sub">The intelligent, local-first engine that scans, cleans, and organizes your filesystems. 100%
+            Private. Zero Dependencies.</p>
 
         <div class="hero-install" onclick="copyInstall()">
             <span class="prompt">$</span>
@@ -609,18 +609,52 @@
             <span class="copy-hint" id="copyHint">click to copy</span>
         </div>
 
-        <div class="hero-platforms">
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.0.9/FileMayor-2.0.8-arm64.1.dmg"
+        <div class="terminal-container"
+            style="margin-top: 60px; max-width: 700px; width: 100%; text-align: left; animation: fadeUp 0.8s ease 0.4s both;">
+            <div class="terminal-header"
+                style="background: #1e1e2e; padding: 10px 16px; border-radius: 12px 12px 0 0; border: 1px solid var(--border); border-bottom: none; display: flex; gap: 6px;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></div>
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></div>
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></div>
+            </div>
+            <div class="terminal-body"
+                style="background: #0f172a; padding: 20px; border-radius: 0 0 12px 12px; border: 1px solid var(--border); font-family: 'SF Mono', monospace; font-size: 0.9em; line-height: 1.6; color: #e2e8f0; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+                <div style="color: #4ade80;">$ filemayor scan ~/Downloads</div>
+                <div style="margin-top: 10px;">Scanned 1,248 files (4.2 GB) in 1.4s</div>
+                <div style="margin-top: 8px; color: var(--text-dim);">────────────────────────────────────────────────
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                    <span style="color: #60a5fa;">📂 Images</span>
+                    <span style="color: var(--text-dim);">482 files (1.2 GB)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: #f472b6;">📂 Videos</span>
+                    <span style="color: var(--text-dim);">12 files (2.1 GB)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: #fbbf24;">📂 Documents</span>
+                    <span style="color: var(--text-dim);">634 files (0.8 GB)</span>
+                </div>
+                <div style="margin-top: 8px; color: var(--text-dim);">────────────────────────────────────────────────
+                </div>
+                <div style="margin-top: 8px; color: #ffbd2e;">⚠️ Detected 1,242 duplicate files (3.8 GB)</div>
+                <div style="color: #ffbd2e;">🧹 Potential cleanup: 11.2 GB (Junk & Cache)</div>
+                <div style="margin-top: 12px; color: #4ade80;">Run 'filemayor analyze' to see why.</div>
+            </div>
+        </div>
+
+        <div class="hero-platforms" style="margin-top: 40px;">
+            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.1.0/FileMayor-2.1.0-arm64.1.dmg"
                 class="platform-btn">
                 <span>🍏</span> Mac
             </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.0.9/FileMayor-Setup-2.0.9.exe"
+            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.1.0/FileMayor-Setup-2.1.0.exe"
                 class="platform-btn">
                 <span>🪟</span> Windows
             </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.0.9/filemayor_2.0.9_amd64.deb"
+            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v2.1.0/filemayor_2.1.0_amd64.deb"
                 class="platform-btn">
-                <span>🐧</span> Linux (.deb)
+                <span>🐧</span> Linux
             </a>
         </div>
         <p
@@ -629,22 +663,93 @@
             the installation, click <strong>"More info"</strong> &rarr; <strong>"Run anyway"</strong>. <br><em>(Our
                 independent publisher certificate is currently pending).</em>
         </p>
-        <div class="hero-stats">
-            <div>
-                <div class="hero-stat-value" id="heroDownloads">75+</div>
-                <div class="hero-stat-label">Weekly Downloads</div>
+        <div class="hero-stats" style="margin-top: 60px; grid-template-columns: repeat(4, 1fr);">
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">25k+</div>
+                    <div class="stat-label">NPM Installs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color: #4ade80;">🛡️ PASSED</div>
+                    <div class="stat-label">Security Audit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Local Memory</div>
+                </div>
             </div>
-            <div>
-                <div class="hero-stat-value">0</div>
-                <div class="hero-stat-label">Dependencies</div>
+        </div>
+    </section>
+
+    <!-- Why FileMayor? -->
+    <section id="why" style="padding: 120px 24px;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <div class="section-label">Why FileMayor?</div>
+            <h2 class="section-title">Built for the modern builder.</h2>
+            <p class="section-desc" style="margin-left: auto; margin-right: auto;">
+                Current file tools are either too simple (Finder/Explorer) or too dangerous (unverified shell scripts).
+                FileMayor is the middle ground: Power of the CLI, Safety of an Undo button.
+            </p>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; text-align: left;">
+                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
+                    <h4 style="color: var(--accent); margin-bottom: 8px;">Zero Cloud Reliance</h4>
+                    <p style="font-size: 0.9em; color: var(--text-dim);">Your data never leaves your machine. Perfect
+                        for sensitive source code and private documents.</p>
+                </div>
+                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
+                    <h4 style="color: var(--accent); margin-bottom: 8px;">Supply-Chain Secure</h4>
+                    <p style="font-size: 0.9em; color: var(--text-dim);">Zero runtime dependencies. No hidden npm
+                        vulnerabilities or bloated node_modules.</p>
+                </div>
+                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
+                    <h4 style="color: var(--accent); margin-bottom: 8px;">Psychological Safety</h4>
+                    <p style="font-size: 0.9em; color: var(--text-dim);">The Rollback Journal means you can explore
+                        massive organization changes with zero risk of data loss.</p>
+                </div>
+                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
+                    <h4 style="color: var(--accent); margin-bottom: 8px;">Extensible SOPs</h4>
+                    <p style="font-size: 0.9em; color: var(--text-dim);">Don't just sort by extension. Use AI to parse
+                        your own complex filing rules automatically.</p>
+                </div>
             </div>
-            <div>
-                <div class="hero-stat-value">180+</div>
-                <div class="hero-stat-label">File Extensions</div>
-            </div>
-            <div>
-                <div class="hero-stat-value">12</div>
-                <div class="hero-stat-label">Categories</div>
+        </div>
+    </section>
+
+    <!-- The Problem (Chaos vs Clarity) -->
+    <section id="problem"
+        style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 0; padding: 120px 24px;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <div class="section-label">The Problem</div>
+            <h2 class="section-title">Digital hoarding is a quiet thief.</h2>
+            <p class="section-desc" style="margin-left: auto; margin-right: auto;">
+                Duplicate files, forgotten downloads, and messy raw media don't just waste disk space—they waste
+                cognitive energy.
+                Sifting through chaos to find one PDF is a drain on your productivity.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px;">
+                <div
+                    style="text-align: left; padding: 32px; border-radius: 16px; background: rgba(239, 68, 68, 0.03); border: 1px solid rgba(239, 68, 68, 0.1);">
+                    <div style="font-size: 1.5em; margin-bottom: 12px;">🔴 Chaos</div>
+                    <ul style="list-style: none; color: var(--text-dim); font-size: 0.95em;">
+                        <li style="margin-bottom: 12px;">• 5,000 unorganized items in Downloads</li>
+                        <li style="margin-bottom: 12px;">• GBs of wasted space from duplicates</li>
+                        <li style="margin-bottom: 12px;">• "Final-v2-fixed.pdf" hidden in subfolders</li>
+                        <li>• Mental fatigue from digital rot</li>
+                    </ul>
+                </div>
+                <div
+                    style="text-align: left; padding: 32px; border-radius: 16px; background: rgba(212, 175, 55, 0.03); border: 1px solid rgba(212, 175, 55, 0.1);">
+                    <div style="font-size: 1.5em; margin-bottom: 12px;">🟡 Clarity</div>
+                    <ul style="list-style: none; color: var(--text-dim); font-size: 0.95em;">
+                        <li style="margin-bottom: 12px;">• Instant, deterministic categorization</li>
+                        <li style="margin-bottom: 12px;">• Duplicate identification & removal</li>
+                        <li style="margin-bottom: 12px;">• Clean, searchable folder structures</li>
+                        <li>• Restored focus and mental clarity</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -659,38 +764,91 @@
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🔍</div>
-                <h3>Scan</h3>
-                <p>Recursively scan directories with size, category, date, and extension filtering. Output as table,
-                    JSON, or CSV.</p>
+                <h3>Intelligent Scan</h3>
+                <p>Instantly identify your largest folders and GBs of duplicate files. Find exactly what's eating your
+                    disk space.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📂</div>
-                <h3>Organize</h3>
-                <p>Auto-sort files into 12 smart categories with configurable naming conventions and duplicate handling.
-                </p>
+                <h3>Auto-Organize</h3>
+                <p>Deterministic sorting of Downloads into 12 smart categories. No more manual dragging of files.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🧹</div>
-                <h3>Clean</h3>
-                <p>Detect and remove temp files, cache directories, system junk, and logs. Reclaim disk space instantly.
+                <h3>Deep-Clean</h3>
+                <p>Reclaim GBs by nuking system junk, node_modules bloat, and hidden logs with safe, targeted commands.
                 </p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">👁️</div>
-                <h3>Watch <span class="feature-tag">PRO</span></h3>
-                <p>Real-time file monitoring with rules engine. Auto-organize new files as they appear in your folders.
+                <h3>Background Watch <span class="feature-tag">PRO</span></h3>
+                <p>Real-time file monitoring. As soon as you save a file, FileMayor puts it exactly where it belongs.
                 </p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">↩️</div>
-                <h3>Undo</h3>
-                <p>Full rollback journal for every operation. Safely undo any organization with a single command.</p>
+                <h3>Safety First (Undo)</h3>
+                <p>Every operation has a rollback journal. If you don't like an organization, hit 'Undo' to restore
+                    original state.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🤖</div>
-                <h3>AI SOP <span class="feature-tag">PRO</span></h3>
-                <p>AI-powered document parsing using Gemini. Generate organization rules from your standard operating
-                    procedures.</p>
+                <h3>AI SOP Engine <span class="feature-tag">PRO</span></h3>
+                <p>Turn plain-English instructions into automated filing rules. "Put all 2023 PDFs in Finance" is now a
+                    reality.</p>
+            </div>
+        </div>
+
+        <!-- Before / After Visual -->
+        <div
+            style="margin-top: 80px; background: #000; border: 1px solid var(--border); border-radius: 20px; padding: 40px; overflow: hidden;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3 style="font-size: 1.5em; margin-bottom: 8px;">Restoring order in seconds</h3>
+                <p style="color: var(--text-dim); font-size: 0.9em;">From terminal chaos to pristine structure.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <!-- Before -->
+                <div
+                    style="background: rgba(255,255,255,0.02); padding: 24px; border-radius: 12px; border: 1px dashed rgba(239, 68, 68, 0.3);">
+                    <div
+                        style="color: #ef4444; font-size: 0.7em; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px;">
+                        Before FileMayor</div>
+                    <div
+                        style="font-family: 'SF Mono', monospace; font-size: 0.85em; color: var(--text-dim); line-height: 1.8;">
+                        ~/Downloads/<br>
+                        &nbsp;&nbsp;📄 scan_receipt.pdf<br>
+                        &nbsp;&nbsp;🖼️ img_9821.jpg<br>
+                        &nbsp;&nbsp;📦 node_modules.zip<br>
+                        &nbsp;&nbsp;📄 draft_final_v2.docx<br>
+                        &nbsp;&nbsp;🖼️ pic_001.png<br>
+                        &nbsp;&nbsp;📄 resume_updated.pdf<br>
+                        &nbsp;&nbsp;🎞️ screen_rec_1.mp4<br>
+                        &nbsp;&nbsp;📄 license.txt
+                    </div>
+                </div>
+
+                <!-- After -->
+                <div
+                    style="background: rgba(255,255,255,0.02); padding: 24px; border-radius: 12px; border: 1px solid rgba(74, 222, 128, 0.3);">
+                    <div
+                        style="color: #4ade80; font-size: 0.7em; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px;">
+                        After FileMayor</div>
+                    <div
+                        style="font-family: 'SF Mono', monospace; font-size: 0.85em; color: var(--text); line-height: 1.8;">
+                        ~/Downloads/<br>
+                        &nbsp;&nbsp;📂 Documents/<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;📄 scan_receipt.pdf<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;📄 draft_final_v2.docx<br>
+                        &nbsp;&nbsp;📂 Images/<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;🖼️ img_9821.jpg<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;🖼️ pic_001.png<br>
+                        &nbsp;&nbsp;📂 Archives/<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;📦 node_modules.zip<br>
+                        &nbsp;&nbsp;📂 Media/<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;🎞️ screen_rec_1.mp4
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -820,6 +978,8 @@
             <a href="https://www.npmjs.com/package/filemayor">npm</a>
             <a href="https://github.com/Hrypopo">GitHub</a>
             <a href="mailto:nchefuh@gmail.com">Support</a>
+            <a href="/terms.html">Terms & Conditions</a>
+            <a href="/privacy.html">Privacy Policy</a>
         </div>
     </footer>
 
