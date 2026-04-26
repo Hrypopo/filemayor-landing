@@ -47,3 +47,6 @@ clone1.err
 clone2.out
 clone2.err
 branch.txt
+.commit-msg.tmp
+g.out
+g.err
