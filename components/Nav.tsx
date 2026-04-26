@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { site } from '@/lib/site';
 
 const links = [
+  { href: '#run', label: 'Run' },
   { href: '#triad', label: 'Triad' },
-  { href: '#surfaces', label: 'Surfaces' },
   { href: '#doctrine', label: 'Doctrine' },
   { href: '#pricing', label: 'Pricing' },
   { href: '/docs', label: 'Docs' },
@@ -16,9 +16,12 @@ export function Nav() {
       style={{ background: 'rgba(8,8,10,0.85)' }}
     >
       <div className="container-prose flex h-14 items-center justify-between gap-6">
-        <Link href="/" className="group inline-flex items-baseline gap-2.5">
+        <Link href="/" className="group inline-flex items-baseline gap-2">
           <span className="font-display text-[20px] tracking-tight text-text">
             {site.name}
+          </span>
+          <span aria-hidden className="font-mono text-[14px] text-text-3">
+            —
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-3 transition-colors group-hover:text-accent">
             by {site.by}

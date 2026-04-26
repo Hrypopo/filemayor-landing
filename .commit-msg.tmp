@@ -1,0 +1,21 @@
+feat: add "what happens when you run it?" section + tighten wordmark
+
+Adds RealOutput.tsx — a new homepage section placed between Hero and
+Curative Triad. Shows the full pipeline:
+
+  scan → explain → cure → apply → undo
+
+with real terminal output for each verb. The argument is "show, don't
+tell": a vertical sequence of five real CLI outputs converts harder
+than any WebGL set piece. This section now carries the conceptual
+weight; the Curative Triad section that follows explains the mental
+model behind it.
+
+Also:
+- Wordmark in Nav and Footer tightened to "FileMayor — by Chevza"
+  with explicit em-dash separator (decorative, aria-hidden so screen
+  readers read "FileMayor by Chevza" without the hyphenation).
+- Nav link order updated: Run, Triad, Doctrine, Pricing, Docs.
+  Surfaces dropped from primary nav (still on the page).
+
+Refs: REDESIGN-PLAN.md, user note 2026.04.26

@@ -38,9 +38,12 @@ export function Footer() {
       <div className="container-prose">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr,3fr]">
           <div>
-            <div className="flex items-baseline gap-2.5">
+            <div className="flex items-baseline gap-2">
               <span className="font-display text-[28px] tracking-tight text-text">
                 {site.name}
+              </span>
+              <span aria-hidden className="font-mono text-[18px] text-text-3">
+                —
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
                 by {site.by}

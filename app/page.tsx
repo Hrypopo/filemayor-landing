@@ -1,5 +1,6 @@
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
+import { RealOutput } from '@/components/RealOutput';
 import { CurativeTriad } from '@/components/CurativeTriad';
 import { ThreeSurfaces } from '@/components/ThreeSurfaces';
 import { WhyFileMayor } from '@/components/WhyFileMayor';
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Nav />
       <main id="main">
         <Hero />
+        <RealOutput />
         <CurativeTriad />
         <ThreeSurfaces />
         <WhyFileMayor />
