@@ -86,7 +86,7 @@ export function Footer() {
             reserved.
           </div>
           <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-text-3">
-            Built in Lesotho · privacy-first by default
+            Built in South Africa · privacy-first by default
           </div>
         </div>
       </div>

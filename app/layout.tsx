@@ -66,18 +66,29 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#08080a',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0d0b0a' },
+    { media: '(prefers-color-scheme: light)', color: '#faf8f3' },
+  ],
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
 };
+
+/* Inline pre-hydration script — sets data-theme before paint to avoid flash.
+   Reads localStorage first, falls back to prefers-color-scheme, defaults dark. */
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       className={`${newsreader.variable} ${geist.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <a
           href="#main"

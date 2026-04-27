@@ -8,16 +8,16 @@ export function LiveTerminal({ className }: LiveTerminalProps) {
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-xl border border-border bg-[#0a0a0c] font-mono text-[13px] leading-relaxed',
+        'term-block overflow-hidden rounded-xl border border-border font-mono text-[13px] leading-relaxed',
         className,
       )}
       role="img"
       aria-label="Sample filemayor explain output: 1,248 files scanned, diagnosis 22 of 100, 3.8 GB recoverable"
     >
-      <div className="flex gap-1.5 border-b border-border bg-surface px-3.5 py-2.5">
-        <span className="size-2.5 rounded-full bg-border-strong" />
-        <span className="size-2.5 rounded-full bg-border-strong" />
-        <span className="size-2.5 rounded-full bg-border-strong" />
+      <div className="flex gap-1.5 border-b border-border/40 bg-black/30 px-3.5 py-2.5">
+        <span className="size-2.5 rounded-full bg-white/15" />
+        <span className="size-2.5 rounded-full bg-white/15" />
+        <span className="size-2.5 rounded-full bg-white/15" />
       </div>
       <div className="space-y-1 p-5 text-text-2">
         <div className="text-ok">$ filemayor explain ~/Downloads</div>

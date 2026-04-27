@@ -98,10 +98,10 @@ export function Pricing() {
               <article
                 key={t.key}
                 className={
-                  'relative rounded-2xl border bg-surface p-8 ' +
+                  'relative rounded-2xl bg-surface p-8 ' +
                   (t.featured
-                    ? 'border-accent/50 shadow-[0_0_60px_-20px] shadow-accent/30'
-                    : 'border-border')
+                    ? 'border-2 border-accent'
+                    : 'border border-border')
                 }
               >
                 {t.featured && (

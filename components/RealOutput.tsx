@@ -224,7 +224,7 @@ export function RealOutput() {
                 <span className="font-mono text-[12px] text-text-2">{s.cmd}</span>
               </header>
 
-              <div className="space-y-1 bg-[#0a0a0c] p-6 font-mono text-[13px] leading-relaxed text-text-2 md:px-7">
+              <div className="term-block space-y-1 p-6 font-mono text-[13px] leading-relaxed text-text-2 md:px-7">
                 <div className="text-ok">$ {s.cmd}</div>
                 <div className="space-y-1 pt-1">{s.body}</div>
               </div>

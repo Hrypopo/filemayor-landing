@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { site } from '@/lib/site';
+import { ThemeToggle } from './ThemeToggle';
 
 const links = [
   { href: '#run', label: 'Run' },
@@ -10,8 +11,7 @@ const links = [
 export function Nav() {
   return (
     <header
-      className="sticky top-0 z-50 border-b border-border/80 backdrop-blur-md backdrop-saturate-150"
-      style={{ background: 'rgba(8,8,10,0.85)' }}
+      className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md backdrop-saturate-150"
     >
       <div className="container-prose flex h-14 items-center justify-between gap-6">
         <Link href="/" className="group inline-flex items-baseline gap-2">
@@ -43,6 +43,7 @@ export function Nav() {
           >
             GitHub
           </a>
+          <ThemeToggle />
           <Link href="#download" className="btn btn-primary text-xs">
             Download
             <span aria-hidden>→</span>
