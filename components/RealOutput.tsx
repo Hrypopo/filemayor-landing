@@ -1,4 +1,7 @@
+'use client';
+
 import type { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
 interface Step {
   num: string;
@@ -7,6 +10,8 @@ interface Step {
   caption: string;
   body: ReactNode;
 }
+
+const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const Row = ({
   k,
@@ -138,6 +143,8 @@ const steps: Step[] = [
   },
 ];
 
+const verbs = ['scan', 'explain', 'cure', 'apply', 'undo'];
+
 export function RealOutput() {
   return (
     <section
@@ -152,16 +159,57 @@ export function RealOutput() {
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-2 md:text-lg">
           No screenshots. No mocks. The output below is what FileMayor prints today, in the
-          order you would type the commands.{' '}
-          <span className="font-mono text-[15px] text-accent">
-            scan → explain → cure → apply → undo
-          </span>
+          order you would type the commands.
         </p>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.12 } },
+            hidden: {},
+          }}
+          className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[15px] text-text-3"
+          aria-label="Verb chain: scan, explain, cure, apply, undo"
+        >
+          {verbs.map((v, i) => (
+            <span key={v} className="flex items-center gap-3">
+              <motion.span
+                variants={{
+                  hidden: { opacity: 0, y: 8 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5, ease: easeOut }}
+                className="text-accent"
+              >
+                {v}
+              </motion.span>
+              {i < verbs.length - 1 && (
+                <motion.span
+                  aria-hidden
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: { opacity: 1 },
+                  }}
+                  transition={{ duration: 0.5, ease: easeOut }}
+                  className="text-text-3"
+                >
+                  →
+                </motion.span>
+              )}
+            </span>
+          ))}
+        </motion.div>
 
         <ol className="mt-12 space-y-5">
           {steps.map((s) => (
-            <li
+            <motion.li
               key={s.num}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, ease: easeOut }}
               className="overflow-hidden rounded-2xl border border-border bg-surface"
             >
               <header className="flex flex-wrap items-baseline justify-between gap-4 border-b border-border px-6 py-4 md:px-7 md:py-5">
@@ -184,7 +232,7 @@ export function RealOutput() {
               <p className="border-t border-border px-6 py-5 text-[14px] leading-relaxed text-text-2 md:px-7">
                 {s.caption}
               </p>
-            </li>
+            </motion.li>
           ))}
         </ol>
 

@@ -3,6 +3,7 @@ import { Hero } from '@/components/Hero';
 import { RealOutput } from '@/components/RealOutput';
 import { ProofStrip } from '@/components/ProofStrip';
 import { Pricing } from '@/components/Pricing';
+import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
@@ -15,6 +16,7 @@ export default function HomePage() {
         <RealOutput />
         <ProofStrip />
         <Pricing />
+        <FAQ />
       </main>
       <Footer />
       <script
