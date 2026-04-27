@@ -59,6 +59,21 @@ const formatPrice = (usd: number) =>
         .toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
         .replace('US', '');
 
+const purchaseFaq = [
+  {
+    q: 'How is the license delivered?',
+    a: 'After checkout you receive an activation link by email. One click activates the desktop app. Offline activation also works — paste the key into the license command. License validation runs locally with a 30-day offline grace period.',
+  },
+  {
+    q: 'Refunds?',
+    a: '14 days, no questions, processed by the checkout provider. No retention tactics.',
+  },
+  {
+    q: "What's the actual difference between Pro and Enterprise?",
+    a: 'Pro is one seat. Enterprise adds team license management, custom categories, API access, and dedicated support. If you are not sure, start on Pro — upgrading later is one email.',
+  },
+];
+
 export function Pricing() {
   return (
     <section
@@ -131,6 +146,27 @@ export function Pricing() {
             );
           })}
         </div>
+
+        <ul className="mt-16 divide-y divide-border border-y border-border">
+          {purchaseFaq.map((it) => (
+            <li key={it.q}>
+              <details className="group">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 md:py-7">
+                  <h3 className="font-display text-[20px] font-normal leading-snug tracking-tight text-text">
+                    {it.q}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="mt-2 inline-block size-2.5 shrink-0 rounded-full border border-border-strong transition-all group-open:border-accent group-open:bg-accent"
+                  />
+                </summary>
+                <p className="-mt-2 max-w-prose pb-7 text-[15px] leading-relaxed text-text-2">
+                  {it.a}
+                </p>
+              </details>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

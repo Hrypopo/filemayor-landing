@@ -3,8 +3,6 @@ import { site } from '@/lib/site';
 
 const links = [
   { href: '#run', label: 'Run' },
-  { href: '#triad', label: 'Triad' },
-  { href: '#doctrine', label: 'Doctrine' },
   { href: '#pricing', label: 'Pricing' },
   { href: '/docs', label: 'Docs' },
 ];

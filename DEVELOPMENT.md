@@ -43,7 +43,7 @@ npm run format      # prettier write
 app/
 ├── layout.tsx          Root layout, fonts (Newsreader, Geist, Geist Mono), metadata
 ├── globals.css         Design tokens, Tailwind base
-├── page.tsx            Home — composes nine section components
+├── page.tsx            Home — FOUR sections: Hero, RealOutput, ProofStrip, Pricing
 ├── privacy/            /privacy route
 ├── terms/              /terms route
 ├── docs/               /docs route (stub)
@@ -52,18 +52,22 @@ app/
 ├── sitemap.ts          Generated sitemap.xml
 └── not-found.tsx       404 page
 components/
-├── Nav.tsx             Sticky top nav
-├── Hero.tsx            Hero with eyebrow, headline, CTAs, terminal
-├── LiveTerminal.tsx    Static terminal preview block
+ON HOME
+├── Nav.tsx             Sticky top nav (Run, Pricing, Docs)
+├── Hero.tsx            Eyebrow, serif headline, prose subhead, verb chain, CTAs, surfaces line, terminal
+├── LiveTerminal.tsx    Hero terminal block
 ├── InstallButton.tsx   Click-to-copy CLI install button (client)
-├── CurativeTriad.tsx   The three-step explain/cure/apply spine
-├── ThreeSurfaces.tsx   CLI / Desktop / PWA
-├── WhyFileMayor.tsx    Four pillars
-├── ChevzaDoctrine.tsx  Six-layer security architecture
-├── OpenMetrics.tsx     Live npm + GitHub stars (client)
-├── Pricing.tsx         Free / Pro / Enterprise (USD primary)
-├── FAQ.tsx             Six entries
-└── Footer.tsx          Three-column footer
+├── RealOutput.tsx      Five verbs with real terminal output (the conversion section)
+├── ProofStrip.tsx      Compact band: 4 live metrics + the Chevza Doctrine layer list (client)
+├── Pricing.tsx         Free / Pro / Enterprise + 3-question purchase FAQ folded inline
+└── Footer.tsx          Three-column footer with "FileMayor — by Chevza" wordmark
+RESERVED FOR SUB-PAGES (not imported from home)
+├── CurativeTriad.tsx   Reserved for /docs or feature page if needed
+├── ThreeSurfaces.tsx   Reserved for /download
+├── WhyFileMayor.tsx    Folded into Hero copy + Doctrine line
+├── ChevzaDoctrine.tsx  Long-form version reserved for /docs/security
+├── OpenMetrics.tsx     Long-form version reserved for /open
+└── FAQ.tsx             Long-form version reserved for /faq if needed
 lib/
 ├── site.ts             Single source of truth for site metadata, version, pricing
 └── utils.ts            cn() helper
@@ -73,6 +77,13 @@ public/
 ├── robots.txt          (legacy — superseded by app/robots.ts on build)
 └── sitemap.xml         (legacy — superseded by app/sitemap.ts on build)
 ```
+
+### Why four sections
+
+The first scaffold had ten. Confidence reads as restraint, not volume.
+Reduced to: **Hero · RealOutput · ProofStrip · Pricing**. Hero promises;
+RealOutput proves; ProofStrip validates without making a fuss; Pricing
+transacts. Cut sections live in `components/` for sub-page reuse.
 
 ## Design tokens
 

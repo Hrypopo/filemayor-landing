@@ -3,6 +3,8 @@ import { site } from '@/lib/site';
 import { LiveTerminal } from './LiveTerminal';
 import { InstallButton } from './InstallButton';
 
+const surfaces = ['CLI', 'Desktop', 'PWA'];
+
 export function Hero() {
   return (
     <section className="grid-bg relative overflow-hidden pb-24 pt-28 md:pb-32 md:pt-36">
@@ -22,12 +24,32 @@ export function Hero() {
           {site.description}
         </p>
 
+        <div className="mt-6 font-mono text-[14px] tracking-[0.02em] text-text-3 md:text-[15px]">
+          <span className="text-text-2">scan</span>{' '}
+          <span aria-hidden>→</span> <span className="text-text-2">explain</span>{' '}
+          <span aria-hidden>→</span> <span className="text-text-2">cure</span>{' '}
+          <span aria-hidden>→</span> <span className="text-text-2">apply</span>{' '}
+          <span aria-hidden>→</span> <span className="text-text-2">undo</span>
+        </div>
+
         <div className="mt-12 flex flex-wrap items-center gap-3">
           <Link href="#download" className="btn btn-primary">
             Download {site.name}
             <span aria-hidden>→</span>
           </Link>
           <InstallButton />
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+          <span>Available on</span>
+          {surfaces.map((s, i) => (
+            <span key={s} className="flex items-center gap-3">
+              <span className="text-text-2">{s}</span>
+              {i < surfaces.length - 1 && <span aria-hidden>·</span>}
+            </span>
+          ))}
+          <span aria-hidden>·</span>
+          <span className="text-text-2">Mac · Windows · Linux</span>
         </div>
 
         <LiveTerminal className="mt-16 max-w-[760px]" />

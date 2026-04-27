@@ -1,13 +1,8 @@
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
 import { RealOutput } from '@/components/RealOutput';
-import { CurativeTriad } from '@/components/CurativeTriad';
-import { ThreeSurfaces } from '@/components/ThreeSurfaces';
-import { WhyFileMayor } from '@/components/WhyFileMayor';
-import { ChevzaDoctrine } from '@/components/ChevzaDoctrine';
-import { OpenMetrics } from '@/components/OpenMetrics';
+import { ProofStrip } from '@/components/ProofStrip';
 import { Pricing } from '@/components/Pricing';
-import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
@@ -18,13 +13,8 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <RealOutput />
-        <CurativeTriad />
-        <ThreeSurfaces />
-        <WhyFileMayor />
-        <ChevzaDoctrine />
-        <OpenMetrics />
+        <ProofStrip />
         <Pricing />
-        <FAQ />
       </main>
       <Footer />
       <script
