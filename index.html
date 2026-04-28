@@ -755,39 +755,32 @@
         </div>
 
         <div class="hero-platforms" style="margin-top: 40px;">
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v3.6.0/FileMayor-3.6.0-arm64.dmg"
-                class="platform-btn">
+            <a href="https://github.com/Hrypopo/filemayor-landing/releases/latest" class="platform-btn">
                 <span>🍏</span> Mac
             </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v3.6.0/FileMayor.Setup.3.6.0.exe"
-                class="platform-btn">
+            <a href="https://github.com/Hrypopo/filemayor-landing/releases/latest" class="platform-btn">
                 <span>🪟</span> Windows
             </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/download/v3.6.0/filemayor_3.6.0_amd64.deb"
-                class="platform-btn">
+            <a href="https://github.com/Hrypopo/filemayor-landing/releases/latest" class="platform-btn">
                 <span>🐧</span> Linux
             </a>
         </div>
         <p
-            style="color: var(--text-dim); font-size: 0.85em; margin-top: 20px; text-align: center; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-            <strong style="color: var(--gold-light);">Windows Note:</strong> If Microsoft Defender SmartScreen blocks
-            the installation, click <strong>"More info"</strong> &rarr; <strong>"Run anyway"</strong>. <br><em>(Our
-                independent publisher certificate is currently pending).</em>
+            style="color: var(--text-dim); font-size: 0.85em; margin-top: 20px; text-align: center; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+            <strong style="color: var(--accent);">Desktop installers:</strong> we are mirroring releases to this repo via a sync pipeline. In the meantime, the CLI install above works on every OS. <br><em>Code-signing certificates pending — Windows users may see a SmartScreen warning once binaries are restored.</em>
         </p>
         <div class="hero-stats" style="margin-top: 60px;">
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-value">25k+</div>
-                    <div class="stat-label">NPM Installs</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" style="color: #4ade80;">🛡️ PASSED</div>
-                    <div class="stat-label">Security Audit</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label">Local Memory</div>
-                </div>
+            <div>
+                <div class="hero-stat-value" id="heroDownloads">25,000+</div>
+                <div class="hero-stat-label">NPM installs</div>
+            </div>
+            <div>
+                <div class="hero-stat-value" style="color: #4ade80;">PASSED</div>
+                <div class="hero-stat-label">Security audit</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">100%</div>
+                <div class="hero-stat-label">Local processing</div>
             </div>
         </div>
     </section>
@@ -1114,14 +1107,20 @@
             });
         }
 
-        // Fetch live download count
-        fetch('https://api.npmjs.org/downloads/point/last-week/filemayor')
+        // Fetch live download count (sum of last 12 months) — falls back to baseline 25,000+ on error
+        fetch('https://api.npmjs.org/downloads/range/last-year/filemayor')
             .then(r => r.json())
             .then(d => {
-                if (d.downloads) {
-                    document.getElementById('heroDownloads').textContent = d.downloads.toLocaleString();
+                const total = (d && Array.isArray(d.downloads))
+                    ? d.downloads.reduce((acc, x) => acc + (x.downloads || 0), 0)
+                    : 0;
+                const el = document.getElementById('heroDownloads');
+                if (el && total > 0) {
+                    el.textContent = total >= 1000
+                        ? (total / 1000).toFixed(total >= 10000 ? 0 : 1) + 'k+'
+                        : total.toLocaleString();
                 }
-            }).catch(() => { });
+            }).catch(() => { /* baseline retained */ });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
