@@ -50,3 +50,7 @@ branch.txt
 .commit-msg.tmp
 g.out
 g.err
+
+# old static site assets superseded by Next.js public/ — kept on legacy branch
+# favicon.png at repo root (replaced by app/icon.tsx and public/favicon.svg)
+# index.html (replaced by app/page.tsx)

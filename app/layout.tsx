@@ -62,7 +62,14 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: site.url },
   robots: { index: true, follow: true },
-  icons: { icon: '/favicon.png', apple: '/favicon.png' },
+  icons: {
+    icon: [
+      { url: '/icon', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: dark)' },
+      { url: '/favicon-light.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: light)' },
+    ],
+    apple: '/icon',
+  },
 };
 
 export const viewport: Viewport = {
