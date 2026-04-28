@@ -27,7 +27,8 @@ export const site = {
   metrics: {
     npmInstalls: 25000,
     testsPassing: 128,
-    vulnerabilities: 0,
+    runtimeVulns: 0,
+    runtimeDeps: 3,
     locales: 10,
     securityLayers: 6,
   },

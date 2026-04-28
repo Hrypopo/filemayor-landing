@@ -168,11 +168,47 @@ export default function SecurityPage() {
           </div>
         </section>
 
+        <section id="vulnerabilities" className="border-b border-border py-20 md:py-24">
+          <div className="container-prose max-w-3xl">
+            <div className="section-label">What &quot;0 runtime vulnerabilities&quot; actually means</div>
+            <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
+              Runtime, not build chain.
+            </h2>
+            <p className="mt-6 text-[16px] leading-relaxed text-text-2">
+              When we say <strong className="text-text">0 runtime vulnerabilities</strong>, we mean: the
+              three packages that ship to your machine and execute when {site.name} runs —{' '}
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">electron-updater</code>,{' '}
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tar</code>,{' '}
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">yauzl</code> — have no
+              published advisories at their pinned versions.
+            </p>
+            <p className="mt-4 text-[16px] leading-relaxed text-text-2">
+              Build-time tools (Electron, Vite, esbuild, Rollup, TypeScript) are a separate
+              category. They sit in the development dependency tree, run on the build
+              machine, and never ship to your computer. GitHub Dependabot reports advisories
+              for them too, and we patch them as part of routine maintenance — but a
+              moderate audit on a build tool is not the same kind of risk as a runtime CVE.
+              Conflating the two is how a tool ends up looking either too alarmed or too
+              complacent.
+            </p>
+            <p className="mt-4 text-[16px] leading-relaxed text-text-2">
+              You can verify the runtime claim yourself:
+            </p>
+            <pre className="term-block mt-4 overflow-x-auto rounded-xl border border-border p-4 font-mono text-[13px]">
+              <code>npm audit --production</code>
+            </pre>
+            <p className="mt-4 text-[16px] leading-relaxed text-text-2">
+              That command audits production dependencies only. If it ever returns
+              non-zero, this page and the homepage metric update the same day.
+            </p>
+          </div>
+        </section>
+
         <section className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-3xl">
-            <div className="section-label">What this is not</div>
+            <div className="section-label">Honest scope</div>
             <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
-              Honest scope.
+              What we have not yet done.
             </h2>
             <p className="mt-6 text-[16px] leading-relaxed text-text-2">
               The Doctrine is an architecture, not a certification. {site.name} has not been

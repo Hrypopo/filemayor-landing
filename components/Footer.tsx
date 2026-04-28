@@ -54,7 +54,7 @@ export function Footer() {
               {site.tagline} Built for builders who refuse to let digital rot win.
             </p>
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
-              v{site.version} · {site.metrics.testsPassing} passing · 0 vulns
+              v{site.version} · {site.metrics.testsPassing} passing · {site.metrics.runtimeDeps} runtime deps
             </p>
           </div>
 

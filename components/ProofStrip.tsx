@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
-import { useRef } from 'react';
 import { site } from '@/lib/site';
 
 const formatBig = (n: number) => {
@@ -136,11 +135,17 @@ export function ProofStrip() {
             className="px-6 py-7 md:px-7 md:py-8"
           >
             <dd className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
-              {site.metrics.vulnerabilities}
+              {site.metrics.runtimeVulns}
             </dd>
             <dt className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
-              vulnerabilities
+              runtime vulns
             </dt>
+            <Link
+              href="/docs/security#vulnerabilities"
+              className="mt-1 inline-block font-mono text-[10px] uppercase tracking-[0.14em] text-text-3 transition-colors hover:text-accent"
+            >
+              what counts? →
+            </Link>
           </motion.div>
         </dl>
 
