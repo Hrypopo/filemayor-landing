@@ -78,7 +78,7 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="border-t border-border py-24 md:py-32"
+      className="section-divider section-pad"
       aria-labelledby="pricing-heading"
     >
       <div className="container-prose">

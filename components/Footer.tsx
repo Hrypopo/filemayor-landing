@@ -5,10 +5,11 @@ const cols = [
   {
     title: 'Product',
     items: [
-      { label: 'Download', href: '#download' },
-      { label: 'Pricing', href: '#pricing' },
+      { label: 'Download', href: '/download' },
+      { label: 'Pricing', href: '/#pricing' },
+      { label: 'Compare', href: '/vs' },
+      { label: 'Writing', href: '/blog' },
       { label: 'Changelog', href: '/changelog' },
-      { label: 'Status', href: 'https://status.filemayor.com' },
     ],
   },
   {
@@ -16,8 +17,8 @@ const cols = [
     items: [
       { label: 'Documentation', href: '/docs' },
       { label: 'CLI reference', href: '/docs/cli' },
+      { label: 'Security', href: '/docs/security' },
       { label: 'GitHub (app)', href: site.github.app },
-      { label: 'GitHub (web)', href: site.github.landing },
       { label: 'npm', href: site.npm },
     ],
   },
@@ -34,7 +35,7 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border py-16 md:py-20">
+    <footer className="section-divider section-pad-xs">
       <div className="container-prose">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr,3fr]">
           <div>

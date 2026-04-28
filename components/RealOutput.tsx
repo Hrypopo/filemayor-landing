@@ -149,7 +149,7 @@ export function RealOutput() {
   return (
     <section
       id="run"
-      className="border-t border-border py-24 md:py-32"
+      className="section-divider section-pad"
       aria-labelledby="run-heading"
     >
       <div className="container-prose">

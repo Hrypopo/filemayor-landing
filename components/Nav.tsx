@@ -44,7 +44,7 @@ export function Nav() {
             GitHub
           </a>
           <ThemeToggle />
-          <Link href="#download" className="btn btn-primary text-xs">
+          <Link href="/download" className="btn btn-primary text-xs">
             Download
             <span aria-hidden>→</span>
           </Link>

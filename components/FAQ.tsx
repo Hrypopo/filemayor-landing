@@ -21,7 +21,7 @@ export function FAQ() {
   return (
     <section
       id="answers"
-      className="border-t border-border py-20 md:py-24"
+      className="section-divider section-pad-sm"
       aria-labelledby="answers-heading"
     >
       <div className="container-prose max-w-prose">

@@ -71,6 +71,34 @@
     @apply mx-auto max-w-container px-6 md:px-12;
   }
 
+  /* Section vertical rhythm — three sizes only.
+     Use .section-pad for primary sections, .section-pad-sm for supporting
+     sections (FAQ, callouts, hero on inner pages), .section-pad-xs for
+     short rows. Never set py-* directly on a <section>. */
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+  .section-pad-sm {
+    @apply py-20 md:py-24;
+  }
+  .section-pad-xs {
+    @apply py-16 md:py-20;
+  }
+  .section-divider {
+    @apply border-t border-border;
+  }
+
+  /* Card primitives — one shape, two paddings. */
+  .card {
+    @apply rounded-2xl border border-border bg-surface;
+  }
+  .card-pad {
+    @apply p-7 md:p-8;
+  }
+  .card-pad-sm {
+    @apply p-6 md:p-7;
+  }
+
   .grid-bg {
     position: relative;
   }

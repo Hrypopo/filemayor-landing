@@ -33,7 +33,7 @@ export function Hero() {
         </div>
 
         <div className="mt-12 flex flex-wrap items-center gap-3">
-          <Link href="#download" className="btn btn-primary">
+          <Link href="/download" className="btn btn-primary">
             Download {site.name}
             <span aria-hidden>→</span>
           </Link>
