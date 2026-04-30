@@ -38,11 +38,19 @@ interface LemonSqueezyEvent {
   };
 }
 
-const HANDLED_EVENTS = new Set([
-  'order_created',
-  'subscription_created',
-  'subscription_updated',
-]);
+/* We only ISSUE on these events:
+ *   order_created          — one-time purchase. Must also have status === 'paid'.
+ *   subscription_created   — first successful payment of a subscription.
+ * subscription_updated is intentionally NOT here — renewals reuse the
+ * existing license. Issuing a new one on every renewal would spam customers
+ * and force re-activation. Cancellations/refunds go through a separate flow. */
+const HANDLED_EVENTS = new Set(['order_created', 'subscription_created']);
+
+/** Statuses that authorize license issuance on order_created. */
+const PAID_ORDER_STATUSES = new Set(['paid']);
+
+/** Statuses that authorize license issuance on subscription_created. */
+const ACTIVE_SUBSCRIPTION_STATUSES = new Set(['active', 'on_trial']);
 
 /** Reject webhook events whose `created_at` is older than this. Replay protection. */
 const MAX_EVENT_AGE_MINUTES = 10;
@@ -171,9 +179,29 @@ export async function POST(req: Request): Promise<Response> {
   const email = attrs.user_email ?? attrs.customer_email ?? '';
   const orderId = String(event?.data?.id ?? '');
   const variantId = attrs.first_order_item?.variant_id;
+  const status = String(attrs.status ?? '').toLowerCase();
 
   if (!email || !orderId) {
     return new Response('Missing email or order id', { status: 400 });
+  }
+
+  // Status gate — only issue a license when the buyer has actually paid.
+  // LemonSqueezy fires order_created before payment confirmation; without
+  // this gate we would mint licenses for unpaid orders.
+  const statusOk =
+    eventName === 'order_created'
+      ? PAID_ORDER_STATUSES.has(status)
+      : ACTIVE_SUBSCRIPTION_STATUSES.has(status);
+
+  if (!statusOk) {
+    console.log(
+      `[license-webhook] skip event=${eventName} status=${status || 'missing'} order=${orderId} — awaiting payment confirmation`,
+    );
+    // 200 keeps LS happy. We will receive a follow-up event when status flips.
+    return new Response(JSON.stringify({ ok: true, skipped: true, reason: 'status-not-paid' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const tier = tierFromVariant(variantId);
