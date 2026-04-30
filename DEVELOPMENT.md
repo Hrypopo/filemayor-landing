@@ -143,6 +143,39 @@ Currently `main` deploys to GitHub Pages via the `CNAME`. When the redesign is r
    update DNS at the registrar away from GitHub Pages to Vercel anycast.
 5. The `legacy` branch is preserved permanently — no force-pushes.
 
+## Environment variables (Vercel)
+
+| Var | Purpose |
+|---|---|
+| `LEMONSQUEEZY_WEBHOOK_SECRET` | Verify inbound webhook signatures |
+| `LEMONSQUEEZY_PRO_VARIANT_ID` | LS variant id for Pro tier |
+| `LEMONSQUEEZY_ENTERPRISE_VARIANT_ID` | LS variant id for Enterprise |
+| `LICENSE_PRIVATE_KEY` | Ed25519 PKCS8 PEM (multi-line value). Generated once via `scripts/generate-license-keypair.mjs`. The matching public key is committed to FileMayor's `cli/core/license.js`. |
+| `RESEND_API_KEY` | Sends activation emails |
+| `LANDING_PAT` | Only needed if any landing-side workflow needs to write to its own repo. The release-sync flow lives in the FileMayor repo, not here. |
+
+## License system setup (one-time)
+
+1. Generate the Ed25519 keypair:
+
+   ```bash
+   node scripts/generate-license-keypair.mjs
+   ```
+
+2. Take the printed PRIVATE KEY → paste into Vercel as `LICENSE_PRIVATE_KEY` (paste the entire PEM block, including BEGIN/END lines, in the env var value).
+
+3. Take the printed PUBLIC KEY → open `~/fm/FileMayor/cli/core/license.js`, replace the placeholder `FILEMAYOR_PUBLIC_KEY` constant, commit on `redesign`.
+
+4. In LemonSqueezy admin → Settings → Webhooks, add: `https://filemayor.com/api/lemonsqueezy/webhook`. Copy the signing secret into Vercel as `LEMONSQUEEZY_WEBHOOK_SECRET`.
+
+5. In LemonSqueezy admin, find the variant ids of the Pro and Enterprise checkout flows. Add as `LEMONSQUEEZY_PRO_VARIANT_ID` and `LEMONSQUEEZY_ENTERPRISE_VARIANT_ID`.
+
+6. In Resend, verify the `filemayor.com` domain (DKIM, SPF, DMARC). Take the API key into Vercel as `RESEND_API_KEY`.
+
+7. Ship a test purchase. The webhook signs a JWT, emails the buyer with a `filemayor://activate?key=...` deep link. Click the link, the desktop app activates.
+
+To rotate the keypair: regenerate, update both halves, re-deploy. Old licenses keep verifying against the old public key only if you keep both constants — see REBRAND.md in the FileMayor repo.
+
 ## Pending Phase-2 items
 
 - [ ] OG image generation route (`app/og/route.tsx` with `@vercel/og`)
