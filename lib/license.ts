@@ -1,14 +1,19 @@
 /* Ed25519 license signing for the LemonSqueezy webhook.
  *
- * The private key lives in Vercel env (LICENSE_PRIVATE_KEY, PEM/PKCS8).
+ * The private key lives in Vercel env (LICENSE_PRIVATE_KEY).
  * The matching public key is embedded in FileMayor's cli/core/license.js
- * as FILEMAYOR_PUBLIC_KEY for offline verification on the user's machine.
+ * for offline verification on the user's machine.
  *
- * Output format is a JWT with header { alg: 'EdDSA', typ: 'JWT' }, the
- * payload below, and an Ed25519 signature over header.payload.
+ * The env var accepts either format:
+ *   1. Raw PEM with newlines (works if your provider preserves multi-line vars)
+ *   2. Base64-encoded PEM (recommended — survives any provider's UI mangling)
  *
- * Generate the keypair once with:
- *   node scripts/generate-license-keypair.mjs
+ * Output is a JWT with header { alg: 'EdDSA', typ: 'JWT', kid: '<keyId>' },
+ * the payload below, and an Ed25519 signature over header.payload.
+ *
+ * Generate the keypair once with: node scripts/generate-license-keypair.mjs
+ * Rotate by generating a new keypair and bumping LICENSE_KEY_ID — older
+ * licenses keep verifying via FileMayor's BUILTIN_PUBLIC_KEYS map.
  */
 
 export type Tier = 'pro' | 'enterprise' | 'owner';
@@ -42,6 +47,21 @@ const b64url = (input: ArrayBuffer | Uint8Array | string): string => {
   return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 };
 
+/** Decode either raw PEM or base64-wrapped PEM into a DER buffer. */
+const normalizePemEnv = (raw: string): string => {
+  const trimmed = raw.trim();
+  // Already-formatted PEM
+  if (trimmed.startsWith('-----BEGIN')) return trimmed;
+  // Otherwise assume the entire env var is the base64 of a PEM file
+  try {
+    const decoded = atob(trimmed.replace(/\s+/g, ''));
+    if (decoded.startsWith('-----BEGIN')) return decoded;
+  } catch {
+    /* fall through to error */
+  }
+  throw new Error('LICENSE_PRIVATE_KEY is neither raw PEM nor base64-wrapped PEM');
+};
+
 const pemToDer = (pem: string): Uint8Array => {
   const cleaned = pem
     .replace(/-----BEGIN [^-]+-----/g, '')
@@ -57,8 +77,9 @@ let cachedPrivateKey: CryptoKey | null = null;
 
 async function getPrivateKey(): Promise<CryptoKey> {
   if (cachedPrivateKey) return cachedPrivateKey;
-  const pem = process.env.LICENSE_PRIVATE_KEY;
-  if (!pem) throw new Error('LICENSE_PRIVATE_KEY env var is not set');
+  const raw = process.env.LICENSE_PRIVATE_KEY;
+  if (!raw) throw new Error('LICENSE_PRIVATE_KEY env var is not set');
+  const pem = normalizePemEnv(raw);
   const der = pemToDer(pem);
   cachedPrivateKey = await crypto.subtle.importKey(
     'pkcs8',
@@ -70,8 +91,10 @@ async function getPrivateKey(): Promise<CryptoKey> {
   return cachedPrivateKey;
 }
 
+const getKeyId = (): string => process.env.LICENSE_KEY_ID || 'v1';
+
 export async function signLicense(payload: LicensePayload): Promise<string> {
-  const header = { alg: 'EdDSA', typ: 'JWT' };
+  const header = { alg: 'EdDSA', typ: 'JWT', kid: getKeyId() };
   const headerB64 = b64url(JSON.stringify(header));
   const payloadB64 = b64url(JSON.stringify(payload));
   const data = `${headerB64}.${payloadB64}`;
@@ -85,8 +108,7 @@ export async function signLicense(payload: LicensePayload): Promise<string> {
   return `${data}.${b64url(sig)}`;
 }
 
-/* HMAC-SHA256 utility for verifying inbound webhook signatures
- * (LemonSqueezy signs every webhook with the configured secret). */
+/** Constant-time HMAC verify for inbound LemonSqueezy webhook signatures. */
 export async function verifyHmacSignature(
   body: string,
   signatureHex: string,
@@ -105,7 +127,6 @@ export async function verifyHmacSignature(
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
   if (expected.length !== signatureHex.length) return false;
-  // Constant-time compare
   let diff = 0;
   for (let i = 0; i < expected.length; i++) {
     diff |= expected.charCodeAt(i) ^ signatureHex.charCodeAt(i);
