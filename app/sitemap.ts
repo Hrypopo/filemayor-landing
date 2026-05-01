@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/docs/cli`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${site.url}/docs/security`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/docs/sop`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${site.url}/skill`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${site.url}/blog/three-dependencies`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/blog/curative-triad`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },

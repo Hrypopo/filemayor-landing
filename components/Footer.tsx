@@ -18,6 +18,7 @@ const cols = [
       { label: 'Documentation', href: '/docs' },
       { label: 'CLI reference', href: '/docs/cli' },
       { label: 'Security', href: '/docs/security' },
+      { label: 'Use via LLM', href: '/skill' },
       { label: 'GitHub (app)', href: site.github.app },
       { label: 'npm', href: site.npm },
     ],
