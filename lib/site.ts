@@ -22,8 +22,13 @@ export const site = {
   pricing: {
     free: { name: 'Free', priceUsd: 0, period: '' },
     pro: { name: 'Pro', priceUsd: 5.99, period: '/mo' },
-    enterprise: { name: 'Enterprise', priceUsd: 24.99, period: '/mo' },
+    // Internal key remains 'enterprise' (matches Tier type in lib/license.ts
+    // and TIERS in cli/core/license.js — preserves the JWT contract). The
+    // user-facing label is "Team" until we ship real enterprise features
+    // (SSO, audit logs, true team seat management).
+    enterprise: { name: 'Team', priceUsd: 24.99, period: '/mo' },
   },
+  hook: 'Your AI can suggest. FileMayor can act — safely.',
   metrics: {
     npmInstalls: 25000,
     testsPassing: 128,

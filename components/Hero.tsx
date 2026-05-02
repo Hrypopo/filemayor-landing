@@ -9,12 +9,16 @@ export function Hero() {
   return (
     <section className="grid-bg relative overflow-hidden pb-24 pt-28 md:pb-32 md:pt-36">
       <div className="container-prose">
-        <span className="mb-9 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
+        <span className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
           <span className="relative inline-block size-1.5 rounded-full bg-accent">
             <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
           </span>
           v{site.version} · hardened runtime
         </span>
+
+        <p className="mb-5 max-w-2xl font-display text-[clamp(20px,2vw,26px)] italic leading-snug text-text-2">
+          {site.hook}
+        </p>
 
         <h1 className="h-display max-w-[16ch] text-[clamp(56px,9vw,128px)]">
           The doctor for your <em className="not-italic text-accent italic">filesystem</em>.

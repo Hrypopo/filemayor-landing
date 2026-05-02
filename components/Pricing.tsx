@@ -35,17 +35,16 @@ const tiers = [
   },
   {
     key: 'enterprise' as const,
-    desc: 'For teams and companies.',
+    desc: 'For small teams.',
     bullets: [
       'Everything in Pro',
-      'Team license management',
+      'Up to 5 seats per license',
       'Custom categories',
-      'API access',
-      'Team sharing',
-      'Dedicated support',
+      'CSV / JSON / API access',
+      'Priority support',
     ],
     cta: {
-      label: 'Get Enterprise',
+      label: 'Get Team',
       href: 'https://filemayor.lemonsqueezy.com/checkout/buy/d2795526-eb05-4272-8084-98b6c7a118bb',
     },
     featured: false,
@@ -69,8 +68,8 @@ const purchaseFaq = [
     a: '14 days, no questions, processed by the checkout provider. No retention tactics.',
   },
   {
-    q: "What's the actual difference between Pro and Enterprise?",
-    a: 'Pro is one seat. Enterprise adds team license management, custom categories, API access, and dedicated support. If you are not sure, start on Pro — upgrading later is one email.',
+    q: "What's the actual difference between Pro and Team?",
+    a: 'Pro is one seat. Team is up to five seats per license, plus CSV/JSON/API access and priority support. We are deliberately not calling it Enterprise yet — real enterprise features (SSO, audit logs, large-fleet seat management) ship later. If you need those, email us first.',
   },
 ];
 
