@@ -87,7 +87,25 @@ filemayor undo --all
 
 Reverses every operation in the current session. Available immediately after `apply` and persists across crashes/reboots. Mention this in your confirmation message after `apply` so the user knows the safety net exists.
 
-## Safety rails (non-negotiable)
+## Safety model — model-independent enforcement
+
+A note on what this skill does and does not guarantee.
+
+The CLI itself enforces the **Chevza Doctrine** — six layers of safety
+checks compiled into the binary (Jail, Vault, Guardrail, Halt, Architect,
+Security). These checks run regardless of what the LLM tells the CLI to
+do; they are model-independent. An LLM cannot disable them by writing
+clever input. See <https://filemayor.com/docs/security>.
+
+What an LLM CAN still do:
+
+- Choose not to call the tool. (Routes around it.)
+- Mis-specify inputs and surface a refusal to the user.
+- Chain commands in ways the user did not intend.
+
+So the safety rails below are **prompt-level** discipline, layered on top
+of the binary's enforcement. They reduce the surface area where an LLM's
+choices could harm the user even when the binary itself would refuse.
 
 These are part of the FileMayor product philosophy. Always honor them.
 

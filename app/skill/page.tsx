@@ -156,9 +156,14 @@ rm -rf /tmp/fm-skill`}
             </h2>
             <p className="mt-4 max-w-2xl text-[15.5px] leading-relaxed text-text-2">
               The skill is one markdown file. It teaches the LLM five verbs and five
-              non-negotiable rules — never apply without a plan, never touch system
-              directories, always offer undo, etc. Even a misbehaving LLM can't bypass the
-              CLI's Doctrine layers — those are enforced inside the binary.
+              prompt-level safety rails — never apply without a plan, never touch system
+              directories, always offer undo, etc. The CLI itself adds a second,
+              model-independent layer: the{' '}
+              <Link href="/docs/security" className="text-accent">
+                Chevza Doctrine
+              </Link>{' '}
+              runs inside the binary regardless of what the LLM asks. An LLM can choose
+              not to call the tool, but it cannot disable the safety architecture.
             </p>
 
             <ol className="mt-10 space-y-4">

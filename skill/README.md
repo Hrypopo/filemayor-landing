@@ -66,14 +66,15 @@ It teaches the LLM:
 It is intentionally short. The full architecture details live at
 <https://filemayor.com/docs/security> for users who want the long form.
 
-## Safety guarantees that survive being inside an LLM
+## Safety guarantees — model-independent enforcement
 
-Even if the LLM ignores the SKILL.md instructions:
+The CLI itself enforces the Doctrine regardless of what the LLM does:
 
-- The CLI itself enforces the Doctrine. The Jailer refuses system paths.
-  The Guardrail refuses destructive batches. The Architect rejects
-  domain-scattering plans. These run inside the binary — no prompt can
-  bypass them.
+- The Jailer refuses system paths. The Guardrail refuses destructive
+  batches. The Architect rejects domain-scattering plans. These run
+  inside the binary, so an LLM cannot disable them via prompt input.
+- An LLM CAN choose not to call the tool, or mis-specify inputs and
+  surface a refusal. It cannot turn the safety architecture off.
 - Every move is journaled. `filemayor undo --all` is always available.
 - Files never leave the machine. The AI calls (Gemini 2.0 Flash) only
   receive metadata. Disable AI entirely with `FILEMAYOR_AI=off` env var.
