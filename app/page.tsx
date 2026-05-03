@@ -10,7 +10,6 @@ import { site } from '@/lib/site';
 export default function HomePage() {
   return (
     <>
-      <h1 style={{ color: "red" }}>REDESIGN TEST 2</h1>
       <Nav />
       <main id="main">
         <Hero />
