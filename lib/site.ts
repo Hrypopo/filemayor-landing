@@ -4,7 +4,7 @@ export const site = {
   domain: 'filemayor.com',
   url: 'https://filemayor.com',
   version: '4.0.1',
-  tagline: 'Press ⌘K. Your folders answer.',
+  tagline: 'Your folders, on command.',
   description:
     'FileMayor v4 — a command bar for your filesystem. Diagnose folders, plan moves, apply with rollback. Local-only, on Mac, Windows, and Linux.',
   npm: 'https://www.npmjs.com/package/filemayor',
