@@ -1,5 +1,8 @@
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
+import { WhatsNew } from '@/components/WhatsNew';
+import { MissionControl } from '@/components/MissionControl';
+import { MCPSection } from '@/components/MCPSection';
 import { RealOutput } from '@/components/RealOutput';
 import { ProofStrip } from '@/components/ProofStrip';
 import { Pricing } from '@/components/Pricing';
@@ -13,6 +16,9 @@ export default function HomePage() {
       <Nav />
       <main id="main">
         <Hero />
+        <WhatsNew />
+        <MissionControl />
+        <MCPSection />
         <RealOutput />
         <ProofStrip />
         <Pricing />

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { site } from '@/lib/site';
 import { LiveTerminal } from './LiveTerminal';
+import { CommandBar } from './CommandBar';
 import { InstallButton } from './InstallButton';
 
 const surfaces = ['CLI', 'Desktop', 'PWA'];
@@ -56,7 +57,8 @@ export function Hero() {
           <span className="text-text-2">Mac · Windows · Linux</span>
         </div>
 
-        <LiveTerminal className="mt-16 max-w-[760px]" />
+        <CommandBar className="mt-14 max-w-[760px]" />
+        <LiveTerminal className="mt-6 max-w-[760px]" />
       </div>
     </section>
   );
