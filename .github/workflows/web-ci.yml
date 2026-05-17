@@ -56,8 +56,8 @@ jobs:
         with:
           urls: |
             http://localhost:3000/
-            http://localhost:3000/pricing
             http://localhost:3000/docs
+            http://localhost:3000/skill
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: ./.lighthouserc.json
