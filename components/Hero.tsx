@@ -22,7 +22,8 @@ export function Hero() {
         </p>
 
         <h1 className="h-display max-w-[16ch] text-[clamp(56px,9vw,128px)]">
-          Press <em className="not-italic text-accent italic">⌘K</em>. Your folders answer.
+          Your folders,{' '}
+          <em className="not-italic text-accent italic">on command.</em>
         </h1>
 
         <p className="mt-8 max-w-xl text-lg leading-relaxed text-text-2 md:text-xl">
