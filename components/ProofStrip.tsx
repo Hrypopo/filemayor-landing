@@ -81,19 +81,19 @@ export function ProofStrip() {
       aria-label="Proof: live metrics and security architecture"
     >
       <div className="container-prose">
-        <dl className="grid grid-cols-2 divide-x divide-y divide-border md:grid-cols-4 md:divide-y-0">
+        <div className="grid grid-cols-2 divide-x divide-y divide-border md:grid-cols-4 md:divide-y-0">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease: easeOut }}
             className="px-6 py-7 first:border-l-0 md:px-7 md:py-8"
           >
-            <dd className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
+            <div className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
               <Count to={npm} format={formatBig} fallback={formatBig(npm)} inView={inView} />
-            </dd>
-            <dt className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
+            </div>
+            <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
               npm installs
-            </dt>
+            </div>
           </motion.div>
 
           <motion.div
@@ -102,16 +102,16 @@ export function ProofStrip() {
             transition={{ duration: 0.6, ease: easeOut, delay: 0.08 }}
             className="px-6 py-7 md:px-7 md:py-8"
           >
-            <dd className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
+            <div className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
               {stars !== null ? (
                 <Count to={stars} inView={inView} delay={0.08} />
               ) : (
                 '—'
               )}
-            </dd>
-            <dt className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
+            </div>
+            <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
               GitHub stars
-            </dt>
+            </div>
           </motion.div>
 
           <motion.div
@@ -120,12 +120,12 @@ export function ProofStrip() {
             transition={{ duration: 0.6, ease: easeOut, delay: 0.16 }}
             className="px-6 py-7 md:px-7 md:py-8"
           >
-            <dd className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
+            <div className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
               <Count to={site.metrics.testsPassing} inView={inView} delay={0.16} />
-            </dd>
-            <dt className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
+            </div>
+            <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
               tests passing
-            </dt>
+            </div>
           </motion.div>
 
           <motion.div
@@ -134,12 +134,12 @@ export function ProofStrip() {
             transition={{ duration: 0.6, ease: easeOut, delay: 0.24 }}
             className="px-6 py-7 md:px-7 md:py-8"
           >
-            <dd className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
+            <div className="font-display text-[36px] font-normal leading-none tracking-tight text-text">
               {site.metrics.runtimeVulns}
-            </dd>
-            <dt className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
+            </div>
+            <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
               runtime vulns
-            </dt>
+            </div>
             <Link
               href="/docs/security#vulnerabilities"
               className="mt-1 inline-block font-mono text-[10px] uppercase tracking-[0.14em] text-text-3 transition-colors hover:text-accent"
@@ -147,7 +147,7 @@ export function ProofStrip() {
               what counts? →
             </Link>
           </motion.div>
-        </dl>
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}
