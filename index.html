@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FileMayor — Your Digital Life Organizer</title>
+    <title>FileMayor — Think Jarvis, for your folders.</title>
     <meta name="description"
-        content="Organize, scan, clean, and watch your filesystem from any terminal. Zero dependencies. Works everywhere.">
+        content="Your intelligent filesystem clerk. Press ⌘K. Tell it what to do. It diagnoses, plans, and executes — with a full rollback journal.">
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="FileMayor — Your Digital Life Organizer">
+    <meta property="og:title" content="FileMayor — Think Jarvis, for your folders.">
     <meta property="og:description"
-        content="Declutter your machine. Free your mind. A secure, local-first engine to organize your files, driven by AI.">
+        content="Your intelligent filesystem clerk. Press ⌘K. Tell it what to do. It diagnoses, plans, and executes — with a full rollback journal.">
     <meta property="og:image" content="https://filemayor.com/filemayor-logo-dark.png">
     <meta property="og:url" content="https://filemayor.com">
     <meta property="og:type" content="website">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FileMayor — Your Digital Life Organizer">
+    <meta name="twitter:title" content="FileMayor — Think Jarvis, for your folders.">
     <meta name="twitter:description"
-        content="Declutter your machine. Free your mind. A secure, local-first engine to organize your files, driven by AI.">
+        content="Your intelligent filesystem clerk. Press ⌘K. Tell it what to do. It diagnoses, plans, and executes — with a full rollback journal.">
     <meta name="twitter:image" content="https://filemayor.com/filemayor-logo-dark.png">
     <!-- Favicon -->
     <link rel="icon" href="/favicon.png" type="image/png">
@@ -31,13 +31,18 @@
         :root {
             --bg: #09090b;
             --bg-card: #18181b;
+            --bg-card2: #1c1c1f;
             --border: #27272a;
+            --border-subtle: #202023;
             --text: #fafafa;
             --text-dim: #a1a1aa;
+            --text-muted: #52525b;
             --accent: #d4af37;
             --accent-bg: rgba(212, 175, 55, 0.08);
+            --accent-glow: rgba(212, 175, 55, 0.15);
             --green: #4ade80;
             --blue: #60a5fa;
+            --purple: #a78bfa;
         }
 
         * {
@@ -67,8 +72,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(9, 9, 11, 0.8);
-            backdrop-filter: blur(16px);
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
 
@@ -123,17 +128,18 @@
             text-align: center;
             padding: 120px 24px 80px;
             position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.07) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -142,7 +148,7 @@
             align-items: center;
             gap: 8px;
             background: var(--accent-bg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             color: var(--accent);
             padding: 6px 16px;
             border-radius: 24px;
@@ -153,59 +159,139 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5em, 6vw, 4.5em);
+            font-size: clamp(2.6em, 6vw, 4.8em);
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.08;
             margin-bottom: 20px;
             animation: fadeUp 0.8s ease 0.1s both;
+            letter-spacing: -0.02em;
         }
 
-        .hero h1 span {
+        .hero h1 .gold {
             color: var(--accent);
+        }
+
+        .hero h1 .dim {
+            color: var(--text-dim);
+            font-weight: 600;
         }
 
         .hero-sub {
             font-size: 1.2em;
             color: var(--text-dim);
             max-width: 540px;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
             animation: fadeUp 0.8s ease 0.2s both;
+            line-height: 1.65;
         }
 
-        .hero-install {
+        /* ─── Command Bar Demo ─────────────────── */
+
+        .cmdk-demo {
+            animation: fadeUp 0.8s ease 0.3s both;
+            width: 100%;
+            max-width: 560px;
+            margin-bottom: 48px;
+        }
+
+        .cmdk-bar {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 32px;
+            border: 1px solid var(--accent);
+            border-radius: 14px 14px 0 0;
+            padding: 16px 22px;
             display: flex;
             align-items: center;
-            gap: 16px;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 1.05em;
-            animation: fadeUp 0.8s ease 0.3s both;
-            cursor: pointer;
-            transition: border-color 0.2s;
+            gap: 14px;
+            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.08), 0 24px 60px rgba(0, 0, 0, 0.6);
         }
 
-        .hero-install:hover {
-            border-color: var(--accent);
-        }
-
-        .hero-install .prompt {
+        .cmdk-kbd {
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             color: var(--accent);
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            flex-shrink: 0;
         }
 
-        .hero-install .copy-hint {
-            color: var(--text-dim);
-            font-size: 0.75em;
-            font-family: 'Inter', sans-serif;
+        .cmdk-text {
+            font-size: 1em;
+            color: var(--text);
+            flex: 1;
+            text-align: left;
         }
+
+        .cmdk-text .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--accent);
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cmdk-results {
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            border-top: 1px solid var(--border);
+            border-radius: 0 0 14px 14px;
+            overflow: hidden;
+        }
+
+        .cmdk-result {
+            padding: 10px 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9em;
+            border-top: 1px solid var(--border-subtle);
+            transition: background 0.15s;
+        }
+
+        .cmdk-result.active {
+            background: var(--accent-bg);
+        }
+
+        .cmdk-result-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            background: rgba(255,255,255,0.04);
+            flex-shrink: 0;
+        }
+
+        .cmdk-result-label {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .cmdk-result-desc {
+            color: var(--text-muted);
+            font-size: 0.82em;
+        }
+
+        /* ─── Platform Buttons ─────────────────── */
 
         .hero-platforms {
-            margin-top: 24px;
+            margin-top: 8px;
             display: flex;
-            gap: 16px;
-            animation: fadeUp 0.8s ease 0.35s both;
+            gap: 12px;
+            animation: fadeUp 0.8s ease 0.4s both;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .platform-btn {
@@ -213,13 +299,14 @@
             text-decoration: none;
             font-size: 0.85em;
             background: var(--bg-card);
-            padding: 8px 16px;
+            padding: 9px 18px;
             border-radius: 8px;
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.2s;
+            font-weight: 500;
         }
 
         .platform-btn:hover {
@@ -228,11 +315,30 @@
             transform: translateY(-2px);
         }
 
+        .platform-btn.primary-btn {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+
+        .platform-btn.primary-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* ─── Hero Stats ───────────────────────── */
+
         .hero-stats {
             display: flex;
             gap: 48px;
-            margin-top: 48px;
-            animation: fadeUp 0.8s ease 0.4s both;
+            margin-top: 56px;
+            animation: fadeUp 0.8s ease 0.45s both;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+            width: 100%;
+            max-width: 560px;
+            justify-content: center;
         }
 
         .hero-stat-value {
@@ -246,18 +352,11 @@
         }
 
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ─── Section ─────────────────────────── */
+        /* ─── Sections ─────────────────────────── */
 
         section {
             padding: 100px 24px;
@@ -267,7 +366,7 @@
 
         .section-label {
             text-transform: uppercase;
-            font-size: 0.75em;
+            font-size: 0.72em;
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--accent);
@@ -275,19 +374,142 @@
         }
 
         .section-title {
-            font-size: 2.2em;
-            font-weight: 700;
+            font-size: 2.4em;
+            font-weight: 800;
             margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
         }
 
         .section-desc {
             font-size: 1.05em;
             color: var(--text-dim);
             max-width: 560px;
-            margin-bottom: 48px;
+            margin-bottom: 56px;
+            line-height: 1.65;
         }
 
-        /* ─── Features ────────────────────────── */
+        /* ─── Curative Triad ───────────────────── */
+
+        .triad-wrapper {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .triad-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .triad-tab {
+            flex: 1;
+            padding: 18px 20px;
+            font-size: 0.88em;
+            font-weight: 600;
+            color: var(--text-dim);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .triad-tab.active {
+            color: var(--accent);
+            background: var(--accent-bg);
+        }
+
+        .triad-tab:not(:last-child) {
+            border-right: 1px solid var(--border);
+        }
+
+        .triad-step {
+            display: none;
+            padding: 36px 40px;
+        }
+
+        .triad-step.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .triad-info h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .triad-info p {
+            color: var(--text-dim);
+            margin-bottom: 16px;
+            line-height: 1.65;
+        }
+
+        .triad-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #0a0a0d;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .terminal-titlebar {
+            background: #1a1a1f;
+            padding: 10px 16px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85em;
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+
+        .t-cmd { color: #4ade80; }
+        .t-dim { color: #52525b; }
+        .t-muted { color: #71717a; }
+        .t-gold { color: var(--accent); }
+        .t-blue { color: #60a5fa; }
+        .t-red { color: #f87171; }
+        .t-green { color: #4ade80; }
+        .t-purple { color: #a78bfa; }
+
+        /* ─── Features Grid ────────────────────── */
 
         .features-grid {
             display: grid;
@@ -298,79 +520,151 @@
         .feature-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 28px;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .feature-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.06);
         }
 
         .feature-icon {
-            font-size: 1.8em;
-            margin-bottom: 16px;
+            font-size: 1.6em;
+            margin-bottom: 14px;
         }
 
         .feature-card h3 {
-            font-size: 1.05em;
+            font-size: 1em;
             font-weight: 600;
             margin-bottom: 8px;
         }
 
         .feature-card p {
-            font-size: 0.9em;
+            font-size: 0.88em;
             color: var(--text-dim);
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         .feature-tag {
             display: inline-block;
-            font-size: 0.65em;
+            font-size: 0.6em;
             font-weight: 700;
             color: var(--accent);
             background: var(--accent-bg);
-            padding: 2px 8px;
+            padding: 2px 7px;
             border-radius: 4px;
             margin-left: 6px;
             vertical-align: middle;
         }
 
-        /* ─── Code Block ──────────────────────── */
-
-        .code-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+        .feature-tag.new {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.08);
         }
 
-        .code-block {
+        /* ─── MCP Section ──────────────────────── */
+
+        .mcp-section-inner {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.04) 0%, rgba(96, 165, 250, 0.04) 100%);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            border-radius: 20px;
+            padding: 48px;
+        }
+
+        .mcp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .mcp-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .mcp-tool {
+            background: rgba(167, 139, 250, 0.08);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            color: #c4b5fd;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-weight: 500;
+        }
+
+        .mcp-integrations {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .mcp-integration {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .mcp-integration-icon {
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .mcp-integration-label {
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .mcp-integration-desc {
+            font-size: 0.8em;
+            color: var(--text-dim);
+        }
+
+        /* ─── Security Grid ────────────────────── */
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .security-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 22px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.9em;
-            line-height: 1.8;
-            overflow-x: auto;
         }
 
-        .code-block .comment {
-            color: #6b7280;
+        .security-icon {
+            font-size: 1.4em;
         }
 
-        .code-block .cmd {
-            color: var(--green);
+        .security-item h4 {
+            font-size: 0.92em;
+            font-weight: 600;
         }
 
-        .code-block .flag {
-            color: var(--blue);
+        .security-item p {
+            font-size: 0.84em;
+            color: var(--text-dim);
+            line-height: 1.5;
         }
 
-        /* ─── Pricing ─────────────────────────── */
+        /* ─── Pricing ──────────────────────────── */
 
         .pricing-grid {
             display: grid;
@@ -381,19 +675,19 @@
         .pricing-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 32px;
             position: relative;
             transition: border-color 0.3s;
         }
 
         .pricing-card:hover {
-            border-color: var(--accent);
+            border-color: rgba(212, 175, 55, 0.3);
         }
 
         .pricing-card.featured {
             border-color: var(--accent);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 48px rgba(212, 175, 55, 0.1);
         }
 
         .pricing-popular {
@@ -408,22 +702,24 @@
             font-size: 0.7em;
             font-weight: 700;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .pricing-name {
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-weight: 600;
             margin-bottom: 8px;
         }
 
         .pricing-price {
-            font-size: 2.5em;
+            font-size: 2.4em;
             font-weight: 800;
             margin-bottom: 4px;
+            letter-spacing: -0.02em;
         }
 
         .pricing-price span {
-            font-size: 0.4em;
+            font-size: 0.38em;
             font-weight: 400;
             color: var(--text-dim);
         }
@@ -440,8 +736,8 @@
         }
 
         .pricing-features li {
-            padding: 6px 0;
-            font-size: 0.9em;
+            padding: 5px 0;
+            font-size: 0.88em;
             color: var(--text-dim);
         }
 
@@ -482,40 +778,64 @@
             opacity: 0.9;
         }
 
-        /* ─── Security ────────────────────────── */
+        /* ─── CTA Strip ────────────────────────── */
 
-        .security-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+        .cta-strip {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.06) 0%, rgba(212, 175, 55, 0.02) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 80px 24px;
+            text-align: center;
         }
 
-        .security-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
+        .cta-strip h2 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
 
-        .security-icon {
-            font-size: 1.4em;
-            flex-shrink: 0;
-        }
-
-        .security-item h4 {
-            font-size: 0.95em;
-            margin-bottom: 4px;
-        }
-
-        .security-item p {
-            font-size: 0.85em;
+        .cta-strip p {
             color: var(--text-dim);
+            margin-bottom: 32px;
+            font-size: 1.05em;
         }
 
-        /* ─── Footer ──────────────────────────── */
+        .cta-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .cta-primary:hover { opacity: 0.9; }
+
+        .cta-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+
+        .cta-secondary:hover { border-color: var(--accent); }
+
+        /* ─── Footer ───────────────────────────── */
 
         footer {
             border-top: 1px solid var(--border);
@@ -526,49 +846,53 @@
         .footer-brand {
             font-weight: 700;
             font-size: 1.1em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .footer-author {
             font-size: 0.85em;
             color: var(--text-dim);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .footer-links {
             display: flex;
             gap: 24px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
             color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85em;
+            transition: color 0.2s;
         }
 
         .footer-links a:hover {
             color: var(--accent);
         }
 
-        .why-grid {
-            grid-template-columns: repeat(2, 1fr);
+        /* ─── Full-bleed alternating rows ─────── */
+
+        .full-bleed {
+            max-width: 100%;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .before-after-grid {
-            grid-template-columns: 1fr 1fr;
+        .full-bleed-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 24px;
         }
 
-        /* ─── Responsive: Tablet (≤1024px) ──── */
+        /* ─── Responsive: Tablet ───────────────── */
 
         @media (max-width: 1024px) {
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .why-grid,
-            .before-after-grid {
-                grid-template-columns: 1fr !important;
             }
 
             .pricing-grid {
@@ -578,12 +902,20 @@
                 margin-right: auto;
             }
 
-            .hero h1 {
-                font-size: clamp(2em, 5vw, 3.5em);
+            .triad-step.active {
+                grid-template-columns: 1fr;
+            }
+
+            .mcp-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .security-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* ─── Responsive: Mobile (≤768px) ─────── */
+        /* ─── Responsive: Mobile ───────────────── */
 
         @media (max-width: 768px) {
             nav {
@@ -605,30 +937,62 @@
             }
 
             .hero h1 {
-                font-size: clamp(1.8em, 7vw, 2.8em);
+                font-size: clamp(1.9em, 7vw, 2.8em);
             }
 
             .hero-sub {
                 font-size: 1em;
             }
 
-            .hero-install {
-                padding: 12px 20px;
-                font-size: 0.9em;
-                flex-wrap: wrap;
-                justify-content: center;
+            .hero-stats {
+                gap: 28px;
             }
 
-            .hero-platforms {
+            section {
+                padding: 64px 16px;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .triad-tabs {
                 flex-direction: column;
-                align-items: center;
-                gap: 10px;
             }
 
-            .platform-btn {
-                width: 100%;
-                max-width: 220px;
-                justify-content: center;
+            .triad-tab:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .triad-step {
+                padding: 24px 20px;
+            }
+
+            .mcp-section-inner {
+                padding: 28px 20px;
+            }
+
+            .footer-links {
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.7em;
             }
 
             .hero-stats {
@@ -637,58 +1001,9 @@
                 align-items: center;
             }
 
-            section {
-                padding: 60px 16px;
-            }
-
-            .section-title {
-                font-size: 1.6em;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .code-section {
-                grid-template-columns: 1fr;
-            }
-
-            .security-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-                gap: 16px;
-            }
-        }
-
-        /* ─── Responsive: Small Mobile (≤480px) ─ */
-
-        @media (max-width: 480px) {
-            .nav-links a:not(.nav-cta) {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 1.6em;
-            }
-
-            .hero-sub {
-                font-size: 0.9em;
-            }
-
-            .hero-install {
-                padding: 10px 14px;
-                font-size: 0.8em;
-            }
-
-            .section-title {
-                font-size: 1.3em;
-            }
-
-            .pricing-price {
-                font-size: 2em;
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -699,303 +1014,393 @@
     <nav>
         <a href="#" class="nav-brand">✨ FileMayor</a>
         <div class="nav-links">
+            <a href="#triad">How it works</a>
             <a href="#features">Features</a>
-            <a href="#usage">Usage</a>
+            <a href="#mcp">MCP</a>
             <a href="#pricing">Pricing</a>
-            <a href="#security">Security</a>
-            <a href="https://www.npmjs.com/package/filemayor" class="nav-cta">Install →</a>
+            <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="nav-cta">Download →</a>
         </div>
     </nav>
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-badge">✨ Now on npm — v3.6.0</div>
-        <h1>Declutter your machine.<br><span>Free your mind.</span></h1>
-        <p class="hero-sub">The intelligent, local-first engine that scans, cleans, and organizes your filesystems. 100%
-            Private. Zero Dependencies.</p>
+        <div class="hero-badge">⚡ v4.0.0 — The Jarvis Release</div>
 
-        <div class="hero-install" onclick="copyInstall()">
-            <span class="prompt">$</span>
-            <span>npm install -g filemayor</span>
-            <span class="copy-hint" id="copyHint">click to copy</span>
-        </div>
+        <h1>Think <span class="gold">Jarvis</span>,<br><span class="dim">for your folders.</span></h1>
 
-        <div class="terminal-container"
-            style="margin-top: 60px; max-width: 700px; width: 100%; text-align: left; animation: fadeUp 0.8s ease 0.4s both;">
-            <div class="terminal-header"
-                style="background: #1e1e2e; padding: 10px 16px; border-radius: 12px 12px 0 0; border: 1px solid var(--border); border-bottom: none; display: flex; gap: 6px;">
-                <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></div>
-                <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></div>
-                <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></div>
+        <p class="hero-sub">Press <kbd style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);color:var(--accent);padding:2px 7px;border-radius:5px;font-size:.9em;">⌘K</kbd> anywhere. Tell it what to do.
+            FileMayor diagnoses, plans, and executes — with a full rollback journal so nothing is ever lost.</p>
+
+        <!-- ⌘K Command Bar Demo -->
+        <div class="cmdk-demo">
+            <div class="cmdk-bar">
+                <span class="cmdk-kbd">⌘K</span>
+                <span class="cmdk-text" id="cmdkText">diagnose my Downloads<span class="cursor"></span></span>
             </div>
-            <div class="terminal-body"
-                style="background: #0f172a; padding: 20px; border-radius: 0 0 12px 12px; border: 1px solid var(--border); font-family: 'SF Mono', monospace; font-size: 0.9em; line-height: 1.6; color: #e2e8f0; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-                <div style="color: #4ade80;">$ filemayor scan ~/Downloads</div>
-                <div style="margin-top: 10px;">Scanned 1,248 files (4.2 GB) in 1.4s</div>
-                <div style="margin-top: 8px; color: var(--text-dim);">────────────────────────────────────────────────
+            <div class="cmdk-results">
+                <div class="cmdk-result active">
+                    <div class="cmdk-result-icon">🩺</div>
+                    <span class="cmdk-result-label">Diagnose folder</span>
+                    <span class="cmdk-result-desc">Run AI health scan → score + issues</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-                    <span style="color: #60a5fa;">📂 Images</span>
-                    <span style="color: var(--text-dim);">482 files (1.2 GB)</span>
+                <div class="cmdk-result">
+                    <div class="cmdk-result-icon">💊</div>
+                    <span class="cmdk-result-label">Generate cure plan</span>
+                    <span class="cmdk-result-desc">AI proposes a treatment strategy</span>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span style="color: #f472b6;">📂 Videos</span>
-                    <span style="color: var(--text-dim);">12 files (2.1 GB)</span>
+                <div class="cmdk-result">
+                    <div class="cmdk-result-icon">↩️</div>
+                    <span class="cmdk-result-label">Undo last operation</span>
+                    <span class="cmdk-result-desc">Full journal-backed rollback</span>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span style="color: #fbbf24;">📂 Documents</span>
-                    <span style="color: var(--text-dim);">634 files (0.8 GB)</span>
-                </div>
-                <div style="margin-top: 8px; color: var(--text-dim);">────────────────────────────────────────────────
-                </div>
-                <div style="margin-top: 8px; color: #ffbd2e;">⚠️ Detected 1,242 duplicate files (3.8 GB)</div>
-                <div style="color: #ffbd2e;">🧹 Potential cleanup: 11.2 GB (Junk & Cache)</div>
-                <div style="margin-top: 12px; color: #4ade80;">Run 'filemayor analyze' to see why.</div>
             </div>
         </div>
 
-        <div class="hero-platforms" style="margin-top: 40px;">
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/latest" class="platform-btn">
-                <span>🍏</span> Mac
-            </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/latest" class="platform-btn">
-                <span>🪟</span> Windows
-            </a>
-            <a href="https://github.com/Hrypopo/filemayor-landing/releases/latest" class="platform-btn">
-                <span>🐧</span> Linux
+        <!-- Download Buttons -->
+        <div class="hero-platforms">
+            <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="platform-btn primary-btn">
+                ⬇️ Download Desktop App
             </a>
         </div>
-        <p
-            style="color: var(--text-dim); font-size: 0.85em; margin-top: 20px; text-align: center; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-            <strong style="color: var(--accent);">Desktop installers:</strong> we are mirroring releases to this repo via a sync pipeline. In the meantime, the CLI install above works on every OS. <br><em>Code-signing certificates pending — Windows users may see a SmartScreen warning once binaries are restored.</em>
-        </p>
-        <div class="hero-stats" style="margin-top: 60px;">
-            <div>
-                <div class="hero-stat-value" id="heroDownloads">25,000+</div>
-                <div class="hero-stat-label">NPM installs</div>
+        <div class="hero-platforms" style="margin-top: 12px;">
+            <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="platform-btn">🍏 macOS</a>
+            <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="platform-btn">🪟 Windows</a>
+            <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="platform-btn">🐧 Linux</a>
+            <a href="https://www.npmjs.com/package/filemayor" class="platform-btn">📦 npm CLI</a>
+        </div>
+
+        <div class="hero-stats">
+            <div style="text-align:center;">
+                <div class="hero-stat-value" id="heroDownloads">25k+</div>
+                <div class="hero-stat-label">npm installs</div>
             </div>
-            <div>
-                <div class="hero-stat-value" style="color: #4ade80;">PASSED</div>
-                <div class="hero-stat-label">Security audit</div>
+            <div style="text-align:center;">
+                <div class="hero-stat-value" style="color: var(--green);">128</div>
+                <div class="hero-stat-label">tests passing</div>
             </div>
-            <div>
+            <div style="text-align:center;">
                 <div class="hero-stat-value">100%</div>
-                <div class="hero-stat-label">Local processing</div>
+                <div class="hero-stat-label">local processing</div>
             </div>
         </div>
     </section>
 
-    <!-- Why FileMayor? -->
-    <section id="why" style="padding: 120px 24px;">
-        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-            <div class="section-label">Why FileMayor?</div>
-            <h2 class="section-title">Built for the modern builder.</h2>
-            <p class="section-desc" style="margin-left: auto; margin-right: auto;">
-                Current file tools are either too simple (Finder/Explorer) or too dangerous (unverified shell scripts).
-                FileMayor is the middle ground: Power of the CLI, Safety of an Undo button.
-            </p>
+    <!-- Curative Triad -->
+    <div class="full-bleed" id="triad">
+        <div class="full-bleed-inner">
+            <div style="text-align:center; margin-bottom: 48px;">
+                <div class="section-label">The Curative Triad</div>
+                <h2 class="section-title">Diagnose. Plan. Heal.</h2>
+                <p class="section-desc" style="margin: 0 auto 0 auto;">Three commands. Total order. FileMayor shows you what's wrong, proposes a treatment, and executes safely — with a rollback at every step.</p>
+            </div>
 
-            <div class="why-grid"
-                style="display: grid; gap: 24px; margin-top: 40px; text-align: left;">
-                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
-                    <h4 style="color: var(--accent); margin-bottom: 8px;">Zero Cloud Reliance</h4>
-                    <p style="font-size: 0.9em; color: var(--text-dim);">Your data never leaves your machine. Perfect
-                        for sensitive source code and private documents.</p>
+            <div class="triad-wrapper">
+                <div class="triad-tabs">
+                    <button class="triad-tab active" onclick="showTriad(0)">🩺 1. Diagnose</button>
+                    <button class="triad-tab" onclick="showTriad(1)">💊 2. Plan</button>
+                    <button class="triad-tab" onclick="showTriad(2)">✅ 3. Apply</button>
                 </div>
-                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
-                    <h4 style="color: var(--accent); margin-bottom: 8px;">Supply-Chain Secure</h4>
-                    <p style="font-size: 0.9em; color: var(--text-dim);">Zero runtime dependencies. No hidden npm
-                        vulnerabilities or bloated node_modules.</p>
+
+                <!-- Step 1: Diagnose -->
+                <div class="triad-step active" id="triad-0">
+                    <div class="triad-info">
+                        <div class="triad-badge">Step 1 of 3</div>
+                        <h3 style="margin-top: 14px;">AI Health Diagnosis</h3>
+                        <p>FileMayor scans your folder and gives it a health score from 0–100. It surfaces exactly what's wrong: screenshots buried in Documents, 14 installer duplicates, 3 GB of forgotten cache.</p>
+                        <p style="font-size: 0.88em; color: var(--text-muted);">Powered by Gemini 2.0 Flash. No data leaves your machine.</p>
+                    </div>
+                    <div class="terminal-block">
+                        <div class="terminal-titlebar">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="t-cmd">$ filemayor explain ~/Downloads</div>
+                            <br>
+                            <div class="t-gold">━━ FILEMAYOR DIAGNOSIS ━━━━━━━━━━━━━━</div>
+                            <div>Workspace: <span class="t-blue">~/Downloads</span></div>
+                            <div>Files scanned: <span class="t-gold">1,248</span> (4.2 GB)</div>
+                            <br>
+                            <div>Health Score: <span class="t-red">22 / 100 — POOR</span></div>
+                            <br>
+                            <div class="t-muted">Issues detected:</div>
+                            <div>&nbsp;&nbsp;⚠️&nbsp; 63 screenshots mixed with documents</div>
+                            <div>&nbsp;&nbsp;⚠️&nbsp; 14 duplicate installers (1.8 GB wasted)</div>
+                            <div>&nbsp;&nbsp;⚠️&nbsp; 27 stale cache folders</div>
+                            <div>&nbsp;&nbsp;⚠️&nbsp; No folder structure in place</div>
+                            <br>
+                            <div class="t-green">→ Run 'filemayor cure' to generate a plan.</div>
+                        </div>
+                    </div>
                 </div>
-                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
-                    <h4 style="color: var(--accent); margin-bottom: 8px;">Psychological Safety</h4>
-                    <p style="font-size: 0.9em; color: var(--text-dim);">The Rollback Journal means you can explore
-                        massive organization changes with zero risk of data loss.</p>
+
+                <!-- Step 2: Plan -->
+                <div class="triad-step" id="triad-1">
+                    <div class="triad-info">
+                        <div class="triad-badge">Step 2 of 3</div>
+                        <h3 style="margin-top: 14px;">AI Treatment Plan</h3>
+                        <p>FileMayor proposes a precise treatment plan in plain English. You review every move before a single file is touched. No surprises — full transparency before execution.</p>
+                        <p style="font-size: 0.88em; color: var(--text-muted);">Plans can be customized with <code style="background:rgba(255,255,255,.06);padding:1px 5px;border-radius:4px;">--prompt</code> for your own filing rules.</p>
+                    </div>
+                    <div class="terminal-block">
+                        <div class="terminal-titlebar">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="t-cmd">$ filemayor cure ~/Downloads</div>
+                            <br>
+                            <div class="t-purple">━━ CURATIVE PLAN (Gemini 2.0 Flash) ━━</div>
+                            <div class="t-muted">Strategy: Relocate by type + project context</div>
+                            <br>
+                            <div>&nbsp;&nbsp;📂 Screenshots/ &larr; 63 files</div>
+                            <div>&nbsp;&nbsp;📂 Software/&nbsp;&nbsp;&nbsp; &larr; 14 installers</div>
+                            <div>&nbsp;&nbsp;📂 Documents/&nbsp;&nbsp; &larr; 94 PDFs &amp; docs</div>
+                            <div>&nbsp;&nbsp;🗑️&nbsp; Cache/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &larr; 27 folders (delete)</div>
+                            <br>
+                            <div>Total moves: <span class="t-gold">171 files</span></div>
+                            <div>Space reclaimed: <span class="t-green">3.2 GB</span></div>
+                            <br>
+                            <div class="t-green">→ Run 'filemayor apply' to execute.</div>
+                        </div>
+                    </div>
                 </div>
-                <div style="padding: 24px; border: 1px solid var(--border); border-radius: 12px;">
-                    <h4 style="color: var(--accent); margin-bottom: 8px;">Extensible SOPs</h4>
-                    <p style="font-size: 0.9em; color: var(--text-dim);">Don't just sort by extension. Use AI to parse
-                        your own complex filing rules automatically.</p>
+
+                <!-- Step 3: Apply -->
+                <div class="triad-step" id="triad-2">
+                    <div class="triad-info">
+                        <div class="triad-badge">Step 3 of 3</div>
+                        <h3 style="margin-top: 14px;">Safe Execution + Rollback</h3>
+                        <p>Every operation is journaled. FileMayor applies the plan behind a 6-layer hardened runtime — and if you change your mind, a single command restores the original state instantly.</p>
+                        <p style="font-size: 0.88em; color: var(--text-muted);">Rollback is instant, complete, and permanent.</p>
+                    </div>
+                    <div class="terminal-block">
+                        <div class="terminal-titlebar">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="t-cmd">$ filemayor apply</div>
+                            <br>
+                            <div class="t-muted">Applying curative plan…</div>
+                            <div>&nbsp;&nbsp;✓ Moved 63 screenshots</div>
+                            <div>&nbsp;&nbsp;✓ Moved 94 documents</div>
+                            <div>&nbsp;&nbsp;✓ Archived 14 installers</div>
+                            <div>&nbsp;&nbsp;✓ Cleaned 27 cache folders</div>
+                            <br>
+                            <div class="t-green">━━ CURE APPLIED SUCCESSFULLY ━━━━━━━━</div>
+                            <div>171 files moved &middot; 3.2 GB freed</div>
+                            <div>Journal: <span class="t-blue">~/.filemayor/journal/cure.json</span></div>
+                            <br>
+                            <div class="t-muted">Changed your mind?</div>
+                            <div class="t-cmd">$ filemayor undo&nbsp;&nbsp; # full restore, instant</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- The Problem (Chaos vs Clarity) -->
-    <section id="problem"
-        style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 0; padding: 120px 24px;">
-        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-            <div class="section-label">The Problem</div>
-            <h2 class="section-title">Digital hoarding is a quiet thief.</h2>
-            <p class="section-desc" style="margin-left: auto; margin-right: auto;">
-                Duplicate files, forgotten downloads, and messy raw media don't just waste disk space—they waste
-                cognitive energy.
-                Sifting through chaos to find one PDF is a drain on your productivity.
-            </p>
-
-            <div class="before-after-grid" style="display: grid; gap: 32px; margin-top: 60px;">
-                <div
-                    style="text-align: left; padding: 32px; border-radius: 16px; background: rgba(239, 68, 68, 0.03); border: 1px solid rgba(239, 68, 68, 0.1);">
-                    <div style="font-size: 1.5em; margin-bottom: 12px;">🔴 Chaos</div>
-                    <ul style="list-style: none; color: var(--text-dim); font-size: 0.95em;">
-                        <li style="margin-bottom: 12px;">• 5,000 unorganized items in Downloads</li>
-                        <li style="margin-bottom: 12px;">• GBs of wasted space from duplicates</li>
-                        <li style="margin-bottom: 12px;">• "Final-v2-fixed.pdf" hidden in subfolders</li>
-                        <li>• Mental fatigue from digital rot</li>
-                    </ul>
-                </div>
-                <div
-                    style="text-align: left; padding: 32px; border-radius: 16px; background: rgba(212, 175, 55, 0.03); border: 1px solid rgba(212, 175, 55, 0.1);">
-                    <div style="font-size: 1.5em; margin-bottom: 12px;">🟡 Clarity</div>
-                    <ul style="list-style: none; color: var(--text-dim); font-size: 0.95em;">
-                        <li style="margin-bottom: 12px;">• Instant, deterministic categorization</li>
-                        <li style="margin-bottom: 12px;">• Duplicate identification & removal</li>
-                        <li style="margin-bottom: 12px;">• Clean, searchable folder structures</li>
-                        <li>• Restored focus and mental clarity</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Features -->
     <section id="features">
-        <div class="section-label">Features</div>
-        <h2 class="section-title">Everything you need</h2>
-        <p class="section-desc">14 powerful commands. Zero configuration required. Works on Windows, macOS, and Linux.
-        </p>
+        <div class="section-label">v4.0.0 Features</div>
+        <h2 class="section-title">Jarvis-grade file intelligence.</h2>
+        <p class="section-desc">Everything from the ⌘K command bar to the AI assistant to the hardened runtime — rebuilt from the ground up for v4.</p>
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3>Intelligent Scan</h3>
-                <p>Instantly identify your largest folders and GBs of duplicate files. Find exactly what's eating your
-                    disk space.</p>
+                <div class="feature-icon">⌘</div>
+                <h3>⌘K Command Bar <span class="feature-tag new">NEW</span></h3>
+                <p>One global shortcut to rule everything. Fuzzy-search navigation, actions, and AI commands from any view. Keyboard-first and always available.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏠</div>
+                <h3>Mission Control Home <span class="feature-tag new">NEW</span></h3>
+                <p>Workspace-centric home with active folder card, live activity counter, hardened-runtime stats, and four quick-action tiles.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Conversational Assistant <span class="feature-tag new">NEW</span></h3>
+                <p>Chat with FileMayor. Inline diagnosis cards, plan previews, one-tap apply and rollback — all inside the conversation bubble.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🩺</div>
+                <h3>Curative Triad</h3>
+                <p>Explain → Cure → Apply. AI diagnoses your folder, generates a treatment plan, and executes with full rollback safety.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">↩️</div>
+                <h3>Full Rollback Journal</h3>
+                <p>Every file operation is journaled. Undo any cure, organize, or delete in one command. Zero risk of permanent data loss.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>6-Layer Hardened Runtime</h3>
+                <p>Jailer, Vault, Guardrail, Halt, Architect, Security — six independent safety modules protecting every operation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔌</div>
+                <h3>MCP Server <span class="feature-tag new">NEW</span></h3>
+                <p>Drive FileMayor from Claude, Cursor, or Zed via Model Context Protocol. 14 tools over stdio — drops in with one JSON snippet.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📂</div>
                 <h3>Auto-Organize</h3>
-                <p>Deterministic sorting of Downloads into 12 smart categories. No more manual dragging of files.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧹</div>
-                <h3>Deep-Clean</h3>
-                <p>Reclaim GBs by nuking system junk, node_modules bloat, and hidden logs with safe, targeted commands.
-                </p>
+                <p>Deterministic sorting into 12 smart categories. 180+ file extensions mapped. Preview with <code style="font-size:.85em;background:rgba(255,255,255,.05);padding:1px 5px;border-radius:4px;">--dry-run</code> before committing.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">👁️</div>
                 <h3>Background Watch <span class="feature-tag">PRO</span></h3>
-                <p>Real-time file monitoring. As soon as you save a file, FileMayor puts it exactly where it belongs.
-                </p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">↩️</div>
-                <h3>Safety First (Undo)</h3>
-                <p>Every operation has a rollback journal. If you don't like an organization, hit 'Undo' to restore
-                    original state.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>AI SOP Engine <span class="feature-tag">PRO</span></h3>
-                <p>Turn plain-English instructions into automated filing rules. "Put all 2023 PDFs in Finance" is now a
-                    reality.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🩺</div>
-                <h3>Curative Triad <span class="feature-tag">NEW</span></h3>
-                <p>Explain → Cure → Apply. AI diagnoses your folder mess, proposes a treatment plan, and executes with full rollback.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔎</div>
-                <h3>Deep Analysis</h3>
-                <p>Detect duplicates, map disk usage, and identify bloat with intelligent directory intelligence.</p>
-            </div>
-        </div>
-
-        <!-- Before / After Visual -->
-        <div
-            style="margin-top: 80px; background: #000; border: 1px solid var(--border); border-radius: 20px; padding: 40px; overflow: hidden;">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h3 style="font-size: 1.5em; margin-bottom: 8px;">Restoring order in seconds</h3>
-                <p style="color: var(--text-dim); font-size: 0.9em;">From terminal chaos to pristine structure.</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-                <!-- Before -->
-                <div
-                    style="background: rgba(255,255,255,0.02); padding: 24px; border-radius: 12px; border: 1px dashed rgba(239, 68, 68, 0.3);">
-                    <div
-                        style="color: #ef4444; font-size: 0.7em; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px;">
-                        Before FileMayor</div>
-                    <div
-                        style="font-family: 'SF Mono', monospace; font-size: 0.85em; color: var(--text-dim); line-height: 1.8;">
-                        ~/Downloads/<br>
-                        &nbsp;&nbsp;📄 scan_receipt.pdf<br>
-                        &nbsp;&nbsp;🖼️ img_9821.jpg<br>
-                        &nbsp;&nbsp;📦 node_modules.zip<br>
-                        &nbsp;&nbsp;📄 draft_final_v2.docx<br>
-                        &nbsp;&nbsp;🖼️ pic_001.png<br>
-                        &nbsp;&nbsp;📄 resume_updated.pdf<br>
-                        &nbsp;&nbsp;🎞️ screen_rec_1.mp4<br>
-                        &nbsp;&nbsp;📄 license.txt
-                    </div>
-                </div>
-
-                <!-- After -->
-                <div
-                    style="background: rgba(255,255,255,0.02); padding: 24px; border-radius: 12px; border: 1px solid rgba(74, 222, 128, 0.3);">
-                    <div
-                        style="color: #4ade80; font-size: 0.7em; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px;">
-                        After FileMayor</div>
-                    <div
-                        style="font-family: 'SF Mono', monospace; font-size: 0.85em; color: var(--text); line-height: 1.8;">
-                        ~/Downloads/<br>
-                        &nbsp;&nbsp;📂 Documents/<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;📄 scan_receipt.pdf<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;📄 draft_final_v2.docx<br>
-                        &nbsp;&nbsp;📂 Images/<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;🖼️ img_9821.jpg<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;🖼️ pic_001.png<br>
-                        &nbsp;&nbsp;📂 Archives/<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;📦 node_modules.zip<br>
-                        &nbsp;&nbsp;📂 Media/<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;🎞️ screen_rec_1.mp4
-                    </div>
-                </div>
+                <p>Real-time daemon auto-organizes files the moment they land in your watched folder. Set it and forget it.</p>
             </div>
         </div>
     </section>
 
-    <!-- Usage -->
-    <section id="usage">
-        <div class="code-section">
-            <div>
-                <div class="section-label">Usage</div>
-                <h2 class="section-title">Simple by design</h2>
-                <p class="section-desc">No configuration needed. Just point at a folder and go. Everything works out of
-                    the box with sensible defaults.</p>
+    <!-- MCP Integration -->
+    <div class="full-bleed" id="mcp">
+        <div class="full-bleed-inner">
+            <div class="mcp-section-inner">
+                <div class="mcp-grid">
+                    <div>
+                        <div class="section-label" style="color: #a78bfa;">AI Integration</div>
+                        <h2 class="section-title" style="font-size: 1.9em;">Drive FileMayor<br>from any AI.</h2>
+                        <p style="color: var(--text-dim); margin-bottom: 24px; line-height: 1.65;">
+                            <code style="background:rgba(167,139,250,.1);color:#c4b5fd;padding:2px 8px;border-radius:5px;font-size:.9em;">@filemayor/mcp</code> is a standalone Model Context Protocol server. Add one JSON snippet to Claude Desktop, Cursor, or Zed — and your AI gets 14 FileMayor tools that run with the same hardened safety as the desktop app.
+                        </p>
+
+                        <div class="mcp-tools">
+                            <span class="mcp-tool">scan</span>
+                            <span class="mcp-tool">analyze</span>
+                            <span class="mcp-tool">explain</span>
+                            <span class="mcp-tool">plan</span>
+                            <span class="mcp-tool">apply</span>
+                            <span class="mcp-tool">rollback</span>
+                            <span class="mcp-tool">organize</span>
+                            <span class="mcp-tool">clean</span>
+                            <span class="mcp-tool">duplicates</span>
+                            <span class="mcp-tool">dedupe</span>
+                            <span class="mcp-tool">delete_files</span>
+                            <span class="mcp-tool">history</span>
+                            <span class="mcp-tool">undo_last</span>
+                            <span class="mcp-tool">info</span>
+                        </div>
+
+                        <div class="mcp-integrations">
+                            <div class="mcp-integration">
+                                <span class="mcp-integration-icon">🤖</span>
+                                <div>
+                                    <div class="mcp-integration-label">Claude Desktop</div>
+                                    <div class="mcp-integration-desc">One JSON block in claude_desktop_config.json</div>
+                                </div>
+                            </div>
+                            <div class="mcp-integration">
+                                <span class="mcp-integration-icon">⚡</span>
+                                <div>
+                                    <div class="mcp-integration-label">Cursor &amp; Zed</div>
+                                    <div class="mcp-integration-desc">Drop-in MCP server, zero configuration</div>
+                                </div>
+                            </div>
+                            <div class="mcp-integration">
+                                <span class="mcp-integration-icon">🔧</span>
+                                <div>
+                                    <div class="mcp-integration-label">Claude Code Skill</div>
+                                    <div class="mcp-integration-desc">Drop SKILL.md in ~/.claude/skills/ and Claude knows when to reach for FileMayor</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="terminal-block">
+                            <div class="terminal-titlebar">
+                                <div class="dot dot-red"></div>
+                                <div class="dot dot-yellow"></div>
+                                <div class="dot dot-green"></div>
+                                <span style="margin-left:10px;font-size:.72em;color:var(--text-muted);font-family:'SF Mono',monospace;">claude_desktop_config.json</span>
+                            </div>
+                            <div class="terminal-body" style="font-size:.82em;">
+                                <span class="t-muted">{</span><br>
+                                &nbsp;&nbsp;<span class="t-blue">"mcpServers"</span><span class="t-muted">: {</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"filemayor"</span><span class="t-muted">: {</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"command"</span><span class="t-muted">: </span><span class="t-green">"npx"</span><span class="t-muted">,</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"args"</span><span class="t-muted">: [</span><span class="t-green">"-y"</span><span class="t-muted">, </span><span class="t-green">"@filemayor/mcp"</span><span class="t-muted">],</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"env"</span><span class="t-muted">: {</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"GEMINI_API_KEY"</span><span class="t-muted">: </span><span class="t-green">"..."</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-muted">}</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="t-muted">}</span><br>
+                                &nbsp;&nbsp;<span class="t-muted">}</span><br>
+                                <span class="t-muted">}</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px; padding: 16px 20px; background: rgba(74,222,128,.05); border: 1px solid rgba(74,222,128,.15); border-radius: 10px; font-size: .85em; color: var(--text-dim); line-height: 1.6;">
+                            <span style="color: #4ade80; font-weight: 600;">100% local.</span> The MCP server is a thin stdio bridge over the same hardened core as the desktop app. No data leaves your machine. GEMINI_API_KEY is only used for AI planning — never for file access.
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="code-block">
-                <span class="comment"># See what's in a folder</span><br>
-                <span class="cmd">filemayor scan</span> ~/Downloads<br><br>
-                <span class="comment"># Preview organization</span><br>
-                <span class="cmd">filemayor organize</span> ~/Downloads <span class="flag">--dry-run</span><br><br>
-                <span class="comment"># Sort everything</span><br>
-                <span class="cmd">filemayor organize</span> ~/Downloads<br><br>
-                <span class="comment"># Delete junk files</span><br>
-                <span class="cmd">filemayor clean</span> /tmp <span class="flag">--yes</span><br><br>
-                <span class="comment"># Export as JSON</span><br>
-                <span class="cmd">filemayor scan</span> . <span class="flag">--json</span> | jq '.files'
+        </div>
+    </div>
+
+    <!-- Security -->
+    <section id="security">
+        <div class="section-label">Security</div>
+        <h2 class="section-title">Built to be trusted.</h2>
+        <p class="section-desc">The Chevza Doctrine: six independent safety layers, zero cloud reliance, and a journal that makes every operation reversible.</p>
+
+        <div class="security-grid">
+            <div class="security-item">
+                <span class="security-icon">🔒</span>
+                <h4>100% Local Processing</h4>
+                <p>No data leaves your machine. No cloud, no servers, no telemetry — ever.</p>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">🪤</span>
+                <h4>Symlink-Aware Jailer</h4>
+                <p>Path jailing blocks access to system-critical directories, even through symlink chains.</p>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">🗝️</span>
+                <h4>OS Keychain Vault</h4>
+                <p>API keys stored in your OS native keychain. Never in plaintext, never in env files.</p>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">🛑</span>
+                <h4>Logic Guardrail</h4>
+                <p>Destructive AI-generated batch operations are vetted before a single file is touched.</p>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">↩️</span>
+                <h4>Full Rollback Journal</h4>
+                <p>Every file operation is logged. Undo anything, anytime — instant and complete.</p>
+            </div>
+            <div class="security-item">
+                <span class="security-icon">📦</span>
+                <h4>Zero Runtime Dependencies</h4>
+                <p>Pure Node.js core. No supply chain risk from third-party npm packages.</p>
             </div>
         </div>
     </section>
+
+    <!-- CTA Strip -->
+    <div class="cta-strip">
+        <div class="section-label" style="margin-bottom: 12px;">Get Started</div>
+        <h2>Your folders deserve a Jarvis.</h2>
+        <p>Download the desktop app or install the CLI — both are free to start.</p>
+        <div class="cta-buttons">
+            <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="cta-primary">⬇️ Download Desktop App</a>
+            <a href="https://www.npmjs.com/package/filemayor" class="cta-secondary">📦 npm install -g filemayor</a>
+        </div>
+    </div>
 
     <!-- Pricing -->
     <section id="pricing">
         <div class="section-label">Pricing</div>
-        <h2 class="section-title">Start free, upgrade when ready</h2>
-        <p class="section-desc">Core features are free forever. Pro unlocks advanced automation and AI features.</p>
+        <h2 class="section-title">Start free, upgrade when ready.</h2>
+        <p class="section-desc">Core features are free forever. Pro unlocks advanced automation, real-time watch mode, and priority support.</p>
 
         <div class="pricing-grid">
             <div class="pricing-card">
@@ -1003,14 +1408,14 @@
                 <div class="pricing-price">R0</div>
                 <div class="pricing-desc">For individuals</div>
                 <ul class="pricing-features">
-                    <li>Directory scanning</li>
-                    <li>File organization</li>
+                    <li>⌘K command bar</li>
+                    <li>Curative Triad (explain, cure, apply)</li>
+                    <li>Directory scanning &amp; organize</li>
                     <li>Junk cleanup</li>
-                    <li>Undo operations</li>
-                    <li>Config file support</li>
-                    <li>Up to 50 files per operation</li>
+                    <li>Full rollback journal</li>
+                    <li>MCP server (14 tools)</li>
                 </ul>
-                <a href="https://www.npmjs.com/package/filemayor" class="pricing-btn">Install Free →</a>
+                <a href="https://github.com/Hrypopo/FileMayor/releases/latest" class="pricing-btn">Download Free →</a>
             </div>
             <div class="pricing-card featured">
                 <div class="pricing-popular">Most Popular</div>
@@ -1019,8 +1424,8 @@
                 <div class="pricing-desc">For power users</div>
                 <ul class="pricing-features">
                     <li>Everything in Free</li>
-                    <li>Watch mode (real-time)</li>
-                    <li>AI SOP parsing</li>
+                    <li>Watch mode (real-time daemon)</li>
+                    <li>AI SOP Engine — custom filing rules</li>
                     <li>Unlimited bulk operations</li>
                     <li>CSV export</li>
                     <li>Priority support</li>
@@ -1031,7 +1436,7 @@
             <div class="pricing-card">
                 <div class="pricing-name">Enterprise</div>
                 <div class="pricing-price">R259.99<span>/month</span></div>
-                <div class="pricing-desc">For teams & companies</div>
+                <div class="pricing-desc">For teams &amp; companies</div>
                 <ul class="pricing-features">
                     <li>Everything in Pro</li>
                     <li>Team license management</li>
@@ -1046,88 +1451,78 @@
         </div>
     </section>
 
-    <!-- Security -->
-    <section id="security">
-        <div class="section-label">Security</div>
-        <h2 class="section-title">Built to be trusted</h2>
-        <p class="section-desc">Your files stay on your machine. Always.</p>
-
-        <div class="security-grid">
-            <div class="security-item">
-                <span class="security-icon">🔒</span>
-                <div>
-                    <h4>100% Local Processing</h4>
-                    <p>No data leaves your machine. No cloud, no servers, no tracking.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <span class="security-icon">🛡️</span>
-                <div>
-                    <h4>Path Traversal Protection</h4>
-                    <p>Built-in guards prevent operations on system directories.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <span class="security-icon">📦</span>
-                <div>
-                    <h4>Zero Dependencies</h4>
-                    <p>Pure Node.js core. No supply chain risk from third-party packages.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <span class="security-icon">↩️</span>
-                <div>
-                    <h4>Full Rollback Journal</h4>
-                    <p>Every file operation is logged. Undo anything at any time.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
-        <div class="footer-brand">✨ FileMayor</div>
+        <div class="footer-brand">✨ FileMayor v4.0.0</div>
         <div class="footer-author">Created by Lehlohonolo Goodwill Nchefu (Chevza)</div>
         <div class="footer-links">
             <a href="https://www.npmjs.com/package/filemayor">npm</a>
             <a href="https://github.com/Hrypopo">GitHub</a>
             <a href="mailto:nchefuh@gmail.com">Support</a>
-            <a href="/terms.html">Terms & Conditions</a>
+            <a href="/terms.html">Terms &amp; Conditions</a>
             <a href="/privacy.html">Privacy Policy</a>
         </div>
     </footer>
 
     <script>
-        function copyInstall() {
-            navigator.clipboard.writeText('npm install -g filemayor').then(() => {
-                document.getElementById('copyHint').textContent = '✓ copied!';
-                setTimeout(() => {
-                    document.getElementById('copyHint').textContent = 'click to copy';
-                }, 2000);
-            });
+        // Curative Triad tab switcher
+        function showTriad(index) {
+            document.querySelectorAll('.triad-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+            document.querySelectorAll('.triad-step').forEach((s, i) => s.classList.toggle('active', i === index));
         }
 
-        // Fetch live download count (sum of last 12 months) — falls back to baseline 25,000+ on error
+        // ⌘K demo typing animation
+        const phrases = [
+            'diagnose my Downloads',
+            'cure ~/Projects --dry-run',
+            'find duplicates in ~/Desktop',
+            'undo last operation',
+            'organize ~/Downloads',
+        ];
+        let phraseIndex = 0, charIndex = 0, deleting = false;
+        const cmdkEl = document.getElementById('cmdkText');
+
+        function typeLoop() {
+            const target = phrases[phraseIndex];
+            const cursor = '<span class="cursor"></span>';
+            if (!deleting) {
+                charIndex++;
+                cmdkEl.innerHTML = target.slice(0, charIndex) + cursor;
+                if (charIndex === target.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
+                setTimeout(typeLoop, 55);
+            } else {
+                charIndex--;
+                cmdkEl.innerHTML = target.slice(0, charIndex) + cursor;
+                if (charIndex === 0) {
+                    deleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(typeLoop, 300);
+                    return;
+                }
+                setTimeout(typeLoop, 28);
+            }
+        }
+        setTimeout(typeLoop, 1200);
+
+        // Live npm download count
         fetch('https://api.npmjs.org/downloads/range/last-year/filemayor')
             .then(r => r.json())
             .then(d => {
                 const total = (d && Array.isArray(d.downloads))
-                    ? d.downloads.reduce((acc, x) => acc + (x.downloads || 0), 0)
-                    : 0;
+                    ? d.downloads.reduce((acc, x) => acc + (x.downloads || 0), 0) : 0;
                 const el = document.getElementById('heroDownloads');
                 if (el && total > 0) {
                     el.textContent = total >= 1000
-                        ? (total / 1000).toFixed(total >= 10000 ? 0 : 1) + 'k+'
-                        : total.toLocaleString();
+                        ? (total / 1000).toFixed(total >= 10000 ? 0 : 1) + 'k+' : total.toLocaleString();
                 }
-            }).catch(() => { /* baseline retained */ });
+            }).catch(() => {});
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', (e) => {
+            a.addEventListener('click', e => {
                 e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
