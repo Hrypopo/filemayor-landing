@@ -66,14 +66,14 @@ export function MCPSection() {
               <span className="size-2.5 rounded-full bg-white/15" />
               <span className="size-2.5 rounded-full bg-white/15" />
               <span className="size-2.5 rounded-full bg-white/15" />
-              <div className="ml-3 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+              <div className="ml-3 font-mono text-[11px] uppercase tracking-[0.14em] text-text-2">
                 ~/Library/Application Support/Claude/claude_desktop_config.json
               </div>
             </div>
             <pre className="overflow-x-auto bg-bg/40 p-5 font-mono text-[13px] leading-relaxed text-text-2">
               <code>{snippet}</code>
             </pre>
-            <div className="border-t border-border/70 bg-bg/40 px-5 py-3 font-mono text-[12px] text-text-3">
+            <div className="border-t border-border/70 bg-bg/40 px-5 py-3 font-mono text-[12px] text-text-2">
               Restart Claude. Ask: <span className="text-accent">“diagnose my Downloads”</span>.
             </div>
           </div>

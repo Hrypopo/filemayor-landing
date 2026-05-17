@@ -60,16 +60,19 @@ export function CommandBar({ className }: CommandBarProps) {
         <kbd className="hidden shrink-0 rounded-md border border-border bg-bg/70 px-2 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-text-2 md:inline-block">
           ⌘ K
         </kbd>
-        <div className="min-w-0 flex-1 font-mono text-[15px] leading-snug text-text md:text-[17px]">
-          <span className="text-text-3">›</span>{' '}
+        <div className="min-w-0 flex-1 truncate whitespace-nowrap font-mono text-[15px] leading-snug text-text md:text-[17px]">
+          <span className="text-text-2">›</span>{' '}
           <span>{text}</span>
-          <span className="ml-0.5 inline-block h-[1.05em] w-[2px] -translate-y-[1px] animate-pulse bg-accent align-middle" />
+          <span
+            aria-hidden
+            className="ml-0.5 inline-block h-[1.05em] w-[2px] -translate-y-[1px] animate-pulse bg-accent align-middle"
+          />
         </div>
-        <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-text-3 md:inline-block">
+        <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-text-2 md:inline-block">
           enter ↵
         </span>
       </div>
-      <div className="flex flex-wrap gap-1.5 border-t border-border/60 bg-bg/30 px-5 py-3 font-mono text-[11px] text-text-3 md:px-6">
+      <div className="flex flex-wrap gap-1.5 border-t border-border/60 bg-bg/30 px-5 py-3 font-mono text-[11px] text-text-2 md:px-6">
         <span>local · offline-first · journaled · undo-anything</span>
       </div>
     </div>

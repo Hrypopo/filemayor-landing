@@ -33,17 +33,17 @@ export function MissionControl() {
             <span className="size-2.5 rounded-full bg-danger/70" />
             <span className="size-2.5 rounded-full bg-warn/70" />
             <span className="size-2.5 rounded-full bg-ok/70" />
-            <div className="ml-4 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+            <div className="ml-4 font-mono text-[11px] uppercase tracking-[0.14em] text-text-2">
               FileMayor
             </div>
-            <div className="ml-auto hidden font-mono text-[11px] text-text-3 md:block">
+            <div className="ml-auto hidden font-mono text-[11px] text-text-2 md:block">
               ⌘K to summon
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-6 p-6 md:p-8 lg:grid-cols-[1.3fr,1fr]">
             <div className="rounded-xl border border-border bg-bg/40 p-6 md:p-7">
-              <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+              <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-2">
                 Active workspace
               </div>
               <div className="mt-2 font-display text-[26px] leading-tight tracking-tight md:text-[30px]">
@@ -69,10 +69,10 @@ export function MissionControl() {
                   className="flex items-center justify-between rounded-xl border border-border bg-bg/40 px-5 py-4"
                 >
                   <div>
-                    <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-text-3">
+                    <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-text-2">
                       {s.k}
                     </div>
-                    <div className="mt-0.5 text-[12.5px] text-text-3">{s.sub}</div>
+                    <div className="mt-0.5 text-[12.5px] text-text-2">{s.sub}</div>
                   </div>
                   <div className="font-display text-[26px] leading-none text-text">{s.v}</div>
                 </div>
@@ -89,18 +89,18 @@ export function MissionControl() {
                 <div className="font-display text-[20px] leading-tight tracking-tight">
                   {a.label}
                 </div>
-                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-text-2">
                   {a.sub}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 border-t border-border bg-bg/40 px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 border-t border-border bg-bg/40 px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-text-2">
             <span className="text-ok">● jailer · ok</span>
             <span className="text-ok">● vault · ok</span>
             <span className="text-ok">● guardrail · ok</span>
-            <span className="text-text-3">undo depth · 42</span>
+            <span className="text-text-2">undo depth · 42</span>
             <span className="ml-auto hidden md:inline">last cure · 2m ago</span>
           </div>
         </div>
