@@ -4,9 +4,9 @@ export const site = {
   domain: 'filemayor.com',
   url: 'https://filemayor.com',
   version: '4.0.0',
-  tagline: 'Think Jarvis, for your folders.',
+  tagline: 'Press ⌘K. Your folders answer.',
   description:
-    'FileMayor v4 — press ⌘K and your filesystem answers. Diagnose, cure, and undo across every folder you own. Locally. Reversibly. On every OS you use.',
+    'FileMayor v4 — a command bar for your filesystem. Diagnose folders, plan moves, apply with rollback. Local-only, on Mac, Windows, and Linux.',
   npm: 'https://www.npmjs.com/package/filemayor',
   github: {
     org: 'Hrypopo',
@@ -28,7 +28,7 @@ export const site = {
     // (SSO, audit logs, true team seat management).
     enterprise: { name: 'Team', priceUsd: 24.99, period: '/mo' },
   },
-  hook: 'Your AI can suggest. FileMayor can act — safely. Now with ⌘K.',
+  hook: 'Your AI can suggest. FileMayor can act — with one undo to roll it back.',
   metrics: {
     npmInstalls: 25000,
     testsPassing: 128,

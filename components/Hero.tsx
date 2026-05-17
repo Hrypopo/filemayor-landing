@@ -14,7 +14,7 @@ export function Hero() {
           <span className="relative inline-block size-1.5 rounded-full bg-accent">
             <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
           </span>
-          v{site.version} · the jarvis release
+          v{site.version} · command bar + MCP
         </span>
 
         <p className="mb-5 max-w-2xl font-display text-[clamp(20px,2vw,26px)] italic leading-snug text-text-2">
@@ -22,7 +22,7 @@ export function Hero() {
         </p>
 
         <h1 className="h-display max-w-[16ch] text-[clamp(56px,9vw,128px)]">
-          Think <em className="not-italic text-accent italic">Jarvis</em>, for your folders.
+          Press <em className="not-italic text-accent italic">⌘K</em>. Your folders answer.
         </h1>
 
         <p className="mt-8 max-w-xl text-lg leading-relaxed text-text-2 md:text-xl">

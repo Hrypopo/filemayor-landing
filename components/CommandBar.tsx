@@ -53,7 +53,7 @@ export function CommandBar({ className }: CommandBarProps) {
         className,
       )}
       role="img"
-      aria-label="FileMayor command bar — press ⌘K and type a request"
+      aria-label="FileMayor command bar — press ⌘K and type a request in plain English"
     >
       <div className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
       <div className="flex items-center gap-4 px-5 py-4 md:px-6 md:py-5">
@@ -65,8 +65,8 @@ export function CommandBar({ className }: CommandBarProps) {
           <span>{text}</span>
           <span className="ml-0.5 inline-block h-[1.05em] w-[2px] -translate-y-[1px] animate-pulse bg-accent align-middle" />
         </div>
-        <span className="hidden shrink-0 rounded-full border border-accent/30 bg-accent/[0.08] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-accent md:inline-block">
-          jarvis
+        <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-text-3 md:inline-block">
+          enter ↵
         </span>
       </div>
       <div className="flex flex-wrap gap-1.5 border-t border-border/60 bg-bg/30 px-5 py-3 font-mono text-[11px] text-text-3 md:px-6">

@@ -24,9 +24,9 @@ export function MCPSection() {
               Bring FileMayor to <em className="not-italic text-accent italic">Claude</em>.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-text-2 md:text-lg">
-              Install one MCP server and Claude Desktop, Claude Code, or any MCP-aware
-              client can diagnose folders, propose cures, and apply moves — with the same
-              journaled rollback as the CLI. No bespoke glue. No data leaves the machine.
+              Install one MCP server. Claude Desktop, Claude Code, and any MCP-aware client
+              can then diagnose folders, propose moves, and apply them — with the same
+              journaled rollback the CLI uses. No glue code. No data leaves the machine.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">

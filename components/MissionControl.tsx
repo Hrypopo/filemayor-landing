@@ -19,13 +19,13 @@ export function MissionControl() {
       aria-labelledby="mc-heading"
     >
       <div className="container-prose">
-        <div className="section-label">Mission Control</div>
+        <div className="section-label">HomeView</div>
         <h2 id="mc-heading" className="h-display text-[clamp(36px,5vw,56px)]">
-          Your workspace, <em className="not-italic text-accent italic">at a glance</em>.
+          The new <em className="not-italic text-accent italic">home</em> screen.
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-2 md:text-lg">
-          The new HomeView is the cockpit. Active folder front and center. Live posture below.
-          Every action one keystroke away.
+          Active folder, recent activity, and security status on one screen. Diagnose, cure,
+          apply, and undo are one keystroke each.
         </p>
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-surface/60 shadow-[0_40px_120px_-40px_rgba(212,175,55,0.18)]">
@@ -34,7 +34,7 @@ export function MissionControl() {
             <span className="size-2.5 rounded-full bg-warn/70" />
             <span className="size-2.5 rounded-full bg-ok/70" />
             <div className="ml-4 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
-              FileMayor · Jarvis
+              FileMayor
             </div>
             <div className="ml-auto hidden font-mono text-[11px] text-text-3 md:block">
               ⌘K to summon

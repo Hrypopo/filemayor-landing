@@ -3,33 +3,33 @@ import { site } from '@/lib/site';
 const items = [
   {
     tag: '⌘K',
-    title: 'Global command bar',
-    desc: 'Press ⌘K anywhere. Ask in plain English. Jarvis answers — and acts.',
+    title: 'Command bar',
+    desc: 'Press ⌘K from anywhere in the app. Type what you want done. FileMayor runs it.',
   },
   {
-    tag: 'Mission Control',
-    title: 'New HomeView',
-    desc: 'Workspace at a glance: active folder, reversible moves, files categorized, security layers.',
+    tag: 'HomeView',
+    title: 'Active workspace at a glance',
+    desc: 'See your current folder, recent moves, files categorized, and security status on one screen.',
   },
   {
     tag: 'MCP',
     title: '@filemayor/mcp',
-    desc: 'Drop FileMayor into Claude Desktop or any MCP client. Your filesystem becomes a tool.',
+    desc: 'Install one MCP server. Claude Desktop and other MCP clients can now diagnose folders and apply moves.',
   },
   {
     tag: 'Skill',
     title: 'Claude Code Skill',
-    desc: 'Install the FileMayor skill once. Claude Code can diagnose, cure, and undo on demand.',
+    desc: 'Install the FileMayor skill once. Claude Code can run diagnose, cure, and undo on demand.',
   },
   {
-    tag: 'Assistant',
-    title: 'Inline plan cards',
-    desc: 'The Polished Assistant proposes moves as cards you accept, reject, or rewrite.',
+    tag: 'Plan cards',
+    title: 'Review before apply',
+    desc: 'Proposed moves appear as cards. Accept, reject, or rewrite each one before anything touches disk.',
   },
   {
-    tag: 'Status Bar',
-    title: 'Always-on telemetry',
-    desc: 'Live ops, undo depth, and security posture at the bottom of every view.',
+    tag: 'Status bar',
+    title: 'Always-on status',
+    desc: 'Operation count, undo depth, and security checks shown at the bottom of every view.',
   },
 ];
 
@@ -43,17 +43,17 @@ export function WhatsNew() {
       <div className="container-prose">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
-            <div className="section-label">v{site.version} · the jarvis release</div>
+            <div className="section-label">v{site.version} · what&apos;s new</div>
             <h2
               id="whats-new-heading"
               className="h-display mt-3 text-[clamp(36px,5vw,56px)]"
             >
-              Six new surfaces. <em className="not-italic text-accent italic">One</em> instinct.
+              Six things v4 does that v3 <em className="not-italic text-accent italic">didn&apos;t</em>.
             </h2>
           </div>
           <p className="max-w-md text-base leading-relaxed text-text-2">
-            v4 is the release where FileMayor stops being a tool and starts being a presence.
-            Same engine. Same safety. New reflexes.
+            Same engine. Same rollback. New ways to summon it — from the keyboard, from
+            Claude, or from any MCP-aware client.
           </p>
         </div>
 
