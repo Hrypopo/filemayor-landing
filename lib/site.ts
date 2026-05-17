@@ -3,10 +3,10 @@ export const site = {
   by: 'Chevza',
   domain: 'filemayor.com',
   url: 'https://filemayor.com',
-  version: '3.6.1',
-  tagline: 'The doctor for your filesystem.',
+  version: '4.0.0',
+  tagline: 'Think Jarvis, for your folders.',
   description:
-    'FileMayor diagnoses, plans, and cures messy folders. Locally. With rollback safety. On every OS you use.',
+    'FileMayor v4 — press ⌘K and your filesystem answers. Diagnose, cure, and undo across every folder you own. Locally. Reversibly. On every OS you use.',
   npm: 'https://www.npmjs.com/package/filemayor',
   github: {
     org: 'Hrypopo',
@@ -28,7 +28,7 @@ export const site = {
     // (SSO, audit logs, true team seat management).
     enterprise: { name: 'Team', priceUsd: 24.99, period: '/mo' },
   },
-  hook: 'Your AI can suggest. FileMayor can act — safely.',
+  hook: 'Your AI can suggest. FileMayor can act — safely. Now with ⌘K.',
   metrics: {
     npmInstalls: 25000,
     testsPassing: 128,
