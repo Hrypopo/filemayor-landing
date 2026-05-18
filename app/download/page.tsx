@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
+import { EmailCapture } from '@/components/EmailCapture';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -49,7 +50,22 @@ export default function DownloadPage() {
               numbers to remember, no broken links after a release.
             </p>
 
-            <ul className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+            <div className="mt-10 rounded-2xl border border-border bg-surface p-7 md:p-8">
+              <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+                Stay current
+              </div>
+              <h2 className="mt-3 font-display text-[22px] font-normal tracking-tight text-text">
+                Get notified when we ship.
+              </h2>
+              <p className="mt-2 text-[14px] leading-relaxed text-text-2">
+                Release notes, security patches, new platform drops. One email per release. No marketing.
+              </p>
+              <div className="mt-5">
+                <EmailCapture />
+              </div>
+            </div>
+
+            <ul className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
               {platforms.map((p) => (
                 <li key={p.key} className="bg-surface p-7">
                   <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
@@ -66,7 +82,7 @@ export default function DownloadPage() {
               ))}
             </ul>
 
-            <div className="mt-14 rounded-2xl border border-border bg-surface p-7 md:p-8">
+            <div className="mt-10 rounded-2xl border border-border bg-surface p-7 md:p-8">
               <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
                 CLI
               </div>
