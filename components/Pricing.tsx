@@ -3,45 +3,48 @@ import { site } from '@/lib/site';
 const tiers = [
   {
     key: 'free' as const,
-    desc: 'For individuals.',
+    desc: 'For individuals getting started.',
     bullets: [
-      'Directory scanning',
+      'Directory scanning & analysis',
       'File organization',
       'Junk cleanup',
-      'Undo operations',
+      'Undo last operation',
       'Config file support',
       'Up to 50 files per operation',
+      'MCP server for personal use',
     ],
     cta: { label: 'Install free', href: site.npm },
     featured: false,
   },
   {
     key: 'pro' as const,
-    desc: 'For power users.',
+    desc: 'For power users who live in their filesystem.',
     bullets: [
       'Everything in Free',
-      'Watch mode (real-time)',
-      'AI SOP parsing',
-      'Curative Triad — explain, cure, apply',
       'Unlimited bulk operations',
+      'Watch mode — real-time automation',
+      'AI Curative Triad (explain → cure → apply)',
+      'Full session journal + undo all',
       'CSV / JSON export',
       'Priority support',
+      '14-day refund, no questions',
     ],
     cta: {
-      label: 'Get Pro',
+      label: 'Get Pro — $19/mo',
       href: 'https://filemayor.lemonsqueezy.com/checkout/buy/7fdcc87f-0660-4c1c-b3db-99f94773b71a',
     },
     featured: true,
   },
   {
     key: 'enterprise' as const,
-    desc: 'For small teams.',
+    desc: 'For teams who need a shared workflow.',
     bullets: [
       'Everything in Pro',
       'Up to 5 seats per license',
-      'Custom categories',
+      'Shared rule libraries',
       'CSV / JSON / API access',
-      'Priority support',
+      'Audit-ready operation log',
+      'Priority support + SLA',
     ],
     cta: {
       label: 'Get Team',
@@ -55,7 +58,7 @@ const formatPrice = (usd: number) =>
   usd === 0
     ? 'Free'
     : usd
-        .toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
+        .toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })
         .replace('US', '');
 
 const purchaseFaq = [
@@ -69,7 +72,11 @@ const purchaseFaq = [
   },
   {
     q: "What's the actual difference between Pro and Team?",
-    a: 'Pro is one seat. Team is up to five seats per license, plus CSV/JSON/API access and priority support. We are deliberately not calling it Enterprise yet — real enterprise features (SSO, audit logs, large-fleet seat management) ship later. If you need those, email us first.',
+    a: 'Pro is one seat. Team is up to five seats per license, plus shared rule libraries, audit-ready operation logs, and a support SLA. SSO and larger fleet management are on the roadmap — email us if you need them now.',
+  },
+  {
+    q: 'Is there an annual plan?',
+    a: 'Yes — annual billing saves you two months. Email hloninchefu@gmail.com to get the annual link before we wire it into checkout.',
   },
 ];
 
