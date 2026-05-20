@@ -1,11 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 
 export function EmailCapture() {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
 
-  async function submit(e: React.FormEvent) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState('loading');
     try {
