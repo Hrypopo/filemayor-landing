@@ -1,4 +1,4 @@
-const items = [
+export const faqItems = [
   {
     q: 'Does FileMayor send my files anywhere?',
     a: 'No. The core engine runs entirely on your machine. The optional AI features (the Curative Triad) call out to a model only with file metadata — names, sizes, paths, extensions — never file contents. Disable AI entirely and the rest still works.',
@@ -34,7 +34,7 @@ export function FAQ() {
         </h2>
 
         <ul className="mt-10 divide-y divide-border border-y border-border">
-          {items.map((it) => (
+          {faqItems.map((it) => (
             <li key={it.q}>
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6">

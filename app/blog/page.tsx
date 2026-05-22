@@ -10,6 +10,22 @@ export const metadata: Metadata = {
 
 export const posts = [
   {
+    slug: 'best-file-organizer-mac-2025',
+    kicker: 'Guide · comparison',
+    title: 'The best file organizer for Mac in 2025.',
+    dek: 'There is no single best tool — there is a best tool for your problem. Here is how to tell them apart.',
+    date: '2026.05.22',
+    readTime: '8 min read',
+  },
+  {
+    slug: 'how-to-organize-downloads-folder',
+    kicker: 'Guide · workflow',
+    title: 'How to organize your Downloads folder (and keep it that way).',
+    dek: 'A repeatable system for cleaning up the folder everyone ignores — and the one command that keeps it clean.',
+    date: '2026.05.22',
+    readTime: '7 min read',
+  },
+  {
     slug: 'three-dependencies',
     kicker: 'Engineering · trust',
     title: 'Why FileMayor has three dependencies (and you don’t need more).',
