@@ -4,30 +4,89 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'FileMayor vs CleanMyMac X',
+  title: 'FileMayor vs CleanMyMac X — 2025 Comparison',
   description:
-    'CleanMyMac X cleans system junk. FileMayor organises your filesystem with AI planning and full rollback. Honest comparison.',
+    'CleanMyMac X cleans system junk. FileMayor organises your filesystem with AI planning and full rollback. Honest comparison — features, pricing, when to use each.',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is FileMayor better than CleanMyMac X?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'They solve different problems. CleanMyMac X removes system junk, app remnants, and macOS clutter. FileMayor organises your working folders — Downloads, project directories, media libraries — with AI-planned bulk operations and a full undo journal. Most people benefit from both, not one or the other.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can FileMayor replace CleanMyMac?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No, and it is not trying to. CleanMyMac handles system caches, malware scans, and app uninstallation — none of which FileMayor touches. FileMayor focuses entirely on organising your user filesystem. Run CleanMyMac monthly for system hygiene; use FileMayor whenever a folder needs structure.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does FileMayor remove system junk or caches?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. FileMayor never touches system directories, app caches, or macOS internals. Its scope is your user filesystem: the folders you create and manage. The Chevza Doctrine — FileMayor\'s six-layer safety architecture — explicitly prohibits operations on protected system paths.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is FileMayor free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. FileMayor has a permanent free tier with no time limit. Pro adds watch mode, scheduled scans, and advanced deduplication at $19/month. CleanMyMac X starts at $39.95/year with no free tier (trial only).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does FileMayor work on Windows and Linux?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes — macOS, Windows, Linux, and a PWA. CleanMyMac X is macOS-focused (Windows version has limited features). If your team spans operating systems, FileMayor gives a consistent CLI and MCP interface everywhere.',
+      },
+    },
+  ],
 };
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', cmm: 'macOS · Windows (limited)' },
   { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', cmm: '$39.95/yr or $9.99/mo (MacPaw)' },
   { row: 'Primary function', fm: 'Filesystem organisation, bulk ops, AI planning', cmm: 'System junk removal, app uninstaller, malware scan' },
-  { row: 'AI planning', fm: 'Yes — Curative Triad (explain → cure → apply)', cmm: 'No' },
-  { row: 'Rollback', fm: 'Full session journal · undo --all', cmm: 'No undo for cleaned files' },
-  { row: 'File organisation', fm: 'Yes — sort, move, rename, dedupe at scale', cmm: 'Limited — focuses on system files, not user folders' },
-  { row: 'CLI access', fm: 'Yes — 14 commands, --json everywhere', cmm: 'No' },
-  { row: 'MCP / AI tool integration', fm: 'Yes — Claude Desktop, Cursor, Zed', cmm: 'No' },
+  { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', cmm: '✗' },
+  { row: 'Rollback', fm: '✓ Full session journal · undo --all', cmm: '✗ No undo for cleaned files' },
+  { row: 'File organisation', fm: '✓ Sort, move, rename, dedupe at scale', cmm: '△ Limited — focuses on system files, not user folders' },
+  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', cmm: '✗' },
+  { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', cmm: '✗' },
   { row: 'Safety architecture', fm: 'Chevza Doctrine — 6-layer hardened runtime', cmm: 'Standard app sandboxing' },
-  { row: 'Telemetry', fm: 'None', cmm: 'Usage analytics (opt-out available)' },
+  { row: 'Telemetry', fm: '✓ None', cmm: 'Usage analytics (opt-out available)' },
   { row: 'Best for', fm: 'Organising folders, managing projects, AI-driven curation', cmm: 'Freeing disk space, removing app leftovers, quick system scan' },
+];
+
+const alsoCompare = [
+  { href: '/vs/hazel', label: 'FileMayor vs Hazel', desc: 'AI intent vs rules engine. Cross-platform vs Mac-only.' },
+  { href: '/vs/grandperspective', label: 'FileMayor vs GrandPerspective', desc: 'One shows the problem. The other fixes it.' },
+  { href: '/vs/dropzone', label: 'FileMayor vs Dropzone 4', desc: 'Bulk AI curation vs one-shot drag-and-drop routing.' },
 ];
 
 export default function VsCleanMyMac() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Nav />
       <main id="main">
+
+        {/* Hero */}
         <section className="border-b border-border py-24 md:py-32">
           <div className="container-prose">
             <Link
@@ -50,6 +109,7 @@ export default function VsCleanMyMac() {
           </div>
         </section>
 
+        {/* Decision matrix */}
         <section className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-4xl">
             <div className="section-label">At a glance</div>
@@ -79,6 +139,7 @@ export default function VsCleanMyMac() {
           </div>
         </section>
 
+        {/* When CleanMyMac is right */}
         <section className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-3xl">
             <div className="section-label">When CleanMyMac is the right call</div>
@@ -94,6 +155,7 @@ export default function VsCleanMyMac() {
           </div>
         </section>
 
+        {/* When FileMayor is right */}
         <section className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-3xl">
             <div className="section-label">When FileMayor is the right call</div>
@@ -114,6 +176,88 @@ export default function VsCleanMyMac() {
           </div>
         </section>
 
+        {/* Why switch */}
+        <section className="border-b border-border py-20 md:py-24">
+          <div className="container-prose max-w-3xl">
+            <div className="section-label">Why people add FileMayor</div>
+            <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
+              CleanMyMac tidied the system. The folders are still a mess.
+            </h2>
+            <p className="mt-6 text-[16.5px] leading-relaxed text-text-2">
+              CleanMyMac users often reach FileMayor the same way: the system is clean,
+              the app is happy, but the Downloads folder still has 3,000 files and no
+              structure. CleanMyMac cannot help there — and it should not try. That is
+              what FileMayor is for.
+            </p>
+            <ul className="mt-8 space-y-4">
+              {[
+                'No guesswork — FileMayor explains every proposed change before touching a file.',
+                'Any mistake is undoable — the full session journal means undo --all is always available.',
+                'Works where you work — macOS, Windows, Linux, and inside your AI assistant via MCP.',
+              ].map((item) => (
+                <li key={item} className="flex gap-3 text-[15.5px] text-text-2">
+                  <span className="mt-0.5 shrink-0 font-mono text-accent">→</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* CLI demo */}
+        <section className="border-b border-border py-20 md:py-24">
+          <div className="container-prose max-w-3xl">
+            <div className="section-label">See it in action</div>
+            <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
+              From chaos to structure in one session.
+            </h2>
+            <p className="mt-6 text-[16.5px] leading-relaxed text-text-2">
+              CleanMyMac freed 4 GB from caches. Now FileMayor handles the Downloads folder
+              that has been accumulating for two years.
+            </p>
+            <pre className="mt-8 overflow-x-auto rounded-2xl border border-border bg-surface p-6 font-mono text-[13px] leading-relaxed text-text-2">
+              <code>{`$ filemayor scan ~/Downloads
+
+  Scanned 3,847 files in 1.4s
+
+  ◆ Diagnosis
+    • 412 duplicate files (2.1 GB recoverable)
+    • 890 files unmodified for 18+ months → archive candidates
+    • 1,204 files with no folder structure (flat root dump)
+    • 23 broken symlinks
+
+  ◆ Proposed cure
+    [1] Archive 890 stale files to ~/Downloads/_archive/2023/
+    [2] Deduplicate 412 files, keeping newest → saves 2.1 GB
+    [3] Sort remaining 2,545 files by type into subfolders
+    [4] Remove 23 broken symlinks
+
+  Apply? [y/N] y
+
+  ✓ 3,847 operations journaled. Run \`filemayor undo --all\` to reverse.`}</code>
+            </pre>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="border-b border-border py-20 md:py-24">
+          <div className="container-prose max-w-3xl">
+            <div className="section-label">Common questions</div>
+            <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
+              FileMayor vs CleanMyMac — FAQ.
+            </h2>
+            <dl className="mt-10 divide-y divide-border">
+              {faqSchema.mainEntity.map((q) => (
+                <div key={q.name} className="py-6">
+                  <dt className="text-[15.5px] font-medium text-text">{q.name}</dt>
+                  <dd className="mt-3 text-[15px] leading-relaxed text-text-2">{q.acceptedAnswer.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* CTA + Also compare */}
         <section className="py-16 md:py-20">
           <div className="container-prose max-w-3xl">
             <div className="section-label">The short answer</div>
@@ -130,8 +274,25 @@ export default function VsCleanMyMac() {
                 How the Curative Triad works
               </Link>
             </div>
+
+            <div className="mt-16 border-t border-border pt-12">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">Also compare</p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                {alsoCompare.map((c) => (
+                  <Link
+                    key={c.href}
+                    href={c.href}
+                    className="group rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent"
+                  >
+                    <p className="text-[14px] font-medium text-text transition-colors group-hover:text-accent">{c.label}</p>
+                    <p className="mt-1.5 text-[13px] leading-snug text-text-3">{c.desc}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
+
       </main>
       <Footer />
     </>
