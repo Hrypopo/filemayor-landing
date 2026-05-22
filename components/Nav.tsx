@@ -3,8 +3,9 @@ import { site } from '@/lib/site';
 import { ThemeToggle } from './ThemeToggle';
 
 const links = [
-  { href: '#run', label: 'Run' },
   { href: '/skill', label: 'Use via LLM' },
+  { href: '/mcp', label: 'MCP' },
+  { href: '/teams', label: 'Teams' },
   { href: '#pricing', label: 'Pricing' },
   { href: '/docs', label: 'Docs' },
 ];

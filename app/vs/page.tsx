@@ -34,6 +34,24 @@ const comparisons = [
     tagline: 'Visualise disk usage. FileMayor visualises and then acts.',
     verdict: 'One shows the problem. The other fixes it.',
   },
+  {
+    slug: 'alfred',
+    name: 'Alfred',
+    tagline: 'A Mac launcher and workflow engine vs a filesystem organiser with AI planning.',
+    verdict: 'Different jobs — they work side by side.',
+  },
+  {
+    slug: 'forklift',
+    name: 'ForkLift',
+    tagline: 'Dual-pane manual management and remote transfers vs AI-planned bulk organisation.',
+    verdict: 'Manual cockpit vs autopilot.',
+  },
+  {
+    slug: 'marta',
+    name: 'Marta',
+    tagline: 'A fast keyboard-driven dual-pane manager vs automated, reversible organisation.',
+    verdict: 'Fly by hand, or let it plan the cleanup.',
+  },
 ];
 
 export default function VsIndex() {
