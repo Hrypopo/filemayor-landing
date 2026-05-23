@@ -13,7 +13,7 @@ const SNIPPET = `{
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["filemayor", "mcp"]
     }
   }
 }`;
@@ -35,7 +35,7 @@ const faqSchema = {
       name: 'Which AI clients support the FileMayor MCP server?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Any client that speaks the Model Context Protocol. That includes Claude Desktop, Claude Code, Cursor, and Zed. You add one entry to the client’s MCP configuration pointing at @filemayor/mcp, restart, and the FileMayor tools become available in chat.',
+        text: ‘Any client that speaks the Model Context Protocol. That includes Claude Desktop, Claude Code, Cursor, and Zed. You add one entry to the client’s MCP configuration pointing at the filemayor CLI, restart, and the FileMayor tools become available in chat.’,
       },
     },
     {
@@ -66,7 +66,7 @@ const faqSchema = {
 };
 
 const steps = [
-  { n: '01', t: 'Add the server', d: 'Drop one entry into your client’s MCP config. No build step, no glue code — npx fetches and runs @filemayor/mcp on demand.' },
+  { n: ‘01’, t: ‘Add the server’, d: ‘Drop one entry into your client’s MCP config. No build step, no glue code — npx filemayor mcp starts the server on demand.’ },
   { n: '02', t: 'Restart the client', d: 'Claude Desktop, Cursor, or Zed picks up the FileMayor tools automatically on the next launch.' },
   { n: '03', t: 'Ask in plain language', d: '“Diagnose my Downloads”, “dedupe this folder”, “archive anything older than a year.” The model plans; you approve.' },
   { n: '04', t: 'Apply with rollback', d: 'Approved plans run locally and journal every move. Changed your mind? undo --all reverses the entire session.' },
@@ -104,8 +104,8 @@ export default function MCPPage() {
               <Link href="/skill" className="btn btn-primary">
                 Read the Skill guide <span aria-hidden>→</span>
               </Link>
-              <Link href="https://www.npmjs.com/package/@filemayor/mcp" className="btn btn-mono">
-                @filemayor/mcp on npm
+              <Link href="https://www.npmjs.com/package/filemayor" className="btn btn-mono">
+                filemayor on npm
               </Link>
             </div>
           </div>
