@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { resend, EMAIL_FROM } from '@/lib/resend';
 
 const WELCOME_HTML = `<!DOCTYPE html>
 <html lang="en">
@@ -104,19 +105,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Subscription failed' }, { status: 502 });
   }
 
-  // Welcome email — fire-and-forget, does not block the response
-  fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: 'FileMayor <hello@filemayor.com>',
-      to: [email],
-      subject: 'Your folders, on command.',
-      html: WELCOME_HTML,
-    }),
+  // Welcome email via Resend SDK — fire-and-forget
+  resend.emails.send({
+    from: EMAIL_FROM,
+    to: [email],
+    subject: 'Your folders, on command.',
+    html: WELCOME_HTML,
   }).catch((err) => console.error('Welcome email failed (non-fatal):', err));
 
   return NextResponse.json({ ok: true });
