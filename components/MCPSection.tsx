@@ -9,15 +9,15 @@ const snippet = `{
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["filemayor", "mcp"]
     }
   }
 }`;
 
 const benefits = [
-  'Local-only execution',
-  'Same Chevza Doctrine guards',
-  'Journaled · undo from chat',
+  'Nothing leaves your machine',
+  'Every move is reversible',
+  'Ask in plain English',
   'Works with Claude Code Skill',
 ];
 
@@ -43,26 +43,24 @@ export function MCPSection() {
       <div className="container-prose">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr,1.1fr] lg:items-center">
           <Reveal>
-            <div className="section-label">Model Context Protocol</div>
+            <div className="section-label">Works with Claude</div>
             <h2 id="mcp-heading" className="h-display mt-3 text-[clamp(36px,5vw,56px)]">
-              Bring FileMayor to <em className="not-italic text-accent italic">Claude</em>.
+              Tell Claude to clean your folders.{' '}
+              <em className="not-italic text-accent italic">It already knows how.</em>
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-text-2 md:text-lg">
-              Install one MCP server. Claude Desktop, Claude Code, and any MCP-aware client
-              can then diagnose folders, propose moves, and apply them — with the same
-              journaled rollback the CLI uses. No glue code. No data leaves the machine.
+              One config entry and Claude Desktop, Claude Code, or Cursor can audit your
+              folders, propose a plan, and apply it — while FileMayor keeps a full record
+              of every move so you can take it all back.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link href="/skill" className="btn btn-primary">
-                Read the Skill guide
+                Read the guide
                 <span aria-hidden>→</span>
               </Link>
-              <Link
-                href="https://www.npmjs.com/package/@filemayor/mcp"
-                className="btn btn-secondary"
-              >
-                @filemayor/mcp on npm
+              <Link href="/mcp" className="btn btn-secondary">
+                Learn more
                 <span aria-hidden>→</span>
               </Link>
             </div>
@@ -97,7 +95,7 @@ export function MCPSection() {
                 <button
                   type="button"
                   onClick={copy}
-                  aria-label={copied ? 'Copied snippet' : 'Copy MCP configuration to clipboard'}
+                  aria-label={copied ? 'Copied' : 'Copy configuration to clipboard'}
                   className="ml-auto inline-flex items-center gap-1.5 rounded-md border border-border bg-bg/60 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-text-2 transition-colors hover:border-accent/40 hover:text-accent"
                 >
                   {copied ? '✓ copied' : 'copy'}
@@ -108,7 +106,7 @@ export function MCPSection() {
               </pre>
               <div className="border-t border-border/70 bg-bg/40 px-5 py-3 font-mono text-[12px] text-text-2">
                 Restart Claude. Ask:{' '}
-                <span className="text-accent">&ldquo;diagnose my Downloads&rdquo;</span>.
+                <span className="text-accent">&ldquo;clean up my Downloads&rdquo;</span>.
               </div>
             </div>
           </Reveal>
