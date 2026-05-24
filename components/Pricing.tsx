@@ -1,4 +1,8 @@
+'use client';
+
+import { track } from '@vercel/analytics';
 import { site } from '@/lib/site';
+import { CHECKOUT_LINKS } from '@/lib/checkout';
 
 const tiers = [
   {
@@ -13,7 +17,7 @@ const tiers = [
       'Up to 50 files per operation',
       'MCP server for personal use',
     ],
-    cta: { label: 'Install free', href: site.npm },
+    cta: { label: 'Install free', href: site.npm, trackEvent: 'plan_click_free' },
     featured: false,
   },
   {
@@ -31,7 +35,8 @@ const tiers = [
     ],
     cta: {
       label: 'Get Pro — $19/mo',
-      href: 'https://filemayor.lemonsqueezy.com/checkout/buy/7fdcc87f-0660-4c1c-b3db-99f94773b71a',
+      href: CHECKOUT_LINKS.pro,
+      trackEvent: 'plan_click_pro',
     },
     featured: true,
   },
@@ -48,7 +53,8 @@ const tiers = [
     ],
     cta: {
       label: 'Get Team',
-      href: 'https://filemayor.lemonsqueezy.com/checkout/buy/d2795526-eb05-4272-8084-98b6c7a118bb',
+      href: CHECKOUT_LINKS.team,
+      trackEvent: 'plan_click_team',
     },
     featured: false,
   },
@@ -141,6 +147,7 @@ export function Pricing() {
 
                 <a
                   href={t.cta.href}
+                  onClick={() => track(t.cta.trackEvent, { plan: t.key })}
                   className={
                     'btn block w-full justify-center text-center ' +
                     (t.featured ? 'btn-primary' : 'btn-mono')

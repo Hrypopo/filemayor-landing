@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { track } from '@vercel/analytics';
 import { cn } from '@/lib/utils';
 
 interface InstallButtonProps {
@@ -19,6 +20,7 @@ export function InstallButton({
       await navigator.clipboard.writeText(command);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      track('install_copy', { command });
     } catch {
       /* clipboard might be blocked in non-https sandbox preview — silent fail */
     }
