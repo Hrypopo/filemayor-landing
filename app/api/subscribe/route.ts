@@ -407,16 +407,13 @@ export async function POST(req: NextRequest) {
   ];
 
   Promise.all(
-    sequence.map(({ subject, html, text, scheduledAt }) =>
-      resend.emails.send({
-        from: EMAIL_FROM,
-        to: [email],
-        subject,
-        ...(html ? { html } : {}),
-        ...(text ? { text } : {}),
-        ...(scheduledAt ? { scheduledAt } : {}),
-      }).catch((err) => console.error(`Email "${subject}" failed (non-fatal):`, err)),
-    ),
+    sequence.map(({ subject, html, text, scheduledAt }) => {
+      const base = { from: EMAIL_FROM, to: [email], subject, ...(scheduledAt ? { scheduledAt } : {}) };
+      const send = html
+        ? resend.emails.send({ ...base, html })
+        : resend.emails.send({ ...base, text: text! });
+      return send.catch((err) => console.error(`Email "${subject}" failed (non-fatal):`, err));
+    }),
   ).catch(() => {});
 
   return NextResponse.json({ ok: true });
