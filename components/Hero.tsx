@@ -14,7 +14,7 @@ export function Hero() {
           <span className="relative inline-block size-1.5 rounded-full bg-accent">
             <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
           </span>
-          v{site.version} · command bar + MCP
+          v{site.version} · AI-powered · fully reversible
         </span>
 
         <p className="mb-5 max-w-2xl font-display text-[clamp(20px,2vw,26px)] italic leading-snug text-text-2">

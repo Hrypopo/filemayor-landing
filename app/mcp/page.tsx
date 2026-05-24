@@ -13,7 +13,7 @@ const SNIPPET = `{
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["filemayor", "mcp"]
     }
   }
 }`;
@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'What is the FileMayor MCP server?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'It is a Model Context Protocol server that exposes FileMayor’s filesystem operations to AI assistants. Once installed, an MCP-aware client like Claude Desktop can diagnose folders, propose reorganisation plans, and apply them — using the same journaled, reversible engine as the FileMayor CLI and desktop app.',
+        text: "It is a Model Context Protocol server that exposes FileMayor's filesystem operations to AI assistants. Once installed, an MCP-aware client like Claude Desktop can diagnose folders, propose reorganisation plans, and apply them — using the same journaled, reversible engine as the FileMayor CLI and desktop app.",
       },
     },
     {
@@ -35,7 +35,7 @@ const faqSchema = {
       name: 'Which AI clients support the FileMayor MCP server?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Any client that speaks the Model Context Protocol. That includes Claude Desktop, Claude Code, Cursor, and Zed. You add one entry to the client’s MCP configuration pointing at @filemayor/mcp, restart, and the FileMayor tools become available in chat.',
+        text: "Any client that speaks the Model Context Protocol. That includes Claude Desktop, Claude Code, Cursor, and Zed. You add one entry to the client's MCP configuration pointing at the filemayor CLI, restart, and the FileMayor tools become available in chat.",
       },
     },
     {
@@ -66,9 +66,9 @@ const faqSchema = {
 };
 
 const steps = [
-  { n: '01', t: 'Add the server', d: 'Drop one entry into your client’s MCP config. No build step, no glue code — npx fetches and runs @filemayor/mcp on demand.' },
+  { n: '01', t: 'Add the server', d: "Drop one entry into your client's MCP config. No build step, no glue code — npx filemayor mcp starts the server on demand." },
   { n: '02', t: 'Restart the client', d: 'Claude Desktop, Cursor, or Zed picks up the FileMayor tools automatically on the next launch.' },
-  { n: '03', t: 'Ask in plain language', d: '“Diagnose my Downloads”, “dedupe this folder”, “archive anything older than a year.” The model plans; you approve.' },
+  { n: '03', t: 'Ask in plain language', d: '"Diagnose my Downloads", "dedupe this folder", "archive anything older than a year." The model plans; you approve.' },
   { n: '04', t: 'Apply with rollback', d: 'Approved plans run locally and journal every move. Changed your mind? undo --all reverses the entire session.' },
 ];
 
@@ -104,8 +104,8 @@ export default function MCPPage() {
               <Link href="/skill" className="btn btn-primary">
                 Read the Skill guide <span aria-hidden>→</span>
               </Link>
-              <Link href="https://www.npmjs.com/package/@filemayor/mcp" className="btn btn-mono">
-                @filemayor/mcp on npm
+              <Link href="https://www.npmjs.com/package/filemayor" className="btn btn-mono">
+                filemayor on npm
               </Link>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function MCPPage() {
             </h2>
             <p className="mt-6 text-[16.5px] leading-relaxed text-text-2">
               Add this to <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[14px]">claude_desktop_config.json</code>{' '}
-              (or your client’s equivalent), then restart.
+              (or your client's equivalent), then restart.
             </p>
             <pre className="mt-8 overflow-x-auto rounded-2xl border border-border bg-surface p-6 font-mono text-[13px] leading-relaxed text-text-2">
               <code>{SNIPPET}</code>

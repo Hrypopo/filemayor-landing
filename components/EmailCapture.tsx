@@ -1,5 +1,6 @@
 'use client';
 import { useState, FormEvent } from 'react';
+import { track } from '@vercel/analytics';
 
 export function EmailCapture() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,12 @@ export function EmailCapture() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-      setState(res.ok ? 'done' : 'error');
+      if (res.ok) {
+        track('email_signup');
+        setState('done');
+      } else {
+        setState('error');
+      }
     } catch {
       setState('error');
     }

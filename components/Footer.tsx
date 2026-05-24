@@ -28,6 +28,7 @@ const cols = [
   {
     title: 'Company',
     items: [
+      { label: 'Press kit', href: '/press' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Terms', href: '/terms' },
       { label: 'Security', href: '/docs/security' },

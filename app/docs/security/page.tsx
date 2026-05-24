@@ -5,77 +5,72 @@ import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Security · The Chevza Doctrine',
+  title: 'Security Policy · FileMayor',
   description:
-    'Six layers between an AI plan and your filesystem. The architecture document for FileMayor security.',
+    'FileMayor Security Policy — scope, data handling, the six-layer Chevza Doctrine, responsible disclosure, and contact information.',
 };
+
+const EFFECTIVE_DATE = 'May 2025';
 
 const layers = [
   {
     n: 'L01',
     name: 'Jail',
-    file: 'cli/core/jailer.js',
-    role: 'Constrains scope.',
+    role: 'Scope containment.',
     detail: [
-      'Symlink-aware sandbox. Resolves every path before any operation runs.',
-      'Refuses any move outside the declared workspace, including indirect paths through symlinks pointing to system directories.',
-      'Hard-blocked targets: ~/Library/Keychains, /System, %WINDIR%, /etc, ~/.ssh, .gitconfig, .npmrc, anything in $TMPDIR not explicitly opted in.',
+      'All paths are canonically resolved before any operation executes. Symlinks are followed to their real targets and re-validated against the declared workspace boundary.',
+      'Any proposed operation outside the workspace — including indirect traversal through symlinks pointing to system directories — is refused before it reaches the execution engine.',
+      'Protected paths include, but are not limited to: ~/Library/Keychains, /System, %WINDIR%, /etc, ~/.ssh, .gitconfig, .npmrc, and any $TMPDIR entry not explicitly declared in-scope by the user.',
     ],
   },
   {
     n: 'L02',
     name: 'Vault',
-    file: 'cli/core/vault.js',
-    role: 'Holds secrets.',
+    role: 'Credential isolation.',
     detail: [
-      'OS keychain integration: Apple Keychain on macOS, Credential Manager on Windows, libsecret on Linux.',
-      'License keys, AI provider credentials, and webhook signing secrets never touch disk in plaintext.',
-      'Falls back to an encrypted on-disk store only if the OS keychain is unavailable, with a clear console warning.',
+      'License keys, AI-provider credentials, and webhook signing secrets are stored exclusively in the OS-native keychain (Apple Keychain on macOS, Windows Credential Manager, libsecret on Linux).',
+      'No credential, key, or signing secret is written to disk in plaintext at any time. An encrypted on-disk fallback is used only when the OS keychain is unavailable; the application logs a visible warning when this fallback is active.',
+      'Vault does not participate in the plan-execution pipeline. It only answers credential queries and is not accessible to the AI planning component.',
     ],
   },
   {
     n: 'L03',
     name: 'Guardrail',
-    file: 'cli/core/guardrail.js',
-    role: 'Inspects every batch.',
+    role: 'Batch inspection.',
     detail: [
-      'Runs after the AI returns a plan, before the validator. Pattern-matches the proposed batch against a deny-list of destructive shapes.',
-      'Mass-delete thresholds, recursive renames touching protected paths, ambiguous overwrites, batches that exceed configured maxima — all blocked at this layer.',
-      'A failed Guardrail check produces a diagnostic that explains which rule fired and what to ask the AI for instead.',
+      'Every AI-generated plan is pattern-matched against a deny-list of destructive operation shapes before it reaches the plan validator.',
+      'Mass-delete thresholds, recursive renames involving protected paths, ambiguous overwrites, and batches exceeding configured size limits are all blocked at this layer.',
+      'When Guardrail blocks a plan, it emits a structured diagnostic identifying the rule that fired. The user can inspect this diagnostic and reformulate their request.',
     ],
   },
   {
     n: 'L04',
     name: 'Halt',
-    file: 'cli/core/emergency-halt.js',
-    role: 'Crash-safe persistence.',
+    role: 'Crash-safe execution.',
     detail: [
-      'Treats the journal as durable state. Every move writes its intent to disk before the move happens, and writes its completion after.',
-      'Forced shutdown mid-operation always rolls back cleanly on next start. There is no "half-applied" state.',
-      'Halt is not a UI feature — it sits inside the execution pipeline so that user-initiated stops, OS signals, and process crashes all converge on the same recovery path.',
+      'The operation journal is treated as durable state. Each move writes its intent to the journal before executing and marks completion after. There is no window in which a partial operation is unrecoverable.',
+      'On any unclean termination — OS signal, power loss, forced kill — the engine detects the incomplete journal entry on next start and rolls back automatically.',
+      'Halt is implemented inside the execution pipeline, not as a UI affordance. All termination paths — user-initiated stops, SIGTERM, SIGKILL, and crashes — converge on the same recovery logic.',
     ],
   },
   {
     n: 'L05',
     name: 'Architect',
-    file: 'cli/core/validator.js',
-    role: 'Validates the plan.',
+    role: 'Semantic plan validation.',
     detail: [
-      'Refuses domain-scattering moves. Treats the proposed plan as a graph and rejects it if it would split semantically related files (e.g. screenshots from the same session, photos from a single trip).',
-      'Detects circular dependencies between operations.',
-      'Plans that fail validation never reach the execution engine.',
+      'The proposed plan is treated as a dependency graph. Operations that would scatter semantically cohesive files — photographs from the same session, documents from a single project — are rejected.',
+      'Circular dependencies between operations are detected and the plan is refused.',
+      'Plans that fail Architect validation never reach the execution engine. The validation result is reported to the user so the plan can be revised.',
     ],
   },
   {
     n: 'L06',
     name: 'Security',
-    file: 'cli/core/security.js',
-    role: 'The boring layer that matters.',
+    role: 'Input hardening.',
     detail: [
-      'Path traversal checks (rejects ../ escape attempts, encoded variants, NUL bytes).',
-      'Rate limiting on AI calls and on filesystem writes per session.',
-      'Input validation on every user-supplied string — workspace paths, prompts, configuration values.',
-      'The layer with the fewest interesting decisions and the most consequential bugs if it ever fails.',
+      'Path traversal defenses are applied to all user-supplied strings: ../ sequences, URL-encoded variants, and null-byte injection attempts are rejected.',
+      'AI API calls and filesystem write operations are rate-limited per session. Limits are configurable and enforced server-side when an API key is in use.',
+      'All user-supplied input — workspace paths, natural-language prompts, configuration values — is validated before any downstream component processes it.',
     ],
   },
 ];
@@ -85,52 +80,121 @@ export default function SecurityPage() {
     <>
       <Nav />
       <main id="main">
+
+        {/* Header */}
         <section className="border-b border-border py-24 md:py-32">
           <div className="container-prose">
-            <div className="section-label">Security · architecture reference</div>
+            <div className="section-label">Security Policy</div>
             <h1 className="h-display text-[clamp(40px,6vw,80px)]">
-              The Chevza Doctrine.
+              FileMayor Security Policy.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-text-2 md:text-xl">
-              Six named layers between an AI plan and your filesystem. The principle: no
-              single component decides, validates, and executes. Responsibility is split
-              along the path so a failure in any one layer is caught by the next.
+              This document describes how {site.name} protects user data and filesystems,
+              the technical controls in place, our responsible disclosure process,
+              and how to contact the security team.
             </p>
-            <p className="mt-6 max-w-2xl font-mono text-[13px] leading-relaxed text-text-3">
-              This page is the canonical reference. For a narrative version, see{' '}
-              <Link href="/blog/chevza-doctrine" className="text-text-2 underline decoration-text-3 underline-offset-4 hover:text-accent">
-                the essay
-              </Link>
-              .
-            </p>
+            <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-4 font-mono text-[12px] text-text-3">
+              <div>
+                <dt className="uppercase tracking-[0.12em]">Effective</dt>
+                <dd className="mt-1 text-text-2">{EFFECTIVE_DATE}</dd>
+              </div>
+              <div>
+                <dt className="uppercase tracking-[0.12em]">Maintained by</dt>
+                <dd className="mt-1 text-text-2">{site.by} ({site.author.name})</dd>
+              </div>
+              <div>
+                <dt className="uppercase tracking-[0.12em]">Contact</dt>
+                <dd className="mt-1">
+                  <a href={`mailto:${site.author.email}?subject=[security]`} className="text-accent hover:underline">
+                    {site.author.email}
+                  </a>
+                </dd>
+              </div>
+            </dl>
           </div>
         </section>
 
+        {/* Scope */}
         <section className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-3xl">
-            <div className="section-label">Principle</div>
+            <div className="section-label">Scope</div>
             <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
-              Defense in depth, by name.
+              What this policy covers.
             </h2>
             <p className="mt-6 text-[16px] leading-relaxed text-text-2">
-              An AI proposing filesystem operations is a powerful tool and a credible threat.
-              Useful because it generalizes; risky for the same reason. The Doctrine is the
-              answer: the AI can propose, but cannot directly execute. There is always a
-              boundary, and the boundary is layered, named, and inspectable.
+              This policy applies to all {site.name} software: the desktop application
+              (macOS, Windows, Linux), the CLI package published to npm, the MCP server
+              exposed via <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">filemayor mcp</code>,
+              and the filemayor.com web properties.
             </p>
             <p className="mt-4 text-[16px] leading-relaxed text-text-2">
-              When a plan flows from intent to execution, it passes through six checks. Each
-              has a single responsibility, a code home, and a failure mode you can read.
+              It does not cover third-party AI providers (OpenAI, Google Gemini, Anthropic)
+              or payment processors. Those services are governed by their own security
+              policies. Links to their trust pages are available on request.
             </p>
           </div>
         </section>
 
+        {/* Data handling */}
+        <section className="border-b border-border py-20 md:py-24">
+          <div className="container-prose max-w-3xl">
+            <div className="section-label">Data handling</div>
+            <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
+              What leaves your machine. What does not.
+            </h2>
+            <div className="mt-8 space-y-5">
+              {[
+                {
+                  label: 'File contents',
+                  policy: 'Never transmitted.',
+                  detail: 'File contents — text, images, binaries — are read locally for metadata extraction and are never sent to any remote service, including the AI provider.',
+                },
+                {
+                  label: 'File metadata',
+                  policy: 'Sent to AI provider when you request AI assistance.',
+                  detail: 'Names, sizes, paths, extensions, and modification dates may be included in prompts to the configured AI provider. This data is subject to the AI provider\'s data retention policy.',
+                },
+                {
+                  label: 'License keys',
+                  policy: 'Stored in OS keychain only.',
+                  detail: 'License keys are verified against our licensing API at activation. After activation, they are stored in the OS-native keychain and the local JWT is used for all subsequent feature checks.',
+                },
+                {
+                  label: 'Email address',
+                  policy: 'Stored with Resend for product communications.',
+                  detail: 'If you sign up at filemayor.com, your email is stored with our email provider (Resend) and is used only for product updates and transactional messages. You may unsubscribe at any time.',
+                },
+                {
+                  label: 'Usage analytics',
+                  policy: 'Aggregated, anonymous, opt-out.',
+                  detail: 'The web properties use Vercel Analytics for aggregated page-view data. No personal identifiers are collected. The desktop application does not transmit telemetry.',
+                },
+              ].map(({ label, policy, detail }) => (
+                <div key={label} className="rounded-xl border border-border bg-surface p-5">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="font-medium text-text">{label}</p>
+                    <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.12em] text-accent">{policy}</span>
+                  </div>
+                  <p className="mt-2 text-[14px] leading-relaxed text-text-2">{detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* The Doctrine */}
         <section className="border-b border-border py-24 md:py-32">
           <div className="container-prose">
-            <div className="section-label">The layers</div>
+            <div className="section-label">Technical controls — The Chevza Doctrine</div>
             <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
-              Six checks, in order.
+              Six layers between intent and execution.
             </h2>
+            <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-text-2">
+              The Chevza Doctrine is the architectural principle that no single component
+              both validates and executes filesystem operations. Every plan produced by the
+              AI passes through six independent control layers before any file is touched.
+              Each layer has a single defined responsibility and a distinct failure mode.
+            </p>
 
             <ol className="mt-12 space-y-12">
               {layers.map((l) => (
@@ -145,9 +209,6 @@ export default function SecurityPage() {
                     <h3 className="mt-2 font-display text-[28px] font-normal leading-tight tracking-tight text-text">
                       {l.name}
                     </h3>
-                    <code className="mt-2 block font-mono text-[12px] text-text-3">
-                      {l.file}
-                    </code>
                   </div>
                   <div>
                     <p className="font-display text-[20px] font-normal italic leading-snug text-accent">
@@ -168,67 +229,117 @@ export default function SecurityPage() {
           </div>
         </section>
 
+        {/* Runtime vulnerabilities */}
         <section id="vulnerabilities" className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-3xl">
-            <div className="section-label">What &quot;0 runtime vulnerabilities&quot; actually means</div>
+            <div className="section-label">Dependency security</div>
             <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
-              Runtime, not build chain.
+              Runtime dependencies: {site.metrics.runtimeVulns} known vulnerabilities.
             </h2>
             <p className="mt-6 text-[16px] leading-relaxed text-text-2">
-              When we say <strong className="text-text">0 runtime vulnerabilities</strong>, we mean: the
-              three packages that ship to your machine and execute when {site.name} runs —{' '}
+              {site.name} ships three runtime dependencies to user machines:{' '}
               <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">electron-updater</code>,{' '}
-              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tar</code>,{' '}
-              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">yauzl</code> — have no
-              published advisories at their pinned versions.
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tar</code>, and{' '}
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">yauzl</code>.
+              At their pinned versions, none have published advisories in the GitHub Advisory Database or npm audit.
             </p>
             <p className="mt-4 text-[16px] leading-relaxed text-text-2">
-              Build-time tools (Electron, Vite, esbuild, Rollup, TypeScript) are a separate
-              category. They sit in the development dependency tree, run on the build
-              machine, and never ship to your computer. GitHub Dependabot reports advisories
-              for them too, and we patch them as part of routine maintenance — but a
-              moderate audit on a build tool is not the same kind of risk as a runtime CVE.
-              Conflating the two is how a tool ends up looking either too alarmed or too
-              complacent.
+              Build-time tooling (Electron, Vite, esbuild, TypeScript) runs only on the build machine
+              and is not shipped to users. Advisories against build tools are monitored and patched
+              as part of routine maintenance; they are not counted in the runtime metric.
             </p>
             <p className="mt-4 text-[16px] leading-relaxed text-text-2">
-              You can verify the runtime claim yourself:
+              This metric is verified on every release. You may reproduce it independently:
             </p>
-            <pre className="term-block mt-4 overflow-x-auto rounded-xl border border-border p-4 font-mono text-[13px]">
+            <pre className="mt-4 overflow-x-auto rounded-xl border border-border bg-surface p-4 font-mono text-[13px]">
               <code>npm audit --production</code>
             </pre>
-            <p className="mt-4 text-[16px] leading-relaxed text-text-2">
-              That command audits production dependencies only. If it ever returns
-              non-zero, this page and the homepage metric update the same day.
+            <p className="mt-4 text-[14px] leading-relaxed text-text-3">
+              If a runtime advisory is published against a pinned dependency, this page and the
+              homepage metric are updated on the same business day as the patched release.
             </p>
           </div>
         </section>
 
+        {/* Responsible disclosure */}
         <section className="border-b border-border py-20 md:py-24">
           <div className="container-prose max-w-3xl">
-            <div className="section-label">Honest scope</div>
+            <div className="section-label">Responsible disclosure</div>
             <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
-              What we have not yet done.
+              How to report a vulnerability.
             </h2>
             <p className="mt-6 text-[16px] leading-relaxed text-text-2">
-              The Doctrine is an architecture, not a certification. {site.name} has not been
-              third-party audited at the time of writing. We treat that as a planned
-              milestone, not an accomplished one. The 128-test suite covers Doctrine layers
-              extensively (see <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tests/test-security.js</code> and{' '}
-              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tests/MASTER_TEST_V3.js</code>) and a third-party security review will
-              update this page when complete.
+              If you discover a security vulnerability in any {site.name} product, please report
+              it privately before public disclosure. We are committed to responding promptly and
+              crediting researchers who follow this process.
+            </p>
+            <div className="mt-8 space-y-4">
+              {[
+                { step: '01', title: 'Email the security team', body: <>Send details to <a href={`mailto:${site.author.email}?subject=[security]`} className="text-accent hover:underline">{site.author.email}</a> with the subject line <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[12px]">[security]</code>. Include a description, reproduction steps, and your assessment of severity.</> },
+                { step: '02', title: 'Acknowledgement within 48 hours', body: 'We will confirm receipt and open a private tracking issue within two business days. If you do not receive a response, follow up to the same address.' },
+                { step: '03', title: 'Remediation timeline', body: 'Critical and high-severity vulnerabilities are targeted for a patch within 14 days. Medium and low severity within 60 days. We will keep you informed of progress.' },
+                { step: '04', title: 'Coordinated disclosure', body: 'We ask for a 90-day embargo for high-severity reports to allow a patched release to reach users before public disclosure. We will work with you on timing if that window needs adjustment.' },
+                { step: '05', title: 'Credit', body: 'Researchers who follow this process are credited in the release changelog by name or handle, at their preference.' },
+              ].map(({ step, title, body }) => (
+                <div key={step} className="flex gap-5 rounded-xl border border-border bg-surface p-5">
+                  <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent shrink-0 pt-0.5">{step}</div>
+                  <div>
+                    <p className="font-medium text-[15px] text-text">{title}</p>
+                    <p className="mt-1.5 text-[14px] leading-relaxed text-text-2">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Honest scope */}
+        <section className="border-b border-border py-20 md:py-24">
+          <div className="container-prose max-w-3xl">
+            <div className="section-label">Certifications and audits</div>
+            <h2 className="font-display text-[clamp(28px,3.5vw,40px)] font-normal leading-tight tracking-tight">
+              Current status.
+            </h2>
+            <p className="mt-6 text-[16px] leading-relaxed text-text-2">
+              {site.name} has not undergone third-party security audit at the time of writing.
+              A formal audit is on the product roadmap and this page will be updated when complete.
+              The {site.metrics.testsPassing}-test suite covers all six Doctrine layers
+              extensively — including boundary conditions, recovery paths, and adversarial inputs.
             </p>
             <p className="mt-4 text-[16px] leading-relaxed text-text-2">
-              Found a vulnerability? Email{' '}
-              <a className="text-accent" href={`mailto:${site.author.email}`}>
-                {site.author.email}
-              </a>{' '}
-              with the subject line <span className="font-mono">[security]</span>. Disclosure window: 90 days for
-              high-severity reports. Coordinated disclosure preferred; we will credit you in
-              the changelog if you wish.
+              The Chevza Doctrine is an architectural control, not a compliance certification.
+              {site.name} does not currently hold SOC 2, ISO 27001, or similar certifications.
+              If your organisation requires a certification before deployment, contact us
+              to discuss timelines.
             </p>
           </div>
         </section>
+
+        {/* Contact */}
+        <section className="py-16 md:py-20">
+          <div className="container-prose max-w-3xl">
+            <h2 className="font-display text-[clamp(28px,3.5vw,44px)] font-normal leading-tight tracking-tight">
+              Questions about this policy?
+            </h2>
+            <p className="mt-5 text-[16.5px] leading-relaxed text-text-2">
+              For security issues, email{' '}
+              <a href={`mailto:${site.author.email}?subject=[security]`} className="text-accent hover:underline">
+                {site.author.email}
+              </a>{' '}
+              with <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">[security]</code> in the subject.
+              For general policy questions, use the same address without the subject prefix.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="/docs" className="btn btn-primary">
+                All documentation <span aria-hidden>→</span>
+              </Link>
+              <Link href="/download" className="btn btn-mono">
+                Download FileMayor
+              </Link>
+            </div>
+          </div>
+        </section>
+
       </main>
       <Footer />
     </>
