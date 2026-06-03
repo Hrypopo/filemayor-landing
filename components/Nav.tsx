@@ -3,10 +3,10 @@ import { site } from '@/lib/site';
 import { ThemeToggle } from './ThemeToggle';
 
 const links = [
-  { href: '/skill', label: 'Use via LLM' },
+  { href: '/why', label: 'Why' },
   { href: '/mcp', label: 'MCP' },
   { href: '/teams', label: 'Teams' },
-  { href: '#pricing', label: 'Pricing' },
+  { href: '/#pricing', label: 'Pricing' },
   { href: '/docs', label: 'Docs' },
 ];
 

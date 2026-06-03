@@ -7,11 +7,27 @@ export const metadata: Metadata = {
     'Most modern tools are dependency forests. FileMayor was built with a different constraint.',
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: "Why FileMayor has three dependencies (and you don't need more).",
+  description: 'Most modern tools are dependency forests. FileMayor was built with a different constraint.',
+  datePublished: '2026-04-26',
+  author: { '@type': 'Person', name: 'Lehlohonolo Goodwill Nchefu', url: 'https://filemayor.com' },
+  publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  url: 'https://filemayor.com/blog/three-dependencies',
+};
+
 export default function Post() {
   return (
-    <Article
-      header={{
-        kicker: 'Engineering · trust',
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Article
+        header={{
+          kicker: 'Engineering · trust',
         title: "Why FileMayor has three dependencies (and you don’t need more).",
         dek: 'Most modern tools are dependency forests. FileMayor was built with a different constraint.',
         date: '2026.04.26',
@@ -101,6 +117,7 @@ export default function Post() {
         FileMayor takes the opposite approach: make fewer assumptions, depend on fewer
         things, do the job well.
       </P>
-    </Article>
+      </Article>
+    </>
   );
 }

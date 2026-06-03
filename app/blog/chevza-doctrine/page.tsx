@@ -8,11 +8,27 @@ export const metadata: Metadata = {
     'How FileMayor allows intelligent planning without risking uncontrolled execution.',
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Inside the Chevza Doctrine: six layers between an AI plan and your filesystem.',
+  description: 'How FileMayor allows intelligent planning without risking uncontrolled execution.',
+  datePublished: '2026-04-26',
+  author: { '@type': 'Person', name: 'Lehlohonolo Goodwill Nchefu', url: 'https://filemayor.com' },
+  publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  url: 'https://filemayor.com/blog/chevza-doctrine',
+};
+
 export default function Post() {
   return (
-    <Article
-      header={{
-        kicker: 'Security · architecture',
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Article
+        header={{
+          kicker: 'Security · architecture',
         title: 'Inside the Chevza Doctrine: six layers between an AI plan and your filesystem.',
         dek: 'How FileMayor allows intelligent planning without risking uncontrolled execution.',
         date: '2026.04.26',
@@ -116,6 +132,7 @@ export default function Post() {
         </Link>
         .
       </P>
-    </Article>
+      </Article>
+    </>
   );
 }

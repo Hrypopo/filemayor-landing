@@ -7,12 +7,25 @@ export const metadata: Metadata = {
     'A practical, repeatable system for cleaning up a messy Downloads folder — by hand or automatically with FileMayor — and keeping it organised for good.',
 };
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to organize your Downloads folder (and keep it that way)',
+  description: 'A practical, repeatable system for cleaning up a messy Downloads folder — by hand or automatically with FileMayor — and keeping it organised for good.',
+  datePublished: '2026-05-22',
+  author: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  url: 'https://filemayor.com/blog/how-to-organize-downloads-folder',
+};
+
 export default function Post() {
   return (
-    <Article
-      header={{
-        kicker: 'Guide · workflow',
-        title: 'How to organize your Downloads folder (and keep it that way).',
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <Article
+        header={{
+          kicker: 'Guide · workflow',
+          title: 'How to organize your Downloads folder (and keep it that way).',
         dek: 'A repeatable system for cleaning up the folder everyone ignores — and the one command that keeps it clean.',
         date: '2026.05.22',
         readTime: '7 min read',
@@ -141,5 +154,6 @@ export default function Post() {
         archive — and put something in place so you only have to do it once.
       </P>
     </Article>
+    </>
   );
 }

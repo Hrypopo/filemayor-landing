@@ -7,6 +7,7 @@ const cols = [
     items: [
       { label: 'Download', href: '/download' },
       { label: 'Pricing', href: '/#pricing' },
+      { label: 'Why FileMayor', href: '/why' },
       { label: 'For Teams', href: '/teams' },
       { label: 'MCP server', href: '/mcp' },
       { label: 'Compare', href: '/vs' },

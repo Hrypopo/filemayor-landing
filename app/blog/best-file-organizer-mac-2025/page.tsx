@@ -8,16 +8,29 @@ export const metadata: Metadata = {
     'An honest, opinionated guide to the best Mac file organizers in 2025 — Hazel, CleanMyMac, ForkLift, Marta, GrandPerspective, and FileMayor — and how to pick the right one.',
 };
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The best file organizer for Mac in 2025',
+  description: 'An honest, opinionated guide to the best Mac file organizers in 2025 — Hazel, CleanMyMac, ForkLift, Marta, GrandPerspective, and FileMayor — and how to pick the right one.',
+  datePublished: '2026-05-22',
+  author: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  url: 'https://filemayor.com/blog/best-file-organizer-mac-2025',
+};
+
 export default function Post() {
   return (
-    <Article
-      header={{
-        kicker: 'Guide · comparison',
-        title: 'The best file organizer for Mac in 2025.',
-        dek: 'There is no single best tool — there is a best tool for your problem. Here is how to tell them apart.',
-        date: '2026.05.22',
-        readTime: '8 min read',
-      }}
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <Article
+        header={{
+          kicker: 'Guide · comparison',
+          title: 'The best file organizer for Mac in 2025.',
+          dek: 'There is no single best tool — there is a best tool for your problem. Here is how to tell them apart.',
+          date: '2026.05.22',
+          readTime: '8 min read',
+        }}
     >
       <P>
         Search for a Mac file organizer and you will find a dozen apps that all claim to tidy
@@ -139,5 +152,6 @@ export default function Post() {
         </Link>
       </P>
     </Article>
+    </>
   );
 }
