@@ -67,10 +67,21 @@ const alsoCompare = [
   { href: '/vs/cleanmymac', label: 'FileMayor vs CleanMyMac', desc: 'System junk removal vs filesystem organisation.' },
 ];
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://filemayor.com/vs' },
+    { '@type': 'ListItem', position: 3, name: 'Alfred vs FileMayor', item: 'https://filemayor.com/vs/alfred' },
+  ],
+};
+
 export default function VsAlfred() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main">
 

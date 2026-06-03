@@ -76,6 +76,16 @@ const alsoCompare = [
   { href: '/vs/dropzone', label: 'FileMayor vs Dropzone 4', desc: 'Bulk AI curation vs one-shot drag-and-drop routing.' },
 ];
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://filemayor.com/vs' },
+    { '@type': 'ListItem', position: 3, name: 'GrandPerspective vs FileMayor', item: 'https://filemayor.com/vs/grandperspective' },
+  ],
+};
+
 export default function VsGrandPerspective() {
   return (
     <>
@@ -83,6 +93,7 @@ export default function VsGrandPerspective() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main">
 

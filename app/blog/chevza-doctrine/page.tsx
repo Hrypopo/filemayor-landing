@@ -2,6 +2,16 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Article, P, H2, H3, Pull } from '@/components/Article';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://filemayor.com/blog' },
+    { '@type': 'ListItem', position: 3, name: 'Inside the Chevza Doctrine', item: 'https://filemayor.com/blog/chevza-doctrine' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'Inside the Chevza Doctrine',
   description:
@@ -22,10 +32,8 @@ const jsonLd = {
 export default function Post() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Article
         header={{
           kicker: 'Security · architecture',

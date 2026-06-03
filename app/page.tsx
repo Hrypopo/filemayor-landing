@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
 import { WhatsNew } from '@/components/WhatsNew';
@@ -9,6 +10,11 @@ import { Pricing } from '@/components/Pricing';
 import { FAQ, faqItems } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
+
+export const metadata: Metadata = {
+  description:
+    'FileMayor is a free AI file organizer for Mac, Windows, and Linux. Scan any folder, get an AI-generated plan, apply with one command, undo instantly. Install free via npm.',
+};
 
 export default function HomePage() {
   return (

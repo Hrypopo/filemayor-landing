@@ -1,6 +1,16 @@
 import type { Metadata } from 'next';
 import { Article, P, H2, H3, Pull, Pre, Ul, Li } from '@/components/Article';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://filemayor.com/blog' },
+    { '@type': 'ListItem', position: 3, name: 'The Curative Triad', item: 'https://filemayor.com/blog/curative-triad' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'The Curative Triad: separating planning from execution',
   description:
@@ -21,10 +31,8 @@ const jsonLd = {
 export default function Post() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Article
         header={{
           kicker: 'Architecture · pattern',

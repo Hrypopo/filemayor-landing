@@ -7,7 +7,8 @@ import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Download',
-  description: `Get ${site.name} for macOS, Windows, or Linux. Or install via npm.`,
+  description:
+    'Download FileMayor free for macOS, Windows, and Linux — or install via npm. AI-powered file organization with full rollback. No subscription required.',
 };
 
 

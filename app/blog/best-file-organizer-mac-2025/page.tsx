@@ -2,6 +2,16 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Article, P, H2, H3, Pull, Code, Ul, Li } from '@/components/Article';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://filemayor.com/blog' },
+    { '@type': 'ListItem', position: 3, name: 'The best file organizer for Mac in 2025', item: 'https://filemayor.com/blog/best-file-organizer-mac-2025' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'The best file organizer for Mac in 2025',
   description:
@@ -23,6 +33,7 @@ export default function Post() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Article
         header={{
           kicker: 'Guide · comparison',

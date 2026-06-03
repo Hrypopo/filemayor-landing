@@ -4,6 +4,16 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Docs', item: 'https://filemayor.com/docs' },
+    { '@type': 'ListItem', position: 3, name: 'Security', item: 'https://filemayor.com/docs/security' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'Security Policy · FileMayor',
   description:
@@ -78,6 +88,7 @@ const layers = [
 export default function SecurityPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main">
 
