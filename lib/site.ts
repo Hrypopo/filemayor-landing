@@ -33,7 +33,7 @@ export const site = {
     npmInstalls: 25000,
     testsPassing: 128,
     runtimeVulns: 0,
-    runtimeDeps: 3,
+    runtimeDeps: 4,
     locales: 10,
     securityLayers: 6,
   },

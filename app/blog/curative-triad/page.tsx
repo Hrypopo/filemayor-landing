@@ -7,11 +7,27 @@ export const metadata: Metadata = {
     'Most file tools act immediately. FileMayor introduces a boundary between understanding, planning, and action.',
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Curative Triad: separating planning from execution.',
+  description: 'Most file tools act immediately. FileMayor introduces a boundary between understanding, planning, and action.',
+  datePublished: '2026-04-26',
+  author: { '@type': 'Person', name: 'Lehlohonolo Goodwill Nchefu', url: 'https://filemayor.com' },
+  publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  url: 'https://filemayor.com/blog/curative-triad',
+};
+
 export default function Post() {
   return (
-    <Article
-      header={{
-        kicker: 'Architecture · pattern',
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Article
+        header={{
+          kicker: 'Architecture · pattern',
         title: 'The Curative Triad: separating planning from execution.',
         dek: 'Most file tools act immediately. FileMayor introduces a boundary between understanding, planning, and action.',
         date: '2026.04.26',
@@ -93,6 +109,7 @@ export default function Post() {
         your behalf. The Triad ensures those decisions are visible, reviewable,
         controlled. And that makes all the difference.
       </P>
-    </Article>
+      </Article>
+    </>
   );
 }

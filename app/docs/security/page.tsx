@@ -237,10 +237,11 @@ export default function SecurityPage() {
               Runtime dependencies: {site.metrics.runtimeVulns} known vulnerabilities.
             </h2>
             <p className="mt-6 text-[16px] leading-relaxed text-text-2">
-              {site.name} ships three runtime dependencies to user machines:{' '}
+              {site.name} ships four runtime dependencies to user machines:{' '}
               <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">electron-updater</code>,{' '}
-              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tar</code>, and{' '}
-              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">yauzl</code>.
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">tar</code>,{' '}
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">yauzl</code>, and{' '}
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">framer-motion</code>.
               At their pinned versions, none have published advisories in the GitHub Advisory Database or npm audit.
             </p>
             <p className="mt-4 text-[16px] leading-relaxed text-text-2">
