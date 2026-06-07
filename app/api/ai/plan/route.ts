@@ -5,24 +5,23 @@
  * license key, applies per-tier rate limiting, then forwards the request
  * to Gemini and returns a structured plan.
  *
- * Required env vars:
- *   GEMINI_API_KEY          — server-side Gemini key (NEVER exposed to client)
- *   FM_LICENSE_PUBLIC_KEY   — Ed25519 public key PEM for license JWT validation
- *                             (or FM_LICENSE_PUBLIC_KEY_<kid> for key rotation)
+ * Key resolution (in priority order):
+ *   1. X-Gemini-Key header — user-supplied BYOK key (no rate limiting applied)
+ *   2. GEMINI_API_KEY env var — server-side hosted key (rate limited, free tier only)
+ *
+ * When a user supplies their own key the request is forwarded directly;
+ * no server-side API costs are incurred and the monthly quota is not consumed.
  *
  * Optional env vars (rate limiting — fail-open if absent):
  *   KV_REST_API_URL / KV_REST_API_TOKEN          — legacy Vercel-KV names, OR
  *   UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN — Upstash native names
- *   (whichever the Upstash Vercel integration injects)
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { Redis } from '@upstash/redis';
 import { verifyLicenseJwt } from '@/lib/license';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-
-const FREE_MONTHLY_LIMIT = 10;
 
 const GEMINI_URL =
   'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
@@ -81,51 +80,9 @@ function isJwt(token: string): boolean {
   return parts.every((p) => /^[A-Za-z0-9_-]+$/.test(p) && p.length > 0);
 }
 
-/** Returns YYYY-MM for the current UTC month. */
-function currentMonthKey(): string {
-  const now = new Date();
-  const y = now.getUTCFullYear();
-  const m = String(now.getUTCMonth() + 1).padStart(2, '0');
-  return `${y}-${m}`;
-}
-
-/** Resolve Redis credentials from whichever env var pair is present. */
-function getRedisConfig(): { url: string; token: string } | null {
-  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  return { url, token };
-}
-
-/** Returns remaining calls (null if Redis not configured), increments counter. */
-async function checkAndIncrementRateLimit(identifier: string): Promise<{
-  allowed: boolean;
-  remaining: number | null;
-}> {
-  const config = getRedisConfig();
-  if (!config) return { allowed: true, remaining: null };
-
-  const redis = new Redis(config);
-  const key = `ai:rl:${identifier}:${currentMonthKey()}`;
-  try {
-    // Atomic increment — creates the key at 0 and then increments
-    const newCount = await redis.incr(key);
-
-    // Set expiry on first write so the key auto-cleans after ~60 days
-    if (newCount === 1) {
-      await redis.expire(key, 60 * 24 * 60 * 60); // 60 days
-    }
-
-    const remaining = Math.max(0, FREE_MONTHLY_LIMIT - newCount);
-    const allowed = newCount <= FREE_MONTHLY_LIMIT;
-
-    // If over limit, we already incremented — that's acceptable; the user is
-    // already blocked and it avoids a read-then-write race condition.
-    return { allowed, remaining };
-  } catch {
-    // KV error — fail open
-    return { allowed: true, remaining: null };
-  }
+/** Validate a user-supplied Gemini key: must start with AIza and be ≥ 20 chars. */
+function isValidGeminiKey(key: string): boolean {
+  return /^AIza[A-Za-z0-9_-]{20,}$/.test(key.trim());
 }
 
 /** Strip markdown code fences from Gemini's response text. */
@@ -141,6 +98,12 @@ function stripCodeFences(text: string): string {
 export async function POST(req: NextRequest): Promise<NextResponse> {
   // ── Security headers ────────────────────────────────────────────────────────
   const headers: HeadersInit = { 'Cache-Control': 'no-store' };
+
+  // ── BYOK key check ──────────────────────────────────────────────────────────
+  // If the client passes their own Gemini key we use it directly and skip all
+  // server-side rate limiting — the cost is on their account, not ours.
+  const byokKey = req.headers.get('x-gemini-key')?.trim() ?? null;
+  const usingByok = byokKey !== null && isValidGeminiKey(byokKey);
 
   // ── Parse body ──────────────────────────────────────────────────────────────
   let body: PlanRequestBody;
@@ -167,7 +130,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: '`context` must be an object' }, { status: 400, headers });
   }
 
-  // ── Auth & tier resolution ──────────────────────────────────────────────────
+  // ── Auth & tier resolution (hosted-key path only) ───────────────────────────
   const authHeader = req.headers.get('authorization') ?? '';
   const bearerMatch = authHeader.match(/^Bearer\s+(.+)$/i);
   const token = bearerMatch ? bearerMatch[1].trim() : null;
@@ -178,46 +141,42 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   if (token) {
     if (isJwt(token)) {
-      // Validate as Ed25519 FileMayor license JWT
       const verified = await verifyLicenseJwt(token);
       if (verified) {
-        // Map 'owner' (internal tier) to 'enterprise' for API consumers
         tier =
           verified.tier === 'owner'
             ? 'enterprise'
             : (verified.tier as 'pro' | 'enterprise');
         identifier = verified.sub ?? verified.email ?? token.slice(-16);
-      }
-      // If verification fails, fall through to free tier with token as identifier
-      // so failed JWTs don't accumulate under 'anonymous'
-      else {
+      } else {
         identifier = token.slice(-16);
       }
     } else {
-      // Old-style FM-XXX-XXXX license key → free tier
       identifier = token;
     }
   }
-  // No auth header → use deviceId from body (already set above)
 
-  // ── Rate limiting (free tier only) ─────────────────────────────────────────
+  // ── Rate limiting (hosted key, free tier only) ──────────────────────────────
   let remainingCalls: number | null = null;
 
-  if (tier === 'free') {
-    const { allowed, remaining } = await checkAndIncrementRateLimit(identifier);
-    remainingCalls = remaining;
-    if (!allowed) {
+  if (!usingByok && tier === 'free') {
+    const result = await checkRateLimit(identifier);
+    if (!result.allowed) {
+      const isBurst = result.reason === 'burst';
       return NextResponse.json(
         {
-          error: 'Monthly AI request limit reached.',
+          error: isBurst
+            ? 'Too many requests. Please wait a moment.'
+            : 'Monthly AI request limit reached. Set your own Gemini key in app settings for unlimited access.',
         },
         { status: 429, headers },
       );
     }
+    remainingCalls = result.remaining;
   }
 
-  // ── Gemini API key check ────────────────────────────────────────────────────
-  const geminiKey = process.env.GEMINI_API_KEY;
+  // ── Resolve Gemini key ──────────────────────────────────────────────────────
+  const geminiKey = usingByok ? byokKey : (process.env.GEMINI_API_KEY ?? null);
   if (!geminiKey) {
     return NextResponse.json(
       { error: 'AI service temporarily unavailable' },
@@ -299,7 +258,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     {
       plan,
       tier,
-      remainingCalls: tier === 'free' ? remainingCalls : null,
+      byok: usingByok,
+      remainingCalls: (!usingByok && tier === 'free') ? remainingCalls : null,
     },
     { status: 200, headers },
   );
