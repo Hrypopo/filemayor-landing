@@ -23,7 +23,7 @@ export function Hero() {
 
         <h1 className="h-display max-w-[16ch] text-[clamp(56px,9vw,128px)]">
           Your folders,{' '}
-          <em className="not-italic text-accent italic">on command.</em>
+          <em className="text-accent-gradient italic">on command.</em>
         </h1>
 
         <p className="mt-8 max-w-xl text-lg leading-relaxed text-text-2 md:text-xl">
