@@ -3,8 +3,6 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { EmailCapture } from '@/components/EmailCapture';
 import { DownloadPlatforms } from '@/components/DownloadPlatforms';
-import { site } from '@/lib/site';
-
 export const metadata: Metadata = {
   title: 'Download',
   description:
