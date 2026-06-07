@@ -75,6 +75,16 @@ const alsoCompare = [
   { href: '/vs/grandperspective', label: 'FileMayor vs GrandPerspective', desc: 'One shows the problem. The other fixes it.' },
 ];
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://filemayor.com/vs' },
+    { '@type': 'ListItem', position: 3, name: 'Dropzone vs FileMayor', item: 'https://filemayor.com/vs/dropzone' },
+  ],
+};
+
 export default function VsDropzone() {
   return (
     <>
@@ -82,6 +92,7 @@ export default function VsDropzone() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main">
 

@@ -2,6 +2,16 @@ import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Docs', item: 'https://filemayor.com/docs' },
+    { '@type': 'ListItem', position: 3, name: 'CLI Reference', item: 'https://filemayor.com/docs/cli' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'CLI reference',
   description:
@@ -172,6 +182,7 @@ const Section = ({ title, label, items }: { title: string; label: string; items:
 export default function CliPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main">
         <section className="border-b border-border py-24 md:py-32">

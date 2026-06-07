@@ -2,6 +2,16 @@ import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Docs', item: 'https://filemayor.com/docs' },
+    { '@type': 'ListItem', position: 3, name: 'SOP Reference', item: 'https://filemayor.com/docs/sop' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'SOP format',
   description:
@@ -26,6 +36,7 @@ Trash anything in ~/Downloads/Trash older than 30 days.
 export default function SopPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main">
         <section className="border-b border-border py-24 md:py-32">

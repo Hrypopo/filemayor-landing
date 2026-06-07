@@ -1,6 +1,16 @@
 import type { Metadata } from 'next';
 import { Article, P, H2, H3, Pull, Code, Pre, Ul, Li } from '@/components/Article';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://filemayor.com/blog' },
+    { '@type': 'ListItem', position: 3, name: 'How to organize your Downloads folder', item: 'https://filemayor.com/blog/how-to-organize-downloads-folder' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'How to organize your Downloads folder (and keep it that way)',
   description:
@@ -22,6 +32,7 @@ export default function Post() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Article
         header={{
           kicker: 'Guide · workflow',

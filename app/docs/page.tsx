@@ -3,6 +3,15 @@ import Link from 'next/link';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://filemayor.com' },
+    { '@type': 'ListItem', position: 2, name: 'Docs', item: 'https://filemayor.com/docs' },
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'Documentation',
   description: 'FileMayor CLI reference, SOP format, security architecture.',
@@ -29,6 +38,7 @@ const sections = [
 export default function DocsIndex() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Nav />
       <main id="main" className="container-prose py-24 md:py-32">
         <div className="section-label">Documentation</div>
