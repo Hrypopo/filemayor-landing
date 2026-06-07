@@ -89,19 +89,23 @@ function currentMonthKey(): string {
   return `${y}-${m}`;
 }
 
-/** Returns remaining calls (null if KV not configured), increments counter. */
+/** Resolve Redis credentials from whichever env var pair is present. */
+function getRedisConfig(): { url: string; token: string } | null {
+  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  return { url, token };
+}
+
+/** Returns remaining calls (null if Redis not configured), increments counter. */
 async function checkAndIncrementRateLimit(identifier: string): Promise<{
   allowed: boolean;
   remaining: number | null;
 }> {
-  // Fail open if Redis env vars are absent. Accept both the legacy
-  // Vercel-KV names and Upstash's native names — the Upstash Vercel
-  // integration injects one or the other depending on how it's connected.
-  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return { allowed: true, remaining: null };
+  const config = getRedisConfig();
+  if (!config) return { allowed: true, remaining: null };
 
-  const redis = new Redis({ url, token });
+  const redis = new Redis(config);
   const key = `ai:rl:${identifier}:${currentMonthKey()}`;
   try {
     // Atomic increment — creates the key at 0 and then increments
