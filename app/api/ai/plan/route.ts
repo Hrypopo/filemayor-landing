@@ -21,7 +21,7 @@ import { verifyLicenseJwt } from '@/lib/license';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const FREE_MONTHLY_LIMIT = 20;
+const FREE_MONTHLY_LIMIT = 10;
 
 const GEMINI_URL =
   'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
