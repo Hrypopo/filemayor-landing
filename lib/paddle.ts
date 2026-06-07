@@ -8,6 +8,7 @@ type PlanKey = 'pro' | 'team';
 
 interface PaddleInstance {
   Checkout: { open: (opts: { items: Array<{ priceId: string; quantity: number }> }) => void };
+  Setup?: (opts: { token: string }) => void;
 }
 
 declare global {

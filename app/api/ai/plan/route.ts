@@ -16,12 +16,12 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 import { verifyLicenseJwt } from '@/lib/license';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const FREE_MONTHLY_LIMIT = 20;
+const FREE_MONTHLY_LIMIT = 10;
 
 const GEMINI_URL =
   'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
@@ -93,18 +93,20 @@ async function checkAndIncrementRateLimit(identifier: string): Promise<{
   allowed: boolean;
   remaining: number | null;
 }> {
-  // Fail open if KV env vars are absent
-  const hasKv = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
-  if (!hasKv) return { allowed: true, remaining: null };
+  // Fail open if Redis env vars are absent
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return { allowed: true, remaining: null };
 
+  const redis = new Redis({ url, token });
   const key = `ai:rl:${identifier}:${currentMonthKey()}`;
   try {
     // Atomic increment — creates the key at 0 and then increments
-    const newCount = await kv.incr(key);
+    const newCount = await redis.incr(key);
 
     // Set expiry on first write so the key auto-cleans after ~60 days
     if (newCount === 1) {
-      await kv.expire(key, 60 * 24 * 60 * 60); // 60 days
+      await redis.expire(key, 60 * 24 * 60 * 60); // 60 days
     }
 
     const remaining = Math.max(0, FREE_MONTHLY_LIMIT - newCount);
