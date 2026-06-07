@@ -2,7 +2,7 @@
 
 import { track } from '@vercel/analytics';
 import { site } from '@/lib/site';
-import { CHECKOUT_LINKS } from '@/lib/checkout';
+import { openPaddleCheckout } from '@/lib/paddle';
 
 const tiers = [
   {
@@ -35,7 +35,6 @@ const tiers = [
     ],
     cta: {
       label: 'Get Pro — $19/mo',
-      href: CHECKOUT_LINKS.pro,
       trackEvent: 'plan_click_pro',
     },
     featured: true,
@@ -53,7 +52,6 @@ const tiers = [
     ],
     cta: {
       label: 'Get Team',
-      href: CHECKOUT_LINKS.team,
       trackEvent: 'plan_click_team',
     },
     featured: false,
@@ -145,16 +143,31 @@ export function Pricing() {
                   ))}
                 </ul>
 
-                <a
-                  href={t.cta.href}
-                  onClick={() => track(t.cta.trackEvent, { plan: t.key })}
-                  className={
-                    'btn block w-full justify-center text-center ' +
-                    (t.featured ? 'btn-primary' : 'btn-mono')
-                  }
-                >
-                  {t.cta.label} <span aria-hidden>→</span>
-                </a>
+                {t.key === 'free' ? (
+                  <a
+                    href={site.npm}
+                    onClick={() => track(t.cta.trackEvent, { plan: t.key })}
+                    className={
+                      'btn block w-full justify-center text-center ' +
+                      (t.featured ? 'btn-primary' : 'btn-mono')
+                    }
+                  >
+                    {t.cta.label} <span aria-hidden>→</span>
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => {
+                      track(t.cta.trackEvent, { plan: t.key });
+                      openPaddleCheckout(t.key === 'enterprise' ? 'team' : (t.key as 'pro' | 'team'));
+                    }}
+                    className={
+                      'btn block w-full justify-center text-center ' +
+                      (t.featured ? 'btn-primary' : 'btn-mono')
+                    }
+                  >
+                    {t.cta.label} <span aria-hidden>→</span>
+                  </button>
+                )}
               </article>
             );
           })}
