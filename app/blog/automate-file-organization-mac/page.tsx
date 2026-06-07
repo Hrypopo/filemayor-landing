@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Article, P, H2, H3, Pull, Ul, Li } from '@/components/Article';
+import { Article, P, H2, Pull, Ul, Li } from '@/components/Article';
 
 const articleSchema = {
   '@context': 'https://schema.org',

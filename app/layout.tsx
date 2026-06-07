@@ -110,8 +110,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src="https://cdn.paddle.com/paddle/v2/paddle.js"
             strategy="afterInteractive"
             onLoad={() => {
-              if (typeof window !== 'undefined' && (window as any).Paddle) {
-                (window as any).Paddle.Setup({
+              if (typeof window !== 'undefined' && window.Paddle) {
+                window.Paddle.Setup?.({
                   token: process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN!,
                 });
               }

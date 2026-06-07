@@ -6,8 +6,16 @@ import { PADDLE_ENABLED, PADDLE_PRICE_IDS, CHECKOUT_LINKS } from './checkout';
 
 type PlanKey = 'pro' | 'team';
 
+interface PaddleInstance {
+  Checkout: { open: (opts: { items: Array<{ priceId: string; quantity: number }> }) => void };
+}
+
+declare global {
+  interface Window { Paddle?: PaddleInstance }
+}
+
 export function openPaddleCheckout(plan: PlanKey): void {
-  const paddle = (typeof window !== 'undefined') ? (window as any).Paddle : null;
+  const paddle = (typeof window !== 'undefined') ? window.Paddle : null;
 
   if (PADDLE_ENABLED && paddle?.Checkout?.open && PADDLE_PRICE_IDS[plan]) {
     paddle.Checkout.open({
