@@ -108,6 +108,129 @@ export async function signLicense(payload: LicensePayload): Promise<string> {
   return `${data}.${b64url(sig)}`;
 }
 
+// ─── Inbound JWT verification ────────────────────────────────────────────────
+
+export interface VerifiedLicense {
+  /** Granted tier extracted from the JWT payload. */
+  tier: Tier;
+  /** Subject claim (customer identifier), if present. */
+  sub?: string;
+  /** Email claim, if present. */
+  email?: string;
+}
+
+/**
+ * Decode a base64url segment (no padding required).
+ * Works in both Node.js and Edge runtimes.
+ */
+const fromB64url = (s: string): string => {
+  // Restore standard base64 padding
+  const padded = s.replace(/-/g, '+').replace(/_/g, '/') + '=='.slice((s.length + 3) % 4 || 4);
+  // atob is available in Node 16+ and all Edge runtimes
+  return atob(padded);
+};
+
+/**
+ * Validate a FileMayor Ed25519 license JWT.
+ *
+ * Public key resolution order:
+ *   1. `process.env[FM_LICENSE_PUBLIC_KEY_<kid>]`  (kid-specific key)
+ *   2. `process.env.FM_LICENSE_PUBLIC_KEY`          (fallback single key)
+ *
+ * Returns `null` if the token is invalid, expired, or the public key is absent.
+ * Throws only on genuinely unexpected errors (e.g. bad key PEM).
+ */
+export async function verifyLicenseJwt(token: string): Promise<VerifiedLicense | null> {
+  // ── 1. Split & basic structure check ─────────────────────────────────────
+  const parts = token.split('.');
+  if (parts.length !== 3) return null;
+  const [headerB64, payloadB64, sigB64] = parts;
+
+  // ── 2. Decode header to find kid ─────────────────────────────────────────
+  let header: { alg?: string; kid?: string };
+  let payload: Record<string, unknown>;
+  try {
+    header = JSON.parse(fromB64url(headerB64)) as { alg?: string; kid?: string };
+    payload = JSON.parse(fromB64url(payloadB64)) as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+
+  if (header.alg !== 'EdDSA') return null;
+
+  // ── 3. Resolve public key ─────────────────────────────────────────────────
+  const kid = header.kid ?? 'v1';
+  const rawKey =
+    process.env[`FM_LICENSE_PUBLIC_KEY_${kid}`] ?? process.env.FM_LICENSE_PUBLIC_KEY;
+  if (!rawKey) return null; // no key configured — can't verify
+
+  let publicKeyPem: string;
+  try {
+    const trimmed = rawKey.trim();
+    publicKeyPem = trimmed.startsWith('-----BEGIN') ? trimmed : atob(trimmed.replace(/\s+/g, ''));
+  } catch {
+    return null;
+  }
+
+  // ── 4. Import the public key (Web Crypto — works in Node & Edge) ──────────
+  let publicKey: CryptoKey;
+  try {
+    const der = pemToDer(publicKeyPem);
+    publicKey = await crypto.subtle.importKey(
+      'spki',
+      der as BufferSource,
+      { name: 'Ed25519' } as AlgorithmIdentifier,
+      false,
+      ['verify'],
+    );
+  } catch {
+    return null;
+  }
+
+  // ── 5. Verify signature ───────────────────────────────────────────────────
+  const sigBytes = (() => {
+    try {
+      const bin = fromB64url(sigB64);
+      const arr = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+      return arr;
+    } catch {
+      return null;
+    }
+  })();
+  if (!sigBytes) return null;
+
+  const message = enc.encode(`${headerB64}.${payloadB64}`);
+  let valid = false;
+  try {
+    valid = await crypto.subtle.verify(
+      { name: 'Ed25519' } as AlgorithmIdentifier,
+      publicKey,
+      sigBytes,
+      message,
+    );
+  } catch {
+    return null;
+  }
+  if (!valid) return null;
+
+  // ── 6. Check expiry ───────────────────────────────────────────────────────
+  if (typeof payload.exp === 'number' && payload.exp < Math.floor(Date.now() / 1000)) {
+    return null; // expired
+  }
+
+  // ── 7. Extract tier ───────────────────────────────────────────────────────
+  const rawTier = payload.tier;
+  const tier: Tier =
+    rawTier === 'pro' || rawTier === 'enterprise' || rawTier === 'owner' ? rawTier : 'pro';
+
+  return {
+    tier,
+    sub: typeof payload.sub === 'string' ? payload.sub : undefined,
+    email: typeof payload.email === 'string' ? payload.email : undefined,
+  };
+}
+
 /** Constant-time HMAC verify for inbound LemonSqueezy webhook signatures. */
 export async function verifyHmacSignature(
   body: string,
