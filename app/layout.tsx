@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Newsreader, Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import Script from 'next/script';
+import { PaddleScript } from '@/components/PaddleScript';
 import { site } from '@/lib/site';
 import './globals.css';
 
@@ -105,19 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        {process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN && (
-          <Script
-            src="https://cdn.paddle.com/paddle/v2/paddle.js"
-            strategy="afterInteractive"
-            onLoad={() => {
-              if (typeof window !== 'undefined' && window.Paddle) {
-                window.Paddle.Setup?.({
-                  token: process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN!,
-                });
-              }
-            }}
-          />
-        )}
+        <PaddleScript />
         {children}
         <Analytics />
       </body>
