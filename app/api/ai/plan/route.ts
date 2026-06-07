@@ -11,12 +11,13 @@
  *                             (or FM_LICENSE_PUBLIC_KEY_<kid> for key rotation)
  *
  * Optional env vars (rate limiting — fail-open if absent):
- *   KV_REST_API_URL         — Vercel KV / Upstash Redis REST endpoint
- *   KV_REST_API_TOKEN       — Vercel KV / Upstash Redis REST token
+ *   KV_REST_API_URL / KV_REST_API_TOKEN          — legacy Vercel-KV names, OR
+ *   UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN — Upstash native names
+ *   (whichever the Upstash Vercel integration injects)
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 import { verifyLicenseJwt } from '@/lib/license';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -88,23 +89,31 @@ function currentMonthKey(): string {
   return `${y}-${m}`;
 }
 
-/** Returns remaining calls (null if KV not configured), increments counter. */
+/** Resolve Redis credentials from whichever env var pair is present. */
+function getRedisConfig(): { url: string; token: string } | null {
+  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  return { url, token };
+}
+
+/** Returns remaining calls (null if Redis not configured), increments counter. */
 async function checkAndIncrementRateLimit(identifier: string): Promise<{
   allowed: boolean;
   remaining: number | null;
 }> {
-  // Fail open if KV env vars are absent
-  const hasKv = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
-  if (!hasKv) return { allowed: true, remaining: null };
+  const config = getRedisConfig();
+  if (!config) return { allowed: true, remaining: null };
 
+  const redis = new Redis(config);
   const key = `ai:rl:${identifier}:${currentMonthKey()}`;
   try {
     // Atomic increment — creates the key at 0 and then increments
-    const newCount = await kv.incr(key);
+    const newCount = await redis.incr(key);
 
     // Set expiry on first write so the key auto-cleans after ~60 days
     if (newCount === 1) {
-      await kv.expire(key, 60 * 24 * 60 * 60); // 60 days
+      await redis.expire(key, 60 * 24 * 60 * 60); // 60 days
     }
 
     const remaining = Math.max(0, FREE_MONTHLY_LIMIT - newCount);
