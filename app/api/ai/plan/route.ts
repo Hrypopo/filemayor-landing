@@ -11,8 +11,9 @@
  *                             (or FM_LICENSE_PUBLIC_KEY_<kid> for key rotation)
  *
  * Optional env vars (rate limiting — fail-open if absent):
- *   KV_REST_API_URL         — Vercel KV / Upstash Redis REST endpoint
- *   KV_REST_API_TOKEN       — Vercel KV / Upstash Redis REST token
+ *   KV_REST_API_URL / KV_REST_API_TOKEN          — legacy Vercel-KV names, OR
+ *   UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN — Upstash native names
+ *   (whichever the Upstash Vercel integration injects)
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -93,9 +94,11 @@ async function checkAndIncrementRateLimit(identifier: string): Promise<{
   allowed: boolean;
   remaining: number | null;
 }> {
-  // Fail open if Redis env vars are absent
-  const url = process.env.KV_REST_API_URL;
-  const token = process.env.KV_REST_API_TOKEN;
+  // Fail open if Redis env vars are absent. Accept both the legacy
+  // Vercel-KV names and Upstash's native names — the Upstash Vercel
+  // integration injects one or the other depending on how it's connected.
+  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) return { allowed: true, remaining: null };
 
   const redis = new Redis({ url, token });
