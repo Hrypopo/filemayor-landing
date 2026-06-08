@@ -64,6 +64,24 @@
   ::selection {
     @apply bg-accent/30 text-text;
   }
+
+  /* Smooth in-page anchor scrolling, offset for the sticky nav.
+     Disabled for users who prefer reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  :where(html) {
+    scroll-padding-top: 6rem;
+  }
+
+  /* Unified keyboard-focus ring — accent, offset from the element. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 @layer components {
@@ -98,6 +116,17 @@
   .card-pad-sm {
     @apply p-6 md:p-7;
   }
+  /* Interactive cards lift subtly on hover — border firms, faint shadow.
+     Opt-in via .card-interactive so static cards stay flat. */
+  .card-interactive {
+    @apply transition-all duration-200;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card-interactive:hover {
+      @apply -translate-y-0.5 border-border-strong;
+      box-shadow: 0 8px 28px -12px rgb(var(--bg) / 0.6);
+    }
+  }
 
   .grid-bg {
     position: relative;
@@ -128,11 +157,42 @@
     line-height: 1.04;
   }
 
+  /* Warm accent gradient for a single emphasised word in a display heading.
+     Falls back to solid accent where background-clip is unsupported. */
+  .text-accent-gradient {
+    color: rgb(var(--accent));
+    background-image: linear-gradient(
+      105deg,
+      rgb(var(--accent)) 0%,
+      rgb(var(--accent) / 0.72) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .btn {
     @apply inline-flex items-center gap-2.5 rounded-lg border border-transparent px-5 py-3 text-sm font-medium transition-all duration-200;
   }
+  /* Arrow glyphs inside buttons nudge forward on hover. */
+  .btn [aria-hidden] {
+    @apply transition-transform duration-200;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn:hover [aria-hidden] {
+      transform: translateX(2px);
+    }
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
   .btn-primary {
     @apply bg-text text-bg hover:bg-accent hover:text-bg;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px -8px rgb(var(--accent) / 0.5);
+    }
   }
   .btn-mono {
     @apply border-border bg-surface font-mono text-text-2 hover:border-border-strong hover:text-text;

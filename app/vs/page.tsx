@@ -79,7 +79,7 @@ export default function VsIndex() {
                 <li key={c.slug}>
                   <Link
                     href={`/vs/${c.slug}`}
-                    className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-7 transition-colors hover:border-accent"
+                    className="group card-interactive flex h-full flex-col rounded-2xl border border-border bg-surface p-7 hover:border-accent"
                   >
                     <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-3">
                       FileMayor vs
