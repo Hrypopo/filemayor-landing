@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     'A shared, reversible filesystem workflow for engineering and ops teams. Local-only execution, audit-ready operation logs, no telemetry, 5 seats per license. Cross-platform CLI, MCP, and desktop.',
 };
 
-const TEAM_CHECKOUT = 'https://filemayor.lemonsqueezy.com/checkout/buy/d2795526-eb05-4272-8084-98b6c7a118bb';
 const CONTACT = `mailto:${site.author.email}?subject=FileMayor%20for%20Teams`;
 
 const faqSchema = {
@@ -19,10 +18,10 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What does the FileMayor Team plan include?',
+      name: 'What does FileMayor offer for teams?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Everything in Pro, plus up to 5 seats per license, shared rule libraries, audit-ready operation logs, CSV/JSON/API access, and a priority support SLA. The Team plan is $99/month.',
+        text: 'FileMayor is free to install and use. For teams, it offers shared rule libraries, audit-ready operation logs, CSV/JSON/API access, and cross-platform CLI and MCP support. Email us to discuss larger deployments.',
       },
     },
     {
@@ -51,10 +50,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Is annual billing available for teams?',
+      name: 'How do I deploy FileMayor across a team?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes — annual billing saves two months versus monthly. Email us for the annual link and volume pricing for more than 5 seats while we wire larger plans into checkout.',
+        text: 'Install via npm (npm install -g filemayor) or download the desktop app for each machine. For larger deployments, shared rule libraries, or SSO requirements, email us directly.',
       },
     },
   ],
@@ -123,15 +122,15 @@ export default function TeamsPage() {
               from a single Team license.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href={TEAM_CHECKOUT} className="btn btn-primary">
-                Get Team — $99/mo <span aria-hidden>→</span>
-              </a>
+              <Link href="/download" className="btn btn-primary">
+                Download FileMayor free <span aria-hidden>→</span>
+              </Link>
               <a href={CONTACT} className="btn btn-mono">
-                Talk to us about volume &amp; SSO
+                Talk to us about team use
               </a>
             </div>
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
-              Up to 5 seats · shared rule libraries · audit log · priority SLA
+              Free to install · local-only · shared rule libraries · audit log
             </p>
           </div>
         </section>
@@ -184,7 +183,7 @@ export default function TeamsPage() {
             <ul className="mt-8 space-y-4">
               {[
                 ['Available now', 'Local-only execution · no telemetry · OS-keychain secret storage · six-layer Chevza Doctrine runtime · journaled, exportable audit log · offline activation with 30-day grace.'],
-                ['Team license', 'Up to 5 seats · shared rule libraries · CSV / JSON / API access · priority support with SLA.'],
+                ['Team workflow', 'Shared rule libraries · CSV / JSON / API access · cross-platform CLI and MCP · email support.'],
                 ['On the roadmap', 'SSO and SCIM provisioning · centralised fleet management · larger seat tiers · SOC 2. Not claimed as shipped — email us if you need any of these now.'],
               ].map(([k, v]) => (
                 <li key={k} className="rounded-xl border border-border bg-surface p-5">
@@ -231,19 +230,16 @@ export default function TeamsPage() {
               Bring a reversible workflow to your team.
             </h2>
             <p className="mt-5 text-[16.5px] leading-relaxed text-text-2">
-              Start with a Team license today, or talk to us about volume seats, annual
-              billing, and SSO. We answer email directly — no sales funnel.
+              Free to install and use. If you're evaluating FileMayor for your team or have
+              questions about larger deployments and SSO, email directly — no sales funnel.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href={TEAM_CHECKOUT} className="btn btn-primary">
-                Get Team — $99/mo <span aria-hidden>→</span>
-              </a>
+              <Link href="/download" className="btn btn-primary">
+                Download FileMayor free <span aria-hidden>→</span>
+              </Link>
               <a href={CONTACT} className="btn btn-mono">
                 Email {site.author.handle}
               </a>
-              <Link href="/#pricing" className="btn btn-mono">
-                Compare all plans
-              </Link>
             </div>
           </div>
         </section>

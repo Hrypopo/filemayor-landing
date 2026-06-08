@@ -6,7 +6,6 @@ import { MissionControl } from '@/components/MissionControl';
 import { MCPSection } from '@/components/MCPSection';
 import { RealOutput } from '@/components/RealOutput';
 import { ProofStrip } from '@/components/ProofStrip';
-import { Pricing } from '@/components/Pricing';
 import { FAQ, faqItems } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
@@ -27,7 +26,6 @@ export default function HomePage() {
         <MCPSection />
         <RealOutput />
         <ProofStrip />
-        <Pricing />
         <FAQ />
       </main>
       <Footer />
@@ -48,18 +46,6 @@ export default function HomePage() {
                 '@type': 'Offer',
                 name: 'Free',
                 price: '0',
-                priceCurrency: 'USD',
-              },
-              {
-                '@type': 'Offer',
-                name: 'Pro',
-                price: site.pricing.pro.priceUsd.toString(),
-                priceCurrency: 'USD',
-              },
-              {
-                '@type': 'Offer',
-                name: 'Team',
-                price: site.pricing.enterprise.priceUsd.toString(),
                 priceCurrency: 'USD',
               },
             ],

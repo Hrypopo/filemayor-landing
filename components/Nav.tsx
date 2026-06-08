@@ -6,7 +6,6 @@ const links = [
   { href: '/why', label: 'Why' },
   { href: '/mcp', label: 'MCP' },
   { href: '/teams', label: 'Teams' },
-  { href: '/#pricing', label: 'Pricing' },
   { href: '/docs', label: 'Docs' },
 ];
 

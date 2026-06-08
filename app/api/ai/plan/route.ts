@@ -209,8 +209,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     if (!allowed) {
       return NextResponse.json(
         {
-          error: 'Monthly AI limit reached. Upgrade to Pro for unlimited access.',
-          upgradeUrl: 'https://filemayor.com/#pricing',
+          error: 'Monthly AI request limit reached.',
         },
         { status: 429, headers },
       );
