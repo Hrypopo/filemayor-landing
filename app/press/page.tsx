@@ -31,7 +31,7 @@ const facts = [
   ['Category', 'Developer tools / AI productivity'],
   ['Platforms', 'macOS · Windows · Linux'],
   ['Distribution', 'Direct download · npm'],
-  ['License model', 'Free + Pro ($19/mo) + Team ($99/mo)'],
+  ['License model', 'Free — open to everyone, no subscription'],
   ['npm downloads', site.metrics.npmInstalls.toLocaleString() + '+'],
   ['Security layers', String(site.metrics.securityLayers)],
 ];
@@ -100,7 +100,7 @@ export default function PressPage() {
               <div className="rounded-xl border border-border bg-surface p-6">
                 <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">Short paragraph (100 words)</p>
                 <blockquote className="text-[15.5px] leading-relaxed text-text-2">
-                  FileMayor is a command-bar filesystem organiser built for people who have given up on staying tidy. Point it at a folder — your Downloads, your Desktop, a project root full of naming accidents — and it diagnoses what's there, proposes a reorganisation in plain English, and executes it with a single undo if you regret anything. It works on Mac, Windows, and Linux; runs entirely local so no file ever leaves the machine; and connects to Claude, Cursor, and other AI tools via the Model Context Protocol. Free for individuals, with Pro and Team plans available.
+                  FileMayor is a command-bar filesystem organiser built for people who have given up on staying tidy. Point it at a folder — your Downloads, your Desktop, a project root full of naming accidents — and it diagnoses what's there, proposes a reorganisation in plain English, and executes it with a single undo if you regret anything. It works on Mac, Windows, and Linux; runs entirely local so no file ever leaves the machine; and connects to Claude, Cursor, and other AI tools via the Model Context Protocol. Free for everyone — no subscription required.
                 </blockquote>
               </div>
 

@@ -42,7 +42,7 @@ const faqSchema = {
       name: 'Can FileMayor automate file moves like Dropzone?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, via watch mode (Pro), scheduled scans, and SOP scripts. FileMayor Pro can monitor a folder continuously and apply rules whenever new files arrive. The CLI also integrates with cron, launchd, or any automation system. Unlike Dropzone, every automated operation is logged and undoable.',
+        text: 'Yes, via watch mode, scheduled scans, and SOP scripts. FileMayor can monitor a folder continuously and apply rules whenever new files arrive. The CLI also integrates with cron, launchd, or any automation system. Unlike Dropzone, every automated operation is logged and undoable.',
       },
     },
     {
@@ -50,7 +50,7 @@ const faqSchema = {
       name: 'Is FileMayor more expensive than Dropzone?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'FileMayor has a free tier (no time limit). Pro is $19/month. Dropzone 4 is $4.99 one-time for the base app, with some actions sold separately. If you only need simple file routing, Dropzone\'s one-time price is hard to beat. If you need AI-planned bulk operations and rollback, FileMayor\'s Pro tier is the right tool.',
+        text: 'FileMayor is free with no time limit. Dropzone 4 is $4.99 one-time for the base app, with some actions sold separately. If you only need simple file routing, Dropzone\'s one-time price is hard to beat. If you need AI-planned bulk operations and rollback, FileMayor is the right tool.',
       },
     },
   ],
@@ -58,7 +58,7 @@ const faqSchema = {
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', dz: 'macOS only' },
-  { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', dz: '$4.99 one-time (base) · actions sold separately' },
+  { row: 'Pricing', fm: 'Free', dz: '$4.99 one-time (base) · actions sold separately' },
   { row: 'Interaction model', fm: 'Describe intent → AI plans → approve → apply → undo', dz: 'Drag files to destination droplets' },
   { row: 'Bulk operations', fm: '✓ Thousands of files, AI-curated', dz: '✗ One file / group at a time via drag' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', dz: '✗' },

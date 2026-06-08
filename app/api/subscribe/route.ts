@@ -226,9 +226,9 @@ const MCP_HTML = `<!DOCTYPE html>
   </table>
 </body></html>`;
 
-// ─── Email 5: 50-file Limit Nudge (Day 14) ──────────────────────────────────
+// ─── Email 5: BYOK / Bring Your Own Key (Day 14) ────────────────────────────
 const LIMIT_HTML = `<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Are you hitting the 50-file limit?</title></head>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Unlimited AI planning — use your own key</title></head>
 <body style="margin:0;padding:0;background:#0a0c14;font-family:'Helvetica Neue',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0c14;padding:48px 16px;">
     <tr><td align="center">
@@ -238,31 +238,20 @@ const LIMIT_HTML = `<!DOCTYPE html>
         </td></tr>
         <tr><td style="background:#111420;border:1px solid rgba(212,175,55,0.12);border-radius:16px;padding:40px;">
           <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.12em;color:#d4af37;font-weight:600;">Day 14</p>
-          <h1 style="margin:0 0 20px;font-size:24px;font-weight:600;color:#ffffff;line-height:1.3;letter-spacing:-0.02em;">Are you hitting the 50-file limit?</h1>
+          <h1 style="margin:0 0 20px;font-size:24px;font-weight:600;color:#ffffff;line-height:1.3;letter-spacing:-0.02em;">Unlimited AI planning — with your own key.</h1>
           <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            The Free plan processes up to 50 files per operation. For a small project folder, that's fine. For Downloads, a Documents root, or anything that's been accumulating for years — it's not enough.
+            FileMayor's AI planning uses Gemini under the hood. By default, it runs through our server — but you can connect your own Gemini API key instead.
+          </p>
+          <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
+            When you do, requests go directly from your machine to Google. No monthly quota, no rate limit, and your file metadata never passes through our servers. The key is stored in your OS keychain.
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            Pro removes the limit entirely. Every file in the folder. One operation.
+            Gemini Flash is free up to 1,500 requests/day on Google's free tier. Most users never exceed it.
           </p>
-          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-            <tr>
-              <td style="padding:14px 18px;background:#0a0c14;border:1px solid rgba(255,255,255,0.08);border-radius:8px 8px 0 0;">
-                <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Free</p>
-                <p style="margin:6px 0 0;font-size:14px;color:rgba(255,255,255,0.6);">50 files per operation &middot; 1 workspace</p>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:14px 18px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.25);border-top:none;border-radius:0 0 8px 8px;">
-                <p style="margin:0;font-size:13px;color:#d4af37;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Pro &mdash; $19/mo</p>
-                <p style="margin:6px 0 0;font-size:14px;color:rgba(255,255,255,0.72);">Unlimited files &middot; unlimited workspaces &middot; SOP automation &middot; AI Curative Triad</p>
-              </td>
-            </tr>
-          </table>
           <table cellpadding="0" cellspacing="0">
             <tr><td style="background:linear-gradient(135deg,#b8860b,#d4af37);border-radius:10px;">
-              <a href="https://filemayor.com/pricing" style="display:block;padding:13px 26px;font-size:14px;font-weight:700;color:#050510;text-decoration:none;">
-                Upgrade to Pro &rarr;
+              <a href="https://filemayor.com/docs" style="display:block;padding:13px 26px;font-size:14px;font-weight:700;color:#050510;text-decoration:none;">
+                Set up your key &rarr;
               </a>
             </td></tr>
           </table>
@@ -277,9 +266,9 @@ const LIMIT_HTML = `<!DOCTYPE html>
   </table>
 </body></html>`;
 
-// ─── Email 6: Pro Feature Showcase (Day 21) ─────────────────────────────────
+// ─── Email 6: GitHub / Community nudge (Day 21) ──────────────────────────────
 const PRO_HTML = `<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>What Pro looks like</title></head>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>It's open source — and we'd love your feedback</title></head>
 <body style="margin:0;padding:0;background:#0a0c14;font-family:'Helvetica Neue',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0c14;padding:48px 16px;">
     <tr><td align="center">
@@ -289,44 +278,17 @@ const PRO_HTML = `<!DOCTYPE html>
         </td></tr>
         <tr><td style="background:#111420;border:1px solid rgba(212,175,55,0.12);border-radius:16px;padding:40px;">
           <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.12em;color:#d4af37;font-weight:600;">Day 21</p>
-          <h1 style="margin:0 0 20px;font-size:24px;font-weight:600;color:#ffffff;line-height:1.3;letter-spacing:-0.02em;">What Pro looks like in practice.</h1>
-          <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            Here's what changes when you move to Pro:
+          <h1 style="margin:0 0 20px;font-size:24px;font-weight:600;color:#ffffff;line-height:1.3;letter-spacing:-0.02em;">Three weeks in.</h1>
+          <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
+            If FileMayor has been useful, the single best thing you can do is star the repo. It's the only signal we have for whether this is worth doubling down on.
           </p>
-          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;border-collapse:collapse;">
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.5);">File limit per operation</td>
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.4);text-align:right;">50</td>
-              <td style="padding:11px 0 11px 16px;font-size:14px;color:#d4af37;font-weight:600;text-align:right;">Unlimited</td>
-            </tr>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.5);">Workspaces</td>
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.4);text-align:right;">1</td>
-              <td style="padding:11px 0 11px 16px;font-size:14px;color:#d4af37;font-weight:600;text-align:right;">Unlimited</td>
-            </tr>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.5);">SOP automation</td>
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.4);text-align:right;">&mdash;</td>
-              <td style="padding:11px 0 11px 16px;font-size:14px;color:#d4af37;font-weight:600;text-align:right;">&check;</td>
-            </tr>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.5);">AI Curative Triad</td>
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.4);text-align:right;">&mdash;</td>
-              <td style="padding:11px 0 11px 16px;font-size:14px;color:#d4af37;font-weight:600;text-align:right;">&check;</td>
-            </tr>
-            <tr>
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.5);">Priority support</td>
-              <td style="padding:11px 0;font-size:14px;color:rgba(255,255,255,0.4);text-align:right;">&mdash;</td>
-              <td style="padding:11px 0 11px 16px;font-size:14px;color:#d4af37;font-weight:600;text-align:right;">&check;</td>
-            </tr>
-          </table>
-          <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            $19/month. Cancel any time.
+          <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
+            If something is broken or confusing, open an issue. We read every one.
           </p>
           <table cellpadding="0" cellspacing="0">
             <tr><td style="background:linear-gradient(135deg,#b8860b,#d4af37);border-radius:10px;">
-              <a href="https://filemayor.com/pricing" style="display:block;padding:13px 26px;font-size:14px;font-weight:700;color:#050510;text-decoration:none;">
-                Upgrade to Pro &rarr;
+              <a href="https://github.com/Hrypopo/FileMayor" style="display:block;padding:13px 26px;font-size:14px;font-weight:700;color:#050510;text-decoration:none;">
+                Star on GitHub &rarr;
               </a>
             </td></tr>
           </table>
@@ -401,8 +363,8 @@ export async function POST(req: NextRequest) {
     { subject: 'The one thing no file tool does.', html: UNDO_HTML, scheduledAt: daysFromNow(2) },
     { subject: '60 seconds in your Downloads folder.', html: ACTIVATION_HTML, scheduledAt: daysFromNow(5) },
     { subject: 'FileMayor + Claude.', html: MCP_HTML, scheduledAt: daysFromNow(9) },
-    { subject: 'Are you hitting the 50-file limit?', html: LIMIT_HTML, scheduledAt: daysFromNow(14) },
-    { subject: 'What Pro looks like.', html: PRO_HTML, scheduledAt: daysFromNow(21) },
+    { subject: 'Unlimited AI planning — with your own key.', html: LIMIT_HTML, scheduledAt: daysFromNow(14) },
+    { subject: 'Three weeks in.', html: PRO_HTML, scheduledAt: daysFromNow(21) },
     { subject: 'A question.', text: CHECKIN_TEXT, scheduledAt: daysFromNow(30) },
   ];
 

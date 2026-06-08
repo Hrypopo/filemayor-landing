@@ -59,7 +59,7 @@ const faqSchema = {
       name: 'How much does the FileMayor MCP server cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The MCP server is included. Personal use is available on the Free tier; unlimited bulk operations and the AI Curative Triad are part of Pro ($19/month). The same license applies across the CLI, desktop app, and MCP server.',
+        text: 'The MCP server is included and free. Every FileMayor feature — bulk operations, the AI Curative Triad, full rollback — is available at no cost.',
       },
     },
   ],
