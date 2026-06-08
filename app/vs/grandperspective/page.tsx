@@ -58,7 +58,7 @@ const faqSchema = {
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', gp: 'macOS only' },
-  { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', gp: 'Free (donation-ware)' },
+  { row: 'Pricing', fm: 'Free', gp: 'Free (donation-ware)' },
   { row: 'Primary function', fm: 'Filesystem diagnosis + AI-planned organisation + rollback', gp: 'Disk space visualisation (treemap)' },
   { row: 'Takes action', fm: '✓ Move, rename, delete, organise', gp: '✗ Visualise only' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', gp: '✗' },

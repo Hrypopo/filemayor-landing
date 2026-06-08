@@ -42,7 +42,7 @@ const faqSchema = {
       name: 'Is FileMayor free?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. FileMayor has a permanent free tier with no time limit. Pro adds watch mode, scheduled scans, and advanced deduplication at $19/month. CleanMyMac X starts at $39.95/year with no free tier (trial only).',
+        text: 'Yes. FileMayor is completely free with no time limit. CleanMyMac X starts at $39.95/year with no free tier (trial only).',
       },
     },
     {
@@ -58,7 +58,7 @@ const faqSchema = {
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', cmm: 'macOS · Windows (limited)' },
-  { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', cmm: '$39.95/yr or $9.99/mo (MacPaw)' },
+  { row: 'Pricing', fm: 'Free', cmm: '$39.95/yr or $9.99/mo (MacPaw)' },
   { row: 'Primary function', fm: 'Filesystem organisation, bulk ops, AI planning', cmm: 'System junk removal, app uninstaller, malware scan' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', cmm: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', cmm: '✗ No undo for cleaned files' },

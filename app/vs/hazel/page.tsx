@@ -58,7 +58,7 @@ const faqSchema = {
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', hz: 'macOS only' },
-  { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', hz: '$42 one-time' },
+  { row: 'Pricing', fm: 'Free', hz: '$42 one-time' },
   { row: 'Interaction model', fm: 'Describe intent → AI plans → approve → apply → undo', hz: 'Write IF/THEN rules per folder' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', hz: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', hz: '✗ No native undo for batched moves' },

@@ -50,7 +50,7 @@ const faqSchema = {
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', ma: 'macOS only' },
-  { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', ma: 'Free (Pro tier for some features)' },
+  { row: 'Pricing', fm: 'Free', ma: 'Free (Pro tier for some features)' },
   { row: 'Primary function', fm: 'AI-planned bulk organisation + rollback', ma: 'Keyboard-driven dual-pane file manager' },
   { row: 'Bulk organisation', fm: '✓ Thousands of files, AI-curated', ma: '△ Manual — you drive every move' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', ma: '✗' },

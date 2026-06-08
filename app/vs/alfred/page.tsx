@@ -50,7 +50,7 @@ const faqSchema = {
 
 const matrix = [
   { row: 'Platforms', fm: 'macOS · Windows · Linux · CLI · PWA', al: 'macOS only' },
-  { row: 'Pricing', fm: 'Free · Pro $19/mo · Team $99/mo', al: 'Free · Powerpack £34 one-time / £59 lifetime' },
+  { row: 'Pricing', fm: 'Free', al: 'Free · Powerpack £34 one-time / £59 lifetime' },
   { row: 'Primary function', fm: 'Filesystem organisation, bulk ops, AI planning', al: 'App launcher, search, clipboard, custom workflows' },
   { row: 'Bulk file organisation', fm: '✓ Thousands of files, AI-curated', al: '△ Workflow scripts only, no planning engine' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', al: '✗' },
