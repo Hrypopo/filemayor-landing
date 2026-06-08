@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Newsreader, Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import { PaddleScript } from '@/components/PaddleScript';
 import { site } from '@/lib/site';
 import './globals.css';
 
@@ -105,7 +104,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <PaddleScript />
         {children}
         <Analytics />
       </body>

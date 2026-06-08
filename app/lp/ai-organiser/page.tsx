@@ -137,14 +137,14 @@ export default function LPAIOrganiserPage() {
             <em className="not-italic text-accent italic">See what happens.</em>
           </h2>
           <p className="mt-4 text-[16px] text-text-2">
-            Free forever. Pro when you need unlimited operations.
+            Free to install. No account required.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/download" className="btn btn-primary">
               Download FileMayor free <span aria-hidden>→</span>
             </Link>
-            <Link href="/#pricing" className="btn btn-mono">
-              See pricing
+            <Link href="/docs" className="btn btn-mono">
+              Read the docs
             </Link>
           </div>
           <p className="mt-5 font-mono text-[11px] text-text-3">

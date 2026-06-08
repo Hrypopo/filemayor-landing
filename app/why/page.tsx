@@ -100,7 +100,7 @@ export default function WhyPage() {
                 ['Cloud sync', 'Your files stay on your machine. FileMayor is not a sync tool. It will never be a sync tool. The value is local-first, and that is not negotiable.'],
                 ['Autonomous background organisation', 'Watch mode monitors folders and can trigger actions — but never without your approval. An AI that moves things without asking is not a tool you can trust.'],
                 ['Opaque black-box AI decisions', 'The plan is always shown in plain English before anything runs. You can read it, edit it, and reject it. The AI is an advisor, not a decision-maker.'],
-                ['Freemium dark patterns', 'The Free tier is genuinely useful. Pro unlocks more power, not basic functionality that was hobbled to force an upgrade. The pricing page says exactly what each plan includes.'],
+                ['Dark patterns', 'FileMayor is free. There is no artificial feature hobbling to force an upgrade, no nag screens, and no usage tricks. The free version is the real version.'],
                 ['Growth over quality', 'There is no VC timeline, no growth-at-all-costs mandate. Features ship when they are right, not when they are good enough.'],
               ].map(([title, desc]) => (
                 <li key={title as string} className="flex gap-5 rounded-xl border border-border bg-surface p-5">
