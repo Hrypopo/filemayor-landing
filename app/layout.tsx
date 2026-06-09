@@ -54,13 +54,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description: `${site.hook} — ${site.description}`,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: site.name }],
+    // og:image comes from app/opengraph-image.tsx (file convention) —
+    // do not hardcode a URL here; /og.png does not exist as a static file.
   },
   twitter: {
     card: 'summary_large_image',
     title: `${site.name} — ${site.tagline}`,
     description: `${site.hook} — ${site.description}`,
-    images: ['/og.png'],
   },
   alternates: { canonical: site.url },
   robots: { index: true, follow: true },

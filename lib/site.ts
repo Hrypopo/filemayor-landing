@@ -19,6 +19,17 @@ export const site = {
     handle: 'Chevza',
     email: 'hloninchefu@gmail.com',
   },
+  /** Social profiles. Leave a URL empty ('') to hide it everywhere —
+   *  the Footer and press pages render only non-empty entries. */
+  socials: {
+    instagram: 'https://instagram.com/filemayor',
+    x: '',
+    linkedin: '',
+    youtube: '',
+    reddit: '',
+    discord: '',
+    producthunt: '',
+  },
   hook: 'Your AI can suggest. FileMayor can act — with one undo to roll it back.',
   metrics: {
     npmInstalls: 25000,

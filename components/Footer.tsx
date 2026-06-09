@@ -1,6 +1,21 @@
 import Link from 'next/link';
 import { site } from '@/lib/site';
 
+const socialLabels: Record<string, string> = {
+  instagram: 'Instagram',
+  x: 'X / Twitter',
+  linkedin: 'LinkedIn',
+  youtube: 'YouTube',
+  reddit: 'Reddit',
+  discord: 'Discord',
+  producthunt: 'Product Hunt',
+};
+
+/** Only socials with a URL set in lib/site.ts appear. */
+const socialItems = Object.entries(site.socials ?? {})
+  .filter(([, url]) => !!url)
+  .map(([key, url]) => ({ label: socialLabels[key] ?? key, href: url as string }));
+
 const cols = [
   {
     title: 'Product',
@@ -33,6 +48,7 @@ const cols = [
       { label: 'Terms', href: '/terms' },
       { label: 'Security', href: '/docs/security' },
       { label: `Contact ${site.author.handle}`, href: `mailto:${site.author.email}` },
+      ...socialItems,
     ],
   },
 ];
