@@ -9,12 +9,12 @@ const surfaces = ['CLI', 'Desktop', 'PWA'];
 export function Hero() {
   return (
     <section className="grid-bg relative overflow-hidden pb-24 pt-28 md:pb-32 md:pt-36">
-      <div className="container-prose">
+      <div className="container-prose relative z-[1]">
         <span className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
           <span className="relative inline-block size-1.5 rounded-full bg-accent">
             <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
           </span>
-          v{site.version} · AI-powered · fully reversible
+          v{site.version} · 100% free · fully reversible
         </span>
 
         <p className="mb-5 max-w-2xl font-display text-[clamp(20px,2vw,26px)] italic leading-snug text-text-2">
@@ -56,6 +56,8 @@ export function Hero() {
           ))}
           <span aria-hidden>·</span>
           <span className="text-text-2">Mac · Windows · Linux</span>
+          <span aria-hidden>·</span>
+          <span className="text-accent">Every feature free</span>
         </div>
 
         <CommandBar className="mt-14 max-w-[760px]" />

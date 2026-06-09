@@ -1,5 +1,9 @@
 export const faqItems = [
   {
+    q: 'Is it really free?',
+    a: 'Yes — every feature, on every platform. Watch mode, the AI assistant, SOP automation, unlimited bulk organize, CSV export: all included, no trial, no account, no card. For unlimited AI planning you can plug in your own model key (Gemini, OpenAI, Claude, or local Ollama), but the built-in free tier works out of the box.',
+  },
+  {
     q: 'Does FileMayor send my files anywhere?',
     a: 'No. The core engine runs entirely on your machine. The optional AI features (the Curative Triad) call out to a model only with file metadata — names, sizes, paths, extensions — never file contents. Disable AI entirely and the rest still works.',
   },
