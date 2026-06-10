@@ -78,8 +78,8 @@ export default function Post() {
         structured plan (sort, deduplicate, archive, flatten), and applies it only after you
         approve — with every operation journaled so <Code>undo --all</Code> reverses the entire
         session. It detects duplicates by content hash, runs on macOS, Windows, and Linux, and
-        exposes a full CLI and an MCP server so AI assistants can drive it. It is free to start;
-        Pro is $19/month.
+        exposes a full CLI and an MCP server so AI assistants can drive it. Completely free —
+        every feature included, no subscription.
       </P>
       <P>
         Where it is not the answer: it is not a launcher, not a disk-usage treemap, and not a
