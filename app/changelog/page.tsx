@@ -12,19 +12,31 @@ export const metadata: Metadata = {
 
 const fallbackEntries = [
   {
-    version: '3.6.1',
-    date: '2026.04.20',
+    version: '4.0.5',
+    date: '2026.06.09',
     blocks: [
-      { type: 'heading' as const, text: 'Hardened runtime.' },
-      {
-        type: 'bullet' as const,
-        text: 'Validator layer now refuses domain-scattering moves on imprecise prompts.',
-      },
-      {
-        type: 'bullet' as const,
-        text: 'Crash-safe journal persistence verified across forced shutdowns.',
-      },
-      { type: 'bullet' as const, text: 'Tests: 128 passing, 0 vulnerabilities.' },
+      { type: 'heading' as const, text: 'Everything is free.' },
+      { type: 'bullet' as const, text: 'Watch Mode, AI SOP Engine, unlimited bulk organize, and CSV export now ship in the free tier. No license required.' },
+      { type: 'bullet' as const, text: 'Removed upgrade modal and all checkout links.' },
+      { type: 'heading' as const, text: 'Distribution.' },
+      { type: 'bullet' as const, text: 'Intel Mac support — macOS now ships both x64 and arm64 DMGs.' },
+      { type: 'bullet' as const, text: 'CI on every PR — typecheck, Vite build, core tests, and the 35-step e2e pipeline gate every PR.' },
+      { type: 'bullet' as const, text: 'npm publish pipeline wired into the release workflow.' },
+      { type: 'heading' as const, text: 'MCP.' },
+      { type: 'bullet' as const, text: 'smithery.yaml added for Smithery auto-indexing. .mcp/server.json added for official MCP registry submission.' },
+      { type: 'bullet' as const, text: 'npx -y @filemayor/mcp --audit prints a machine-readable trust report without starting a session.' },
+    ],
+  },
+  {
+    version: '4.0.0',
+    date: '2026.05.16',
+    blocks: [
+      { type: 'heading' as const, text: 'Global ⌘K Command Bar.' },
+      { type: 'bullet' as const, text: 'Single command surface available from any view. Keyboard-first, fuzzy-matched, recent-action memory.' },
+      { type: 'bullet' as const, text: 'Mission Control Home — workspace-centric home with live activity counter and quick actions.' },
+      { type: 'bullet' as const, text: 'MCP server (@filemayor/mcp) — 14 tools over stdio. Drops into Claude Desktop, Cursor, Zed via one JSON snippet.' },
+      { type: 'bullet' as const, text: 'Multi-model AI — Gemini, OpenAI, Claude, Ollama, or the built-in free tier. Keys stored in the OS keychain.' },
+      { type: 'bullet' as const, text: 'Bundle −53% — lazy-loaded views and code-split heavy deps. Entry dropped from 518 KB to 244 KB.' },
     ],
   },
   {
@@ -36,7 +48,7 @@ const fallbackEntries = [
       { type: 'bullet' as const, text: 'Gemini 2.0 Flash integration for the SOP parser.' },
       {
         type: 'bullet' as const,
-        text: 'i18n: shipped 10 locales — Arabic, German, English, Spanish, French, Hindi, Japanese, Korean, Portuguese, Chinese.',
+        text: 'i18n: 10 locales — Arabic, German, English, Spanish, French, Hindi, Japanese, Korean, Portuguese, Chinese.',
       },
     ],
   },

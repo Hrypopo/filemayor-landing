@@ -7,7 +7,7 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'FileMayor for Teams — Filesystem operations with an audit trail',
   description:
-    'A shared, reversible filesystem workflow for engineering and ops teams. Local-only execution, audit-ready operation logs, no telemetry, 5 seats per license. Cross-platform CLI, MCP, and desktop.',
+    'A shared, reversible filesystem workflow for engineering and ops teams. Local-only execution, audit-ready operation logs, opt-out telemetry. Cross-platform CLI, MCP, and desktop.',
 };
 
 const CONTACT = `mailto:${site.author.email}?subject=FileMayor%20for%20Teams`;
@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'Does FileMayor send our files or data anywhere?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No. The core engine runs entirely on the machine. Optional AI planning sends only file metadata — names, sizes, paths, extensions — never file contents, and can be disabled entirely. FileMayor collects no telemetry. License validation runs locally with a 30-day offline grace period.',
+        text: 'No. The core engine runs entirely on the machine. Optional AI planning sends only file metadata — names, sizes, paths, extensions — never file contents, and can be disabled entirely. The CLI sends one anonymous version+OS+command ping per version (no file names or paths); disable it with FILEMAYOR_NO_TELEMETRY=1. License validation runs locally with a 30-day offline grace period.',
       },
     },
     {
@@ -63,7 +63,7 @@ const pillars = [
   {
     label: 'Local-only by default',
     title: 'Files never leave the machine.',
-    body: 'The engine runs locally on macOS, Windows, and Linux. Optional AI planning sends only metadata — never contents — and disables cleanly. No telemetry, ever.',
+    body: 'The engine runs locally on macOS, Windows, and Linux. Optional AI planning sends only metadata — never contents — and disables cleanly. The CLI sends one anonymous version+command ping per version; disable with FILEMAYOR_NO_TELEMETRY=1.',
   },
   {
     label: 'Audit-ready operation log',
@@ -118,8 +118,8 @@ export default function TeamsPage() {
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-text-2 md:text-xl">
               FileMayor gives engineering, data, and ops teams one reversible workflow for
               organising files at scale — local-only execution, an audit-ready operation
-              log on every change, and no telemetry. Cross-platform CLI, MCP, and desktop,
-              from a single Team license.
+              log on every change, and opt-out anonymous telemetry (FILEMAYOR_NO_TELEMETRY=1).
+              Cross-platform CLI, MCP, and desktop.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link href="/download" className="btn btn-primary">
@@ -182,7 +182,7 @@ export default function TeamsPage() {
             </h2>
             <ul className="mt-8 space-y-4">
               {[
-                ['Available now', 'Local-only execution · no telemetry · OS-keychain secret storage · six-layer Chevza Doctrine runtime · journaled, exportable audit log · offline activation with 30-day grace.'],
+                ['Available now', 'Local-only execution · opt-out CLI telemetry (FILEMAYOR_NO_TELEMETRY=1) · OS-keychain secret storage · six-layer Chevza Doctrine runtime · journaled, exportable audit log · offline activation with 30-day grace.'],
                 ['Team workflow', 'Shared rule libraries · CSV / JSON / API access · cross-platform CLI and MCP · email support.'],
                 ['On the roadmap', 'SSO and SCIM provisioning · centralised fleet management · larger seat tiers · SOC 2. Not claimed as shipped — email us if you need any of these now.'],
               ].map(([k, v]) => (
