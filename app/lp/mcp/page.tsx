@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { n: '01', title: 'Add one entry to your config', code: `{\n  "mcpServers": {\n    "filemayor": {\n      "command": "npx",\n      "args": ["filemayor", "mcp"]\n    }\n  }\n}` },
+  { n: '01', title: 'Add one entry to your config', code: `{\n  "mcpServers": {\n    "filemayor": {\n      "command": "npx",\n      "args": ["-y", "@filemayor/mcp"]\n    }\n  }\n}` },
   { n: '02', title: 'Restart Claude', body: 'Claude Desktop or Claude Code picks up the FileMayor tools on next launch. No API keys. No accounts.' },
   { n: '03', title: 'Ask in plain English', body: '"Clean up my Downloads", "Dedupe this folder", "Archive anything older than a year." Claude plans it, FileMayor executes it safely.' },
   { n: '04', title: 'Undo if you want', body: 'Every move is journaled. One command — filemayor undo --all — reverses the entire session.' },

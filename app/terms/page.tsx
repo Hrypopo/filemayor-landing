@@ -92,9 +92,9 @@ export default function TermsPage() {
                 Refunds
               </h2>
               <p className="mt-5 text-[15.5px] leading-relaxed">
-                14 days from purchase, no questions asked. Refunds are processed by our
-                payment provider (LemonSqueezy). Email support to initiate; we will not
-                attempt retention tactics.
+                FileMayor is currently free — there is nothing to refund. If a paid tier
+                is introduced in the future, the refund window will be 14 days from purchase,
+                no questions asked. Email support to initiate.
               </p>
             </div>
 

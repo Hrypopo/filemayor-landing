@@ -68,10 +68,10 @@ export default function PrivacyPage() {
                 <div>
                   <dt className="font-display text-[19px] font-normal text-text">Email address</dt>
                   <dd className="mt-1.5">
-                    Collected only when you purchase a Pro or Enterprise license. Used for
-                    license delivery and customer support. Stored by our payment provider
-                    (LemonSqueezy) and forwarded to us for fulfillment. Never sold, never
-                    used for marketing without explicit opt-in.
+                    Collected only when you subscribe to the mailing list or activate a
+                    license key. Used for license delivery, release notifications, and
+                    customer support. Never sold, never used for marketing without explicit
+                    opt-in.
                   </dd>
                 </div>
                 <div>
