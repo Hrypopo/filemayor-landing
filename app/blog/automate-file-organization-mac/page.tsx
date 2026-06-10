@@ -114,7 +114,7 @@ export default function Post() {
           the entire session if the plan was wrong about something.
         </P>
         <P>
-          For ongoing watch mode — routing new files as they arrive — FileMayor Pro watches
+          For ongoing watch mode — routing new files as they arrive — FileMayor watches
           a folder and applies a plain-English policy you define once. No rule syntax to
           learn. If you change your mind, you update the policy and the next session
           reflects it.

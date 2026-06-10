@@ -34,7 +34,7 @@ const faqSchema = {
       name: 'Can FileMayor replace Hazel for folder watching?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, for most use cases. FileMayor Pro includes watch mode — it monitors specified folders and applies configured rules whenever new files arrive. Unlike Hazel\'s rules engine, FileMayor\'s watch mode logs every action and supports undo. For complex, condition-heavy automation on macOS with AppleScript integration, Hazel\'s rules engine is more powerful.',
+        text: 'Yes, for most use cases. FileMayor includes watch mode — it monitors specified folders and applies configured rules whenever new files arrive. Unlike Hazel\'s rules engine, FileMayor\'s watch mode logs every action and supports undo. For complex, condition-heavy automation on macOS with AppleScript integration, Hazel\'s rules engine is more powerful.',
       },
     },
     {
@@ -62,7 +62,7 @@ const matrix = [
   { row: 'Interaction model', fm: 'Describe intent → AI plans → approve → apply → undo', hz: 'Write IF/THEN rules per folder' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', hz: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', hz: '✗ No native undo for batched moves' },
-  { row: 'Watch mode', fm: '✓ Yes (Pro)', hz: '✓ Yes — core feature' },
+  { row: 'Watch mode', fm: '✓ Yes — free', hz: '✓ Yes — core feature' },
   { row: 'AppleScript integration', fm: '✗', hz: '✓ Yes — full macOS automation' },
   { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', hz: 'Shell scripts via rules only' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', hz: '✗' },
@@ -224,7 +224,7 @@ export default function VsHazel() {
               Continuous watching — no rules to write.
             </h2>
             <p className="mt-6 text-[16.5px] leading-relaxed text-text-2">
-              FileMayor Pro watches a folder and applies a consistent policy to every
+              FileMayor watches a folder and applies a consistent policy to every
               new file that arrives — with a full audit log.
             </p>
             <pre className="mt-8 overflow-x-auto rounded-2xl border border-border bg-surface p-6 font-mono text-[13px] leading-relaxed text-text-2">

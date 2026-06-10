@@ -160,7 +160,7 @@ export default function Post() {
           <Li><strong>Quick duplicate audit on Linux</strong> → fdupes or rmlint.</Li>
           <Li><strong>Rules-based automation with a YAML config you maintain</strong> → organize-tool.</Li>
           <Li><strong>Bulk cleanup with AI planning and a session undo</strong> → FileMayor.</Li>
-          <Li><strong>Ongoing folder watching with a natural-language policy</strong> → FileMayor Pro.</Li>
+          <Li><strong>Ongoing folder watching with a natural-language policy</strong> → FileMayor.</Li>
         </Ul>
         <P>
           These tools are not mutually exclusive. fdupes for a quick scan, then FileMayor

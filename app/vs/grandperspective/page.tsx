@@ -66,7 +66,7 @@ const matrix = [
   { row: 'Duplicate detection', fm: '✓ Content-hash deduplication', gp: '✗' },
   { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', gp: '✗' },
   { row: 'Disk visualisation', fm: 'Text diagnosis (size, age, duplicates)', gp: '✓ Interactive treemap' },
-  { row: 'Watch mode', fm: '✓ Yes (Pro) — real-time folder monitoring', gp: '✗' },
+  { row: 'Watch mode', fm: '✓ Yes — free, real-time folder monitoring', gp: '✗' },
   { row: 'Best for', fm: 'Finding the problem and fixing it, safely', gp: 'Understanding where disk space is consumed' },
 ];
 

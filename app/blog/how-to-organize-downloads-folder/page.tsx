@@ -138,7 +138,7 @@ export default function Post() {
       <H2>Keeping it clean</H2>
       <P>
         A one-time cleanup is satisfying for about a week. The real win is preventing the mess
-        from coming back. FileMayor Pro can watch the folder and apply a consistent policy to
+        from coming back. FileMayor can watch the folder and apply a consistent policy to
         every new file as it arrives.
       </P>
       <Pre>{`$ filemayor watch ~/Downloads --policy "sort by type, archive after 90 days"
