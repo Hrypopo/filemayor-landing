@@ -52,6 +52,18 @@ const comparisons = [
     tagline: 'A fast keyboard-driven dual-pane manager vs automated, reversible organisation.',
     verdict: 'Fly by hand, or let it plan the cleanup.',
   },
+  {
+    slug: 'finder',
+    name: 'macOS Finder',
+    tagline: 'Manual drag-and-drop vs AI-planned bulk organisation with undo.',
+    verdict: 'For anything beyond a single folder, FileMayor wins.',
+  },
+  {
+    slug: 'bash',
+    name: 'Bash / shell scripts',
+    tagline: 'Handwritten scripts vs journaled, reversible operations with AI planning.',
+    verdict: 'Scripts break silently. FileMayor tells you what it will do first.',
+  },
 ];
 
 export default function VsIndex() {
