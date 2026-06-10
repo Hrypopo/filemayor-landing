@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from 'next';
+import { Suspense } from 'react';
 import { Newsreader, Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { site } from '@/lib/site';
+import { UtmTracker } from '@/components/UtmTracker';
 import './globals.css';
 
 const newsreader = Newsreader({
@@ -116,6 +118,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         {children}
+        <Suspense>
+          <UtmTracker />
+        </Suspense>
         <Analytics />
         <SpeedInsights />
       </body>
