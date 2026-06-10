@@ -104,18 +104,51 @@ with votes. Reach out to your network the night before.
 
 ---
 
-### C. MCP directories (30 min)
+### C. MCP directories (~45 min total, 5 separate actions)
 
 These surface FileMayor to developers actively looking for MCP servers.
+Do all of them — combined they cover >50k active MCP users.
 
-1. **Smithery** — auto-indexes from the `smithery.yaml` in the repo.
-   Check: smithery.ai/server/@filemayor/mcp after npm publish.
+**1. Smithery** — already done. Auto-indexes from `smithery.yaml` in the repo.
+   Confirm at: smithery.ai/server/@filemayor/mcp (appears within 24h of npm publish).
 
-2. **Glama** — submit at glama.ai/mcp/servers/submit
-   - GitHub URL: `https://github.com/Hrypopo/FileMayor`
-   - Subdirectory: `mcp`
+**2. Glama** — auto-indexes public GitHub repos. No submission needed.
+   Confirm at: glama.ai/mcp/servers/@filemayor/mcp (auto-discovers after npm publish).
 
-3. **mcp.so** — submit at mcp.so/submit
+**3. Official MCP Registry** (registry.modelcontextprotocol.io) — 5 min
+   The `.mcp/server.json` is already in the repo. Run:
+   ```bash
+   # Install the publisher CLI
+   npm install -g mcp-publisher   # or download from github.com/modelcontextprotocol/registry
+   # Submit (requires GitHub auth — it verifies repo ownership)
+   mcp-publisher publish .mcp/server.json
+   ```
+
+**4. punkpeye/awesome-mcp-servers** (widely linked, 15k+ GitHub stars) — 5 min
+   Fork github.com/punkpeye/awesome-mcp-servers, then open README.md and find the
+   `### 📂 File Systems` section (search for "file-systems"). Add this line in
+   alphabetical order by repo name (under entries starting with 'F'):
+
+   ```
+   - [Hrypopo/FileMayor](https://github.com/Hrypopo/FileMayor) [![filemayor MCP server](https://glama.ai/mcp/servers/@filemayor/mcp/badges/score.svg)](https://glama.ai/mcp/servers/@filemayor/mcp) 📇 🏠 🍎 🪟 🐧 - AI-powered filesystem organiser with reversible operations. Diagnose a folder, generate a reorganisation plan, apply it, and undo the entire session with one command. Journaled, path-jailed, local-only — no file contents leave the machine. 14 tools.
+   ```
+
+   PR title: `Add FileMayor — reversible AI filesystem organiser`
+
+**5. Cline MCP Marketplace** (cline.bot users) — 5 min
+   Open a new issue at github.com/cline/mcp-marketplace with:
+   - Title: `Add FileMayor MCP — reversible AI filesystem organizer`
+   - Body:
+     ```
+     **GitHub repo:** https://github.com/Hrypopo/FileMayor
+     **npm package:** @filemayor/mcp
+     **Description:** AI-powered filesystem organiser. Diagnose folders, generate
+     reversible reorganisation plans, apply on approval, undo the whole session.
+     Local-only execution, journaled moves, path-jailed. 14 tools.
+     **Logo:** https://filemayor.com/icon (512×512 PNG)
+     ```
+
+**6. mcp.so** — submit at mcp.so/submit
 
 ---
 
