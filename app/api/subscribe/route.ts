@@ -200,7 +200,7 @@ const MCP_HTML = `<!DOCTYPE html>
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["filemayor", "mcp"]
+      "args": ["-y", "@filemayor/mcp"]
     }
   }
 }</code>

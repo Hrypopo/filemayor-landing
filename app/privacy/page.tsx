@@ -93,10 +93,24 @@ export default function PrivacyPage() {
                   </dd>
                 </div>
                 <div>
+                  <dt className="font-display text-[19px] font-normal text-text">CLI usage telemetry</dt>
+                  <dd className="mt-1.5">
+                    The FileMayor CLI sends one anonymous ping per version to{' '}
+                    <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">filemayor.com/api/ping</code>.
+                    The payload contains: CLI version, OS platform (darwin/linux/win32), CPU architecture, and the
+                    top-level command name (e.g. &ldquo;scan&rdquo;, &ldquo;organize&rdquo;). No file names, paths,
+                    contents, user identifiers, or IP addresses are stored. The ping fires at most once per version and
+                    is not sent in CI environments. To opt out, set{' '}
+                    <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">FILEMAYOR_NO_TELEMETRY=1</code>{' '}
+                    in your environment. You can verify the full implementation in{' '}
+                    <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">cli/core/telemetry.js</code>.
+                  </dd>
+                </div>
+                <div>
                   <dt className="font-display text-[19px] font-normal text-text">Marketing-site analytics</dt>
                   <dd className="mt-1.5">
-                    We use a privacy-first analytics provider (Plausible, when enabled) to
-                    measure aggregate page views and CTA clicks on{' '}
+                    We use Vercel Analytics to measure aggregate page views, CTA clicks, and
+                    performance metrics on{' '}
                     <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">filemayor.com</code>. No
                     cookies, no personal identifiers, no cross-site tracking. The data is
                     aggregate-only and we cannot link page views to individuals.
