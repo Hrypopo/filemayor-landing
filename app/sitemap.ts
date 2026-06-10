@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/blog/automate-file-organization-mac`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/blog/best-cli-file-organizer`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/blog/ai-file-organizer`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${site.url}/blog/mcp-server-filesystem`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/vs`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${site.url}/vs/hazel`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/vs/cleanmymac`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
