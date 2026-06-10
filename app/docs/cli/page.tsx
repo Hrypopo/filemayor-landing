@@ -105,9 +105,8 @@ const tools: Command[] = [
     name: 'watch',
     signature: 'filemayor watch <dir>',
     description:
-      'Live auto-organize. Monitors a folder; routes new arrivals to their correct homes in real-time. Pro feature.',
+      'Live auto-organize. Monitors a folder; routes new arrivals to their correct homes in real-time.',
     example: 'filemayor watch ~/Downloads',
-    pro: true,
   },
 ];
 
@@ -221,9 +220,6 @@ export default function CliPage() {
               </li>
               <li>
                 <code className="font-mono text-text">3</code> — Doctrine block (Guardrail, Validator, or Security layer refused)
-              </li>
-              <li>
-                <code className="font-mono text-text">4</code> — license required for Pro feature
               </li>
               <li>
                 <code className="font-mono text-text">5</code> — AI provider unreachable (with --offline-fail)
