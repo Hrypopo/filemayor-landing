@@ -116,8 +116,8 @@ export default function SopPage() {
               Status
             </p>
             <p className="mt-3 text-[15.5px] leading-relaxed text-text-2">
-              SOP parsing is a Pro feature. Free tier supports manual organization via
-              the <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">organize</code> command.
+              SOP parsing is available to all users. Run the
+              <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">organize</code> command to apply it.
             </p>
           </div>
         </section>
