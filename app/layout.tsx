@@ -74,7 +74,15 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.tagline}`,
     description: `${site.hook} — ${site.description}`,
   },
-  alternates: { canonical: site.url },
+  alternates: {
+    canonical: site.url,
+    languages: {
+      'en': site.url,
+      'fr': `${site.url}/fr`,
+      'pt': `${site.url}/pt`,
+      'x-default': site.url,
+    },
+  },
   robots: { index: true, follow: true },
   icons: {
     icon: [

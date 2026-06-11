@@ -35,6 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/vs/marta`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${site.url}/vs/bash`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/vs/finder`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${site.url}/fr`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${site.url}/pt`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/changelog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${site.url}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${site.url}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
