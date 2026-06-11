@@ -10,6 +10,14 @@ export const metadata: Metadata = {
 
 export const posts = [
   {
+    slug: 'claude-file-organization',
+    kicker: 'Tutorial · Claude · MCP',
+    title: 'How to organize files with Claude: a practical guide.',
+    dek: 'Claude reasons about your files brilliantly — but it needs a safe execution layer to actually move them. Here is how to connect the two.',
+    date: '2026.06.11',
+    readTime: '6 min read',
+  },
+  {
     slug: 'mcp-server-filesystem',
     kicker: 'Tutorial · MCP',
     title: 'MCP server for filesystem access: how to give Claude safe file operations.',
