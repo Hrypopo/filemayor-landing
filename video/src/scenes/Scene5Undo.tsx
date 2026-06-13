@@ -88,9 +88,9 @@ export const Scene5Undo: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.bg }}>
       <ThreeCanvas width={width} height={height} gl={{ antialias: true }}>
         <fog attach="fog" args={[COLORS.bg, 15, 38]} />
-        <ambientLight intensity={0.3} color="#fff4dd" />
-        <directionalLight position={[6, 8, -6]} intensity={1.3} color="#f59e0b" />
-        <pointLight position={[-4, 2, 8]} intensity={110} color="#d4af37" distance={40} />
+        <ambientLight intensity={0.42} color="#fff4dd" />
+        <directionalLight position={[6, 8, -6]} intensity={1.6} color="#f59e0b" />
+        <pointLight position={[-4, 2, 8]} intensity={160} color="#d4af37" distance={40} />
         <CameraRig pose={{ position: [-0.5, camY, camZ], lookAt: [0, 0, -2], fov: 36 }} />
         <FileCards files={files} getState={getState} />
         {ghosts.map((g) => (
