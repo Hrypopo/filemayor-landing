@@ -27,6 +27,11 @@ npm run render:6s     # 6s cut (scene 4) for paid ads
 npm run studio        # live-edit in Remotion Studio
 ```
 
+> **Windows / PowerShell:** run each line separately. Windows PowerShell 5.1
+> rejects `&&` between commands (`The token '&&' is not a valid statement
+> separator`) — use `;`, or PowerShell 7+/cmd.exe. Also make sure you're inside
+> the cloned repo first: `cd filemayor-landing\video`, not just `cd video`.
+
 ### True 4K (3840×2160)
 
 The compositions are 1920×1080, but the scenes are real 3D, so they
