@@ -27,6 +27,25 @@ npm run render:6s     # 6s cut (scene 4) for paid ads
 npm run studio        # live-edit in Remotion Studio
 ```
 
+### True 4K (3840×2160)
+
+The compositions are 1920×1080, but the scenes are real 3D, so they
+re-render crisp at any resolution. `--scale 2` renders the canvas at 2× for a
+native 4K master (not an upscale):
+
+```bash
+npm run render:4k      # 60s master → out/filemayor-launch-60s-4k.mp4
+npm run render:15s:4k  # 15s cut    → out/filemayor-launch-15s-4k.mp4
+npm run render:6s:4k   # 6s cut     → out/filemayor-launch-6s-4k.mp4
+```
+
+The `--timeout 240000` is required: at 4K the heaviest frames exceed Remotion's
+default 30s per-frame `delayRender` timeout and the render aborts without it.
+`--concurrency 3` keeps memory in check on a 16 GB box. Expect roughly real-time
+× 30 to render (the 60s master ≈ 2h on a CPU-only machine; far faster with a GPU).
+Masters are large (60s ≈ 700 MB); transcode a smaller delivery copy with
+`npx remotion ffmpeg -i <master> -crf 28 -movflags +faststart out/preview.mp4`.
+
 Square (1:1) crops for Instagram/X can be rendered from any composition with
 `--width 1080 --height 1080` after adjusting the composition size in
 `src/Root.tsx`.
