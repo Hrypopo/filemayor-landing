@@ -13,7 +13,7 @@ const SNIPPET = `{
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["-y", "filemayor-mcp"]
     }
   }
 }`;
@@ -66,7 +66,7 @@ const faqSchema = {
 };
 
 const steps = [
-  { n: '01', t: 'Add the server', d: "Drop one entry into your client's MCP config. No build step, no glue code — npx -y @filemayor/mcp starts the server on demand." },
+  { n: '01', t: 'Add the server', d: "Drop one entry into your client's MCP config. No build step, no glue code — npx -y filemayor-mcp starts the server on demand." },
   { n: '02', t: 'Restart the client', d: 'Claude Desktop, Cursor, or Zed picks up the FileMayor tools automatically on the next launch.' },
   { n: '03', t: 'Ask in plain language', d: '"Diagnose my Downloads", "dedupe this folder", "archive anything older than a year." The model plans; you approve.' },
   { n: '04', t: 'Apply with rollback', d: 'Approved plans run locally and journal every move. Changed your mind? undo --all reverses the entire session.' },

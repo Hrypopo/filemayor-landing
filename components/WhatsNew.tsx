@@ -14,7 +14,7 @@ const items = [
   },
   {
     tag: 'MCP',
-    title: '@filemayor/mcp',
+    title: 'filemayor-mcp',
     desc: 'Install one MCP server. Claude Desktop and other MCP clients can now diagnose folders and apply moves.',
   },
   {

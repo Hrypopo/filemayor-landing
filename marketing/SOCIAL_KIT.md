@@ -65,7 +65,7 @@ First comment:
 >
 > The flow is scan → explain → plan → apply → undo. Planning can use AI (built-in free tier, or bring your own Gemini/OpenAI/Claude/Ollama key) but the engine is deterministic and local — no file contents ever leave the machine, only names/sizes/paths.
 >
-> It also runs as an MCP server, so Claude Desktop/Cursor can operate on your filesystem through the same journaled, path-jailed layer instead of raw shell access. `npx -y @filemayor/mcp --audit` prints a trust report (transport, egress, tool list) before you wire it in.
+> It also runs as an MCP server, so Claude Desktop/Cursor can operate on your filesystem through the same journaled, path-jailed layer instead of raw shell access. `npx -y filemayor-mcp --audit` prints a trust report (transport, egress, tool list) before you wire it in.
 >
 > Free on Mac/Windows/Linux. Happy to answer anything about the rollback journal design.
 

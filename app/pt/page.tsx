@@ -33,7 +33,7 @@ const features = [
   {
     title: 'Servidor MCP integrado',
     body: 'FileMayor se integra ao Claude Desktop, Claude Code ou Cursor via MCP. Descreva o que você quer em português — FileMayor executa com segurança.',
-    cmd: 'npx -y @filemayor/mcp',
+    cmd: 'npx -y filemayor-mcp',
   },
 ];
 
@@ -155,7 +155,7 @@ export default function PtPage() {
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["-y", "filemayor-mcp"]
     }
   }
 }`}</code>

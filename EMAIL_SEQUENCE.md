@@ -143,7 +143,7 @@ Setup takes two minutes. Add this to your Claude MCP config:
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["-y", "filemayor-mcp"]
     }
   }
 }

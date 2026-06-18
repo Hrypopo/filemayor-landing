@@ -19,7 +19,7 @@ All notable changes to FileMayor will be documented in this file.
 - **CI on every PR** — typecheck, Vite build, 36 core tests, and the 35-step e2e pipeline now gate every pull request and push to main.
 - **Version singleton** — the app, CLI, MCP server, and READMEs all derive their version from `package.json`; `scripts/sync-version.js` covers the MCP package so strings can no longer drift.
 - **Bundle −53%** — views are lazy-loaded and heavy deps (framer-motion, lucide, i18n) split into cacheable chunks; entry dropped from 518 KB to 244 KB.
-- **MCP `--audit`** — `npx -y @filemayor/mcp --audit` prints a machine-readable trust report (transport, egress, tool list with destructive flags, runtime safeguards) without starting a session.
+- **MCP `--audit`** — `npx -y filemayor-mcp --audit` prints a machine-readable trust report (transport, egress, tool list with destructive flags, runtime safeguards) without starting a session.
 
 ## [4.0.0] — 2026-05-16
 
@@ -32,7 +32,7 @@ All notable changes to FileMayor will be documented in this file.
 - **First-run as a conversation** — Onboarding rewritten as "Hello. I'm FileMayor." with four-promise grid (local-first, reversible, Jarvis-style, hardened) and an immediate first scan so users see value in under 30 seconds.
 
 ### 🤖 AI Integration Surfaces
-- **`@filemayor/mcp` — MCP server** (`mcp/`) — FileMayor speaks Model Context Protocol over stdio. 14 tools exposed: `filemayor_scan`, `filemayor_analyze`, `filemayor_explain`, `filemayor_plan`, `filemayor_apply`, `filemayor_rollback`, `filemayor_organize`, `filemayor_clean`, `filemayor_duplicates`, `filemayor_dedupe`, `filemayor_delete_files`, `filemayor_history`, `filemayor_undo_last`, `filemayor_info`. Drops into Claude Desktop, Cursor, Zed via one JSON snippet. Reuses the same hardened-runtime safeguards as the CLI and desktop app.
+- **`filemayor-mcp` — MCP server** (`mcp/`) — FileMayor speaks Model Context Protocol over stdio. 14 tools exposed: `filemayor_scan`, `filemayor_analyze`, `filemayor_explain`, `filemayor_plan`, `filemayor_apply`, `filemayor_rollback`, `filemayor_organize`, `filemayor_clean`, `filemayor_duplicates`, `filemayor_dedupe`, `filemayor_delete_files`, `filemayor_history`, `filemayor_undo_last`, `filemayor_info`. Drops into Claude Desktop, Cursor, Zed via one JSON snippet. Reuses the same hardened-runtime safeguards as the CLI and desktop app.
 - **Claude Code Skill** (`.claude/skills/filemayor/SKILL.md`) — Teaches Claude when to reach for FileMayor (messy Downloads, "tidy this folder", "find duplicates", disk-space questions) and how to drive the Curative Triad safely (always show diagnosis + plan before applying, prefer dry-run, never bypass blocked system dirs).
 
 ### 🐛 Bug Fixes

@@ -49,7 +49,7 @@ The title must start with "Show HN:" and be under 80 chars.
 >
 > It also runs as an MCP server, so Claude Desktop/Cursor can operate on your
 > filesystem through the same journaled, path-jailed layer instead of raw shell
-> access. `npx -y @filemayor/mcp --audit` prints a trust report before you wire
+> access. `npx -y filemayor-mcp --audit` prints a trust report before you wire
 > it in.
 >
 > Free on Mac/Windows/Linux. Happy to answer anything about the rollback journal
@@ -110,10 +110,10 @@ These surface FileMayor to developers actively looking for MCP servers.
 Do all of them — combined they cover >50k active MCP users.
 
 **1. Smithery** — already done. Auto-indexes from `smithery.yaml` in the repo.
-   Confirm at: smithery.ai/server/@filemayor/mcp (appears within 24h of npm publish).
+   Confirm at: smithery.ai/server/filemayor-mcp (appears within 24h of npm publish).
 
 **2. Glama** — auto-indexes public GitHub repos. No submission needed.
-   Confirm at: glama.ai/mcp/servers/@filemayor/mcp (auto-discovers after npm publish).
+   Confirm at: glama.ai/mcp/servers/filemayor-mcp (auto-discovers after npm publish).
 
 **3. Official MCP Registry** (registry.modelcontextprotocol.io) — 5 min
    The `.mcp/server.json` is already in the repo. Run:
@@ -130,7 +130,7 @@ Do all of them — combined they cover >50k active MCP users.
    alphabetical order by repo name (under entries starting with 'F'):
 
    ```
-   - [Hrypopo/FileMayor](https://github.com/Hrypopo/FileMayor) [![filemayor MCP server](https://glama.ai/mcp/servers/@filemayor/mcp/badges/score.svg)](https://glama.ai/mcp/servers/@filemayor/mcp) 📇 🏠 🍎 🪟 🐧 - AI-powered filesystem organiser with reversible operations. Diagnose a folder, generate a reorganisation plan, apply it, and undo the entire session with one command. Journaled, path-jailed, local-only — no file contents leave the machine. 14 tools.
+   - [Hrypopo/FileMayor](https://github.com/Hrypopo/FileMayor) [![filemayor MCP server](https://glama.ai/mcp/servers/filemayor-mcp/badges/score.svg)](https://glama.ai/mcp/servers/filemayor-mcp) 📇 🏠 🍎 🪟 🐧 - AI-powered filesystem organiser with reversible operations. Diagnose a folder, generate a reorganisation plan, apply it, and undo the entire session with one command. Journaled, path-jailed, local-only — no file contents leave the machine. 14 tools.
    ```
 
    PR title: `Add FileMayor — reversible AI filesystem organiser`
@@ -141,7 +141,7 @@ Do all of them — combined they cover >50k active MCP users.
    - Body:
      ```
      **GitHub repo:** https://github.com/Hrypopo/FileMayor
-     **npm package:** @filemayor/mcp
+     **npm package:** filemayor-mcp
      **Description:** AI-powered filesystem organiser. Diagnose folders, generate
      reversible reorganisation plans, apply on approval, undo the whole session.
      Local-only execution, journaled moves, path-jailed. 14 tools.

@@ -105,7 +105,7 @@ export default function Post() {
           Run the audit flag first. It prints a structured trust report and exits without
           starting an MCP session:
         </P>
-        <Pre>{`npx -y @filemayor/mcp --audit`}</Pre>
+        <Pre>{`npx -y filemayor-mcp --audit`}</Pre>
         <P>
           The output tells you the transport type (stdio — no network listener), what outbound
           calls the server can make (one optional Gemini call for AI planning, gated by an env
@@ -122,7 +122,7 @@ export default function Post() {
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"]
+      "args": ["-y", "filemayor-mcp"]
     }
   }
 }`}</Pre>
@@ -135,7 +135,7 @@ export default function Post() {
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["-y", "@filemayor/mcp"],
+      "args": ["-y", "filemayor-mcp"],
       "env": {
         "GEMINI_API_KEY": "your-key-here"
       }
@@ -199,7 +199,7 @@ export default function Post() {
     "filemayor": {
       "command": {
         "path": "npx",
-        "args": ["-y", "@filemayor/mcp"]
+        "args": ["-y", "filemayor-mcp"]
       }
     }
   }

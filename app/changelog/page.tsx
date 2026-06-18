@@ -24,7 +24,7 @@ const fallbackEntries = [
       { type: 'bullet' as const, text: 'npm publish pipeline wired into the release workflow.' },
       { type: 'heading' as const, text: 'MCP.' },
       { type: 'bullet' as const, text: 'smithery.yaml added for Smithery auto-indexing. .mcp/server.json added for official MCP registry submission.' },
-      { type: 'bullet' as const, text: 'npx -y @filemayor/mcp --audit prints a machine-readable trust report without starting a session.' },
+      { type: 'bullet' as const, text: 'npx -y filemayor-mcp --audit prints a machine-readable trust report without starting a session.' },
     ],
   },
   {
@@ -34,7 +34,7 @@ const fallbackEntries = [
       { type: 'heading' as const, text: 'Global ⌘K Command Bar.' },
       { type: 'bullet' as const, text: 'Single command surface available from any view. Keyboard-first, fuzzy-matched, recent-action memory.' },
       { type: 'bullet' as const, text: 'Mission Control Home — workspace-centric home with live activity counter and quick actions.' },
-      { type: 'bullet' as const, text: 'MCP server (@filemayor/mcp) — 14 tools over stdio. Drops into Claude Desktop, Cursor, Zed via one JSON snippet.' },
+      { type: 'bullet' as const, text: 'MCP server (filemayor-mcp) — 14 tools over stdio. Drops into Claude Desktop, Cursor, Zed via one JSON snippet.' },
       { type: 'bullet' as const, text: 'Multi-model AI — Gemini, OpenAI, Claude, Ollama, or the built-in free tier. Keys stored in the OS keychain.' },
       { type: 'bullet' as const, text: 'Bundle −53% — lazy-loaded views and code-split heavy deps. Entry dropped from 518 KB to 244 KB.' },
     ],
