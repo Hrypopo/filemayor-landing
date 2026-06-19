@@ -3,6 +3,7 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { EmailCapture } from '@/components/EmailCapture';
 import { DownloadPlatforms } from '@/components/DownloadPlatforms';
+import { ShareStrip } from '@/components/ShareStrip';
 export const metadata: Metadata = {
   title: 'Download',
   description:
@@ -43,6 +44,10 @@ export default function DownloadPage() {
 
             <DownloadPlatforms />
 
+            <div className="mt-10">
+              <ShareStrip />
+            </div>
+
             <div className="mt-10 rounded-2xl border border-border bg-surface p-7 md:p-8">
               <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
                 CLI
@@ -60,10 +65,7 @@ export default function DownloadPage() {
             </div>
 
             <p className="mt-10 max-w-2xl text-[14px] text-text-3">
-              Code-signing certificates are in progress. Until they ship, Windows users may
-              see a SmartScreen warning on first install — click <span className="font-mono">More info → Run anyway</span> to proceed. macOS users may need to right-click → Open the
-              first time. The binaries are unmodified and identical to the GitHub release
-              artifacts.
+              Code-signing certificates are in progress. Until they ship: <strong className="text-text-2">Windows</strong> — SmartScreen may warn on first run, click <span className="font-mono">More info → Run anyway</span>. <strong className="text-text-2">macOS</strong> — Gatekeeper may block the first launch, right-click the app and choose <span className="font-mono">Open</span>. <strong className="text-text-2">Linux</strong> — mark the AppImage executable with <span className="font-mono">chmod +x</span> before running. All binaries are unmodified and identical to the GitHub release artifacts.
             </p>
           </div>
         </section>

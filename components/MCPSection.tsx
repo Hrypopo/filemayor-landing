@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { Reveal } from './Reveal';
 
 const snippet = `{
   "mcpServers": {
     "filemayor": {
       "command": "npx",
-      "args": ["filemayor", "mcp"]
+      "args": ["-y", "filemayor-mcp"]
     }
   }
 }`;
@@ -29,6 +30,7 @@ export function MCPSection() {
       await navigator.clipboard.writeText(snippet);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
+      track('mcp_config_copy');
     } catch {
       /* clipboard may be blocked in some contexts */
     }

@@ -27,7 +27,7 @@ export function WhyFileMayor() {
       <div className="container-prose">
         <div className="section-label">Why FileMayor</div>
         <h2 id="why-heading" className="h-display text-[clamp(36px,5vw,56px)]">
-          The middle ground between Finder and rm.
+          The middle ground between your file browser and rm.
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
