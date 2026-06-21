@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/docs/sop`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/skill`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${site.url}/blog/best-free-file-organizer-2026`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${site.url}/blog/best-file-organizer-mac-2025`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/blog/how-to-organize-downloads-folder`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${site.url}/blog/three-dependencies`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },

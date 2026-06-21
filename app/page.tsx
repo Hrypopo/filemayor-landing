@@ -41,12 +41,26 @@ export default function HomePage() {
             applicationCategory: 'UtilitiesApplication',
             operatingSystem: 'Windows, macOS, Linux',
             softwareVersion: site.version,
+            applicationSubCategory: 'File Management',
+            releaseNotes: `${site.url}/changelog`,
+            downloadUrl: site.github.releases,
+            installUrl: 'https://www.npmjs.com/package/filemayor',
+            featureList: [
+              'AI-powered folder diagnosis',
+              'Reversible file moves with rollback journal',
+              'Duplicate file detection and removal',
+              'MCP server for Claude Desktop and Cursor',
+              'CLI interface for scripting and automation',
+              'Local-only execution — no file contents leave the machine',
+              'Cross-platform: Mac, Windows, Linux',
+            ].join(', '),
             offers: [
               {
                 '@type': 'Offer',
                 name: 'Free',
                 price: '0',
                 priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
               },
             ],
             author: {
@@ -54,6 +68,23 @@ export default function HomePage() {
               name: site.author.name,
               alternateName: site.author.handle,
             },
+            publisher: {
+              '@type': 'Organization',
+              name: site.name,
+              url: site.url,
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'FileMayor', item: site.url },
+            ],
           }),
         }}
       />

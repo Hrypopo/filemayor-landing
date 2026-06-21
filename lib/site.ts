@@ -3,7 +3,7 @@ export const site = {
   by: 'Chevza',
   domain: 'filemayor.com',
   url: 'https://filemayor.com',
-  version: '4.0.4',
+  version: '4.0.7',
   tagline: 'Your folders, on command.',
   description:
     'FileMayor v4 — a command bar for your filesystem. Diagnose folders, plan moves, apply with rollback. Local-only, on Mac, Windows, and Linux.',

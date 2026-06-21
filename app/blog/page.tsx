@@ -4,11 +4,20 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Writing',
-  description: 'Essays on filesystem trust, AI safety, and how FileMayor is built.',
+  title: 'Blog — AI File Organization Guides, CLI Tips & MCP Tutorials',
+  description:
+    'Practical guides on organizing files with AI, cleaning up Downloads, deduplicating folders, using FileMayor with Claude Desktop and Cursor, and building with the MCP server.',
 };
 
 export const posts = [
+  {
+    slug: 'best-free-file-organizer-2026',
+    kicker: 'Guide · comparison',
+    title: 'The best free file organizer in 2026 (Mac, Windows & Linux).',
+    dek: 'A no-nonsense comparison of free file organizers — AI-powered, rules-based, and manual — and which one to pick.',
+    date: '2026.06.21',
+    readTime: '7 min read',
+  },
   {
     slug: 'claude-file-organization',
     kicker: 'Tutorial · Claude · MCP',
