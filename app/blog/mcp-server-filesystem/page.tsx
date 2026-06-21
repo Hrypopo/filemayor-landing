@@ -108,8 +108,9 @@ export default function Post() {
         <Pre>{`npx -y filemayor-mcp --audit`}</Pre>
         <P>
           The output tells you the transport type (stdio — no network listener), what outbound
-          calls the server can make (one optional Gemini call for AI planning, gated by an env
-          var), and the complete list of tools with their destructive flags. Diff it after
+          calls the server can make (one optional external-AI call for AI planning — Anthropic,
+          Gemini, or OpenAI, gated by an env var), and the complete list of tools with their
+          destructive flags. Diff it after
           upgrades to catch changes.
         </P>
         <H3>2. Add one entry to claude_desktop_config.json</H3>
@@ -133,8 +134,10 @@ export default function Post() {
         </P>
         <P>
           The <Code>filemayor_plan</Code> tool (which calls an external AI) is only for
-          non-Claude clients like Cursor or Zed. If you use one of those, add a Gemini API
-          key — it&rsquo;s free up to 1,500 requests/day on Google&rsquo;s free tier:
+          non-Claude clients like Cursor or Zed. If you use one of those, add a provider key —
+          <Code>ANTHROPIC_API_KEY</Code> (Claude), <Code>GEMINI_API_KEY</Code> (Gemini), or{' '}
+          <Code>OPENAI_API_KEY</Code> (GPT-4o-mini). The first key present wins. Gemini is free
+          up to 1,500 requests/day on Google&rsquo;s free tier:
         </P>
         <Pre>{`{
   "mcpServers": {
@@ -168,8 +171,8 @@ export default function Post() {
           </Li>
           <Li>
             <Code>filemayor_plan</Code> — for non-Claude clients: generates a plan via an external
-            AI (requires GEMINI_API_KEY). When Claude is the client, Claude reasons directly —
-            no key needed.
+            AI (Anthropic, Gemini, or OpenAI — set ANTHROPIC_API_KEY, GEMINI_API_KEY, or
+            OPENAI_API_KEY). When Claude is the client, Claude reasons directly — no key needed.
           </Li>
           <Li>
             <Code>filemayor_apply</Code> — executes the most recent plan; writes the journal
