@@ -13,6 +13,7 @@ const articleSchema = {
   author: { '@type': 'Person', name: 'Lehlohonolo Goodwill Nchefu' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
   url: 'https://filemayor.com/blog/best-free-file-organizer-2026',
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 const breadcrumb = {

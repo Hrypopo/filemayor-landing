@@ -10,6 +10,7 @@ const articleSchema = {
   datePublished: '2026-06-10',
   author: { '@type': 'Person', name: 'Lehlohonolo Goodwill Nchefu' },
   publisher: { '@type': 'Organization', name: 'FileMayor' },
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 const breadcrumb = {
