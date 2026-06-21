@@ -127,9 +127,14 @@ export default function Post() {
   }
 }`}</Pre>
         <P>
-          If you want AI-powered planning (the <Code>filemayor_plan</Code> tool), add a
-          Gemini API key — it&rsquo;s free up to 1,500 requests/day on Google&rsquo;s free
-          tier:
+          That&rsquo;s it — no API key required. When Claude is the MCP client, Claude IS
+          the AI. It calls <Code>filemayor_explain</Code> to audit the folder, reasons about
+          the moves itself, and passes them directly to <Code>filemayor_apply</Code>.
+        </P>
+        <P>
+          The <Code>filemayor_plan</Code> tool (which calls an external AI) is only for
+          non-Claude clients like Cursor or Zed. If you use one of those, add a Gemini API
+          key — it&rsquo;s free up to 1,500 requests/day on Google&rsquo;s free tier:
         </P>
         <Pre>{`{
   "mcpServers": {
@@ -137,7 +142,7 @@ export default function Post() {
       "command": "npx",
       "args": ["-y", "filemayor-mcp"],
       "env": {
-        "GEMINI_API_KEY": "your-key-here"
+        "GEMINI_API_KEY": "your-gemini-key"
       }
     }
   }
@@ -162,8 +167,9 @@ export default function Post() {
             estimate
           </Li>
           <Li>
-            <Code>filemayor_plan</Code> — AI-generated reorganisation plan from a natural-language
-            prompt (requires GEMINI_API_KEY)
+            <Code>filemayor_plan</Code> — for non-Claude clients: generates a plan via an external
+            AI (requires GEMINI_API_KEY). When Claude is the client, Claude reasons directly —
+            no key needed.
           </Li>
           <Li>
             <Code>filemayor_apply</Code> — executes the most recent plan; writes the journal
