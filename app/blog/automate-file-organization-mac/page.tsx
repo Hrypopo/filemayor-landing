@@ -28,11 +28,52 @@ export const metadata: Metadata = {
     'Three approaches to automatic file organization on macOS — folder actions, Hazel rules, and AI-planned CLI tools — with honest tradeoffs for each.',
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to automate file organization on Mac',
+  description: 'Three approaches to automatic file organization on macOS — folder actions, Hazel rules, and AI-planned CLI tools — with honest tradeoffs for each.',
+  tool: [{ '@type': 'HowToTool', name: 'FileMayor CLI' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Install FileMayor',
+      text: 'Run `npm install -g filemayor` in your terminal. FileMayor runs on Node ≥20 and works on macOS, Windows, and Linux.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Scan and diagnose your folder',
+      text: 'Run `filemayor explain ~/Downloads` to get a health score (0–100), a list of identified issues, and an estimated savings in MB.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Generate a reorganisation plan',
+      text: 'Run `filemayor cure ~/Downloads --prompt "group by type, archive anything older than 6 months"`. FileMayor proposes a set of moves in plain English — nothing is changed yet.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Review and apply the plan',
+      text: 'Run `filemayor apply` to execute the plan. Every move is written to a journal before it happens.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 5,
+      name: 'Undo if needed',
+      text: 'Run `filemayor undo` at any time to reverse the entire session. The journal survives crashes.',
+    },
+  ],
+};
+
 export default function Post() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <Article
         header={{
           kicker: 'Guide · automation',

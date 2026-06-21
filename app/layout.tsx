@@ -7,6 +7,44 @@ import { site } from '@/lib/site';
 import { UtmTracker } from '@/components/UtmTracker';
 import './globals.css';
 
+// Site-wide structured data — rendered once in the root layout so every page
+// inherits Organization and WebSite signals without each page redeclaring them.
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${site.url}/filemayor-logo-dark.png`,
+    width: 512,
+    height: 512,
+  },
+  description: site.description,
+  founder: {
+    '@type': 'Person',
+    name: site.author.name,
+    alternateName: site.author.handle,
+    email: site.author.email,
+  },
+  sameAs: [
+    site.github.app,
+    site.npm,
+    'https://instagram.com/filemayor',
+    'https://smithery.ai/server/filemayor-mcp',
+  ],
+};
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  inLanguage: ['en', 'fr', 'pt'],
+  author: { '@type': 'Organization', name: site.name },
+};
+
 const newsreader = Newsreader({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -117,6 +155,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
       </head>
       <body>
         <a
