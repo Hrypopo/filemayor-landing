@@ -26,6 +26,7 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
   url: 'https://filemayor.com/blog/how-to-organize-downloads-folder',
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 const howToSchema = {
@@ -33,37 +34,39 @@ const howToSchema = {
   '@type': 'HowTo',
   name: 'How to organize your Downloads folder',
   description: 'A practical, repeatable system for cleaning up a messy Downloads folder — by hand or automatically with FileMayor — and keeping it organised for good.',
+  totalTime: 'PT10M',
   tool: [{ '@type': 'HowToTool', name: 'FileMayor CLI' }],
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
   step: [
     {
       '@type': 'HowToStep',
       position: 1,
       name: 'Audit what is in your Downloads folder',
-      text: 'Run `filemayor explain ~/Downloads` to see a health score, file counts by category, and the biggest space hogs. This is read-only — nothing is moved.',
+      text: 'Run "filemayor explain ~/Downloads" to see a health score, file counts by category, and the biggest space hogs. This is read-only — nothing is moved.',
     },
     {
       '@type': 'HowToStep',
       position: 2,
       name: 'Delete obvious junk',
-      text: 'Run `filemayor clean ~/Downloads --dry-run` to preview junk files (.DS_Store, Thumbs.db, temp files, empty folders). Run without --dry-run to remove them.',
+      text: 'Run "filemayor clean ~/Downloads --dry-run" to preview junk files (.DS_Store, Thumbs.db, temp files, empty folders). Run without --dry-run to remove them.',
     },
     {
       '@type': 'HowToStep',
       position: 3,
       name: 'Remove duplicates',
-      text: 'Run `filemayor duplicates ~/Downloads` to find hash-identical files. Then `filemayor dedupe ~/Downloads` to remove the extras — each deletion is journaled.',
+      text: 'Run "filemayor duplicates ~/Downloads" to find hash-identical files. Then run "filemayor dedupe ~/Downloads" to remove the extras — each deletion is journaled.',
     },
     {
       '@type': 'HowToStep',
       position: 4,
       name: 'Organise remaining files by category',
-      text: 'Run `filemayor organize ~/Downloads` to sort files into subfolders by extension (Documents, Images, Software, etc.). Use --dry-run first to preview.',
+      text: 'Run "filemayor organize ~/Downloads" to sort files into subfolders by extension (Documents, Images, Software, etc.). Use --dry-run first to preview.',
     },
     {
       '@type': 'HowToStep',
       position: 5,
       name: 'Undo anything you regret',
-      text: 'Run `filemayor undo` at any point to reverse the last operation. The move journal persists across sessions.',
+      text: 'Run "filemayor undo" at any point to reverse the last operation. The move journal persists across sessions.',
     },
   ],
 };

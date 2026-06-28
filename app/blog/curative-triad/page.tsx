@@ -26,6 +26,7 @@ const jsonLd = {
   author: { '@type': 'Person', name: 'Lehlohonolo Goodwill Nchefu', url: 'https://filemayor.com' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
   url: 'https://filemayor.com/blog/curative-triad',
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 export default function Post() {

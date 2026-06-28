@@ -27,6 +27,7 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
   url: 'https://filemayor.com/blog/best-file-organizer-mac-2025',
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 export default function Post() {

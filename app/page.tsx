@@ -58,7 +58,7 @@ export default function HomePage() {
               {
                 '@type': 'Offer',
                 name: 'Free',
-                price: '0',
+                price: 0,
                 priceCurrency: 'USD',
                 availability: 'https://schema.org/InStock',
               },
