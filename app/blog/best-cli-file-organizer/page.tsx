@@ -125,7 +125,7 @@ export default function Post() {
           the entire session.
         </P>
         <P>
-          The CLI has 14 commands covering scanning, duplicate detection, deduplication,
+          The CLI has 15 commands covering scanning, duplicate detection, deduplication,
           archiving, watching, and more. Every command supports <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[14px]">--json</code> for
           scripting. It runs on macOS, Windows, and Linux, and exposes an MCP server so
           AI assistants can drive it programmatically.

@@ -240,13 +240,13 @@ const LIMIT_HTML = `<!DOCTYPE html>
           <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.12em;color:#d4af37;font-weight:600;">Day 14</p>
           <h1 style="margin:0 0 20px;font-size:24px;font-weight:600;color:#ffffff;line-height:1.3;letter-spacing:-0.02em;">Unlimited AI planning — with your own key.</h1>
           <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            FileMayor's AI planning uses Gemini under the hood. By default, it runs through our server — but you can connect your own Gemini API key instead.
+            By default, AI planning runs through our free server. But you can connect your own provider key instead — FileMayor supports Anthropic (Claude), Google Gemini, and OpenAI. And if you use FileMayor through Claude Desktop, Claude is already the AI — no key needed at all.
           </p>
           <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            When you do, requests go directly from your machine to Google. No monthly quota, no rate limit, and your file metadata never passes through our servers. The key is stored in your OS keychain.
+            With your own key, requests go directly from your machine to the provider. No monthly quota, no rate limit, and your file metadata never passes through our servers. The key is stored in your OS keychain.
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);">
-            Gemini Flash is free up to 1,500 requests/day on Google's free tier. Most users never exceed it.
+            Gemini Flash, for example, is free up to 1,500 requests/day on Google's free tier — most users never exceed it.
           </p>
           <table cellpadding="0" cellspacing="0">
             <tr><td style="background:linear-gradient(135deg,#b8860b,#d4af37);border-radius:10px;">

@@ -11,8 +11,10 @@ import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
+  title: 'FileMayor — Free AI File Organizer for Mac, Windows & Linux',
   description:
     'FileMayor is a free AI file organizer for Mac, Windows, and Linux. Scan any folder, get an AI-generated plan, apply with one command, undo instantly. Install free via npm.',
+  alternates: { canonical: '/' },
 };
 
 export default function HomePage() {

@@ -35,10 +35,8 @@ export default function TermsPage() {
               </h2>
               <p className="mt-5 text-[15.5px] leading-relaxed">
                 {site.name} is proprietary software owned by {site.author.name} (Chevza).
-                The Free tier is licensed for individual, non-commercial use. The Pro tier
-                is licensed for one user across that user's personal devices. The
-                Enterprise tier is licensed per organization for the seat count specified
-                at purchase.
+                It is free to use — every feature is included at no cost, for both personal
+                and commercial use. There are no paid tiers and nothing to purchase.
               </p>
               <p className="mt-4 text-[15.5px] leading-relaxed">
                 The CLI engine{' '}
@@ -47,10 +45,6 @@ export default function TermsPage() {
                 run it without restriction; you may not redistribute, fork, or relicense
                 it. Source-available components, where present, are individually licensed
                 and noted in their README files.
-              </p>
-              <p className="mt-4 text-[15.5px] leading-relaxed">
-                License keys are personal. Sharing a key with a third party violates this
-                agreement and may result in deactivation.
               </p>
             </div>
 

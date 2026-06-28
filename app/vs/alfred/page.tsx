@@ -56,7 +56,7 @@ const matrix = [
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', al: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', al: '✗' },
   { row: 'App launching / search', fm: '✗ Filesystem command bar only', al: '✓ Core feature' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', al: 'Via workflows / shell scripts' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', al: 'Via workflows / shell scripts' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', al: '✗' },
   { row: 'Best for', fm: 'Organising and curating folders at scale, safely', al: 'Launching, searching, and keystroke automation' },
 ];

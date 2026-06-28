@@ -63,7 +63,7 @@ const matrix = [
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', cmm: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', cmm: '✗ No undo for cleaned files' },
   { row: 'File organisation', fm: '✓ Sort, move, rename, dedupe at scale', cmm: '△ Limited — focuses on system files, not user folders' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', cmm: '✗' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', cmm: '✗' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', cmm: '✗' },
   { row: 'Safety architecture', fm: 'Chevza Doctrine — 6-layer hardened runtime', cmm: 'Standard app sandboxing' },
   { row: 'Telemetry', fm: '✓ None', cmm: 'Usage analytics (opt-out available)' },

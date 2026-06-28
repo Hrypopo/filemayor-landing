@@ -2,7 +2,7 @@ const surfaces = [
   {
     label: 'CLI',
     title: 'In your terminal.',
-    desc: '14 commands. Pure Node.js. Three runtime dependencies. Pipes to jq.',
+    desc: '15 commands. Pure Node.js. Four runtime dependencies. Pipes to jq.',
     code: 'npm install -g filemayor',
   },
   {

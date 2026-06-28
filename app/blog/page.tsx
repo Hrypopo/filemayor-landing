@@ -85,7 +85,7 @@ export const posts = [
   {
     slug: 'three-dependencies',
     kicker: 'Engineering · trust',
-    title: 'Why FileMayor has three dependencies (and you don\'t need more).',
+    title: 'Why FileMayor has four dependencies (and you don\'t need more).',
     dek: 'Most modern tools are dependency forests. FileMayor was built with a different constraint.',
     date: '2026.04.26',
     readTime: '5 min read',

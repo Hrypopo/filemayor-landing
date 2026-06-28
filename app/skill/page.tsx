@@ -143,7 +143,7 @@ rm -rf /tmp/fm-skill`}
               Cowork users: install via plugin marketplace (search FileMayor), or copy the
               skill folder into your local Cowork skills directory using the same pattern.
               Other MCP-compatible clients can paste the SKILL.md contents into a system
-              prompt — a dedicated MCP server is in progress.
+              prompt — or use the dedicated MCP server, <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[12px]">npx -y filemayor-mcp</code>.
             </p>
           </div>
         </section>

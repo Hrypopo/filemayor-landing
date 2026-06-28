@@ -16,6 +16,7 @@ const schema = {
   description: 'A direct comparison of FileMayor vs writing Bash or shell scripts for organising your filesystem.',
   author: { '@type': 'Organization', name: 'FileMayor' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 const rows = [

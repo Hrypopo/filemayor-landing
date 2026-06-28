@@ -154,13 +154,13 @@ export default function Post() {
         <H3>3. Restart Claude Desktop</H3>
         <P>
           After restarting, open a new conversation and look for the hammer icon (🔧). You
-          should see 14 FileMayor tools available. Ask Claude to diagnose a folder:
+          should see 15 FileMayor tools available. Ask Claude to diagnose a folder:
         </P>
         <Pre>{`Diagnose my Downloads folder and tell me what's taking up the most space.`}</Pre>
 
         <H2>The tools Claude gets</H2>
         <P>
-          The server exposes 14 tools. The key ones for filesystem management:
+          The server exposes 15 tools. The key ones for filesystem management:
         </P>
         <Ul>
           <Li>

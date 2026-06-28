@@ -88,7 +88,7 @@ const steps: Step[] = [
     body: (
       <>
         <div className="text-accent">CURATIVE PLAN</div>
-        <div className="text-text-3">Gemini 2.0 Flash · 0.8s · metadata only, no file contents read</div>
+        <div className="text-text-3">AI planner · 0.8s · metadata only, no file contents read</div>
         <Sep />
         <div className="text-text-2">Strategy</div>
         <div className="pl-2">

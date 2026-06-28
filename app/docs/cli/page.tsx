@@ -15,7 +15,7 @@ const breadcrumb = {
 export const metadata: Metadata = {
   title: 'CLI reference',
   description:
-    'All 14 FileMayor CLI commands with syntax, examples, and exit codes.',
+    'All 15 FileMayor CLI commands with syntax, examples, and exit codes.',
 };
 
 interface Command {
@@ -75,6 +75,13 @@ const tools: Command[] = [
     example: 'filemayor organize ~/Downloads --dry-run',
   },
   {
+    name: 'para',
+    signature: 'filemayor para <dir> [--archive-after <n>]',
+    description:
+      'Sort by actionability using the PARA method (Projects, Areas, Resources, Archives). Deterministic — labels every move with its reason, then apply with `filemayor apply`. No AI key needed. PARA is a method by Tiago Forte; FileMayor automates it.',
+    example: 'filemayor para ~/Documents',
+  },
+  {
     name: 'clean',
     signature: 'filemayor clean <dir> [--yes]',
     description:
@@ -113,23 +120,23 @@ const tools: Command[] = [
 const meta: Command[] = [
   {
     name: 'init',
-    signature: 'filemayor init',
+    signature: 'filemayor init [--para]',
     description:
-      'Create a `.filemayor.json` config in the current directory. Defines categories, watch rules, AI provider, and locale.',
-    example: 'filemayor init',
+      'Create a `.filemayor.yml` config in the current directory. Defines categories, watch rules, AI provider, and locale. Use `--para` to scaffold the four PARA folders with a tuned config.',
+    example: 'filemayor init --para',
   },
   {
     name: 'info',
     signature: 'filemayor info',
     description:
-      'System info, version, license status, AI provider connectivity, journal location.',
+      'System info, version, AI provider connectivity, and journal location.',
     example: 'filemayor info',
   },
   {
     name: 'license',
     signature: 'filemayor license [activate|deactivate] [<key>]',
     description:
-      'Activate or deactivate a Pro license. Validates locally with a 30-day offline grace period.',
+      'Everything is free — no license required. This command manages an optional license key, retained for organizations that need a formal license record. Validates locally with a 30-day offline grace period.',
     example: 'filemayor license activate FM-XXXX-XXXX',
   },
 ];
@@ -188,7 +195,7 @@ export default function CliPage() {
           <div className="container-prose">
             <div className="section-label">Documentation · CLI reference</div>
             <h1 className="h-display text-[clamp(40px,6vw,80px)]">
-              Fourteen verbs.
+              Fifteen verbs.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-2 md:text-xl">
               The CLI is the canonical surface. Every command takes <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[14px]">--json</code> for shell integration. Requires Node.js ≥ 20.
