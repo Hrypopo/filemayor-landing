@@ -11,6 +11,14 @@ export const metadata: Metadata = {
 
 export const posts = [
   {
+    slug: 'automate-para-method',
+    kicker: 'Guide · method',
+    title: 'How to automate the PARA method.',
+    dek: 'Projects, Areas, Resources, Archives — the method is simple, the upkeep is what defeats people. Here is how to hand the upkeep to a tool.',
+    date: '2026.06.28',
+    readTime: '7 min read',
+  },
+  {
     slug: 'best-free-file-organizer-2026',
     kicker: 'Guide · comparison',
     title: 'The best free file organizer in 2026 (Mac, Windows & Linux).',
