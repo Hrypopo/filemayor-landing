@@ -24,9 +24,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'The best CLI file organizers for developers in 2025',
+  title: 'The best CLI file organizers in 2025',
   description:
     'Honest comparison of command-line file organizers: fdupes, rmlint, organize-tool, and FileMayor. When to use each and which is safest for bulk operations.',
+  alternates: { canonical: '/blog/best-cli-file-organizer' },
 };
 
 export default function Post() {

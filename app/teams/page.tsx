@@ -5,9 +5,10 @@ import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'FileMayor for Teams — Filesystem operations with an audit trail',
+  title: 'FileMayor for Teams',
   description:
-    'A shared, reversible filesystem workflow for engineering and ops teams. Local-only execution, audit-ready operation logs, opt-out telemetry. Cross-platform CLI, MCP, and desktop.',
+    'A shared, reversible filesystem workflow for engineering and ops teams. Local-only execution, audit-ready operation logs. Cross-platform CLI, MCP, and desktop.',
+  alternates: { canonical: '/teams' },
 };
 
 const CONTACT = `mailto:${site.author.email}?subject=FileMayor%20for%20Teams`;

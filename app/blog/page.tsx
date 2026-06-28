@@ -4,9 +4,10 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Blog — AI File Organization Guides, CLI Tips & MCP Tutorials',
+  title: 'Blog — File Organization Guides & MCP Tips',
   description:
-    'Practical guides on organizing files with AI, cleaning up Downloads, deduplicating folders, using FileMayor with Claude Desktop and Cursor, and building with the MCP server.',
+    'Practical guides on organizing files with AI, cleaning up Downloads, deduplicating folders, and using FileMayor with Claude and the MCP server.',
+  alternates: { canonical: '/blog' },
 };
 
 export const posts = [

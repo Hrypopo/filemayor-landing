@@ -12,9 +12,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'How to organize your Downloads folder (and keep it that way)',
+  title: 'How to organize your Downloads folder',
   description:
     'A practical, repeatable system for cleaning up a messy Downloads folder — by hand or automatically with FileMayor — and keeping it organised for good.',
+  alternates: { canonical: '/blog/how-to-organize-downloads-folder' },
 };
 
 const articleSchema = {

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: 'Inside the Chevza Doctrine',
   description:
     'How FileMayor allows intelligent planning without risking uncontrolled execution.',
+  alternates: { canonical: '/blog/chevza-doctrine' },
 };
 
 const jsonLd = {

@@ -71,9 +71,10 @@ const faqSchema = {
 };
 
 export const metadata: Metadata = {
-  title: 'The best free file organizer in 2026 (Mac, Windows & Linux)',
+  title: 'The best free file organizer in 2026',
   description:
     'A no-nonsense comparison of the best free file organizers in 2026 — AI-powered, rules-based, and manual — for Mac, Windows, and Linux users.',
+  alternates: { canonical: '/blog/best-free-file-organizer-2026' },
 };
 
 export default function Post() {

@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs CleanMyMac X — 2025 Comparison',
   description:
-    'CleanMyMac X cleans system junk. FileMayor organises your filesystem with AI planning and full rollback. Honest comparison — features, pricing, when to use each.',
+    'CleanMyMac X cleans system junk. FileMayor organises your filesystem with AI planning and full rollback. Compare features, pricing, and when to use each.',
+  alternates: { canonical: '/vs/cleanmymac' },
 };
 
 const faqSchema = {

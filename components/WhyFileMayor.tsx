@@ -5,7 +5,7 @@ const pillars = [
   },
   {
     h: 'Supply-chain secure.',
-    p: 'Three runtime dependencies. No hidden npm vulnerabilities. No bloated node_modules in your trust boundary.',
+    p: 'Four runtime dependencies. No hidden npm vulnerabilities. No bloated node_modules in your trust boundary.',
   },
   {
     h: 'Rollback safety.',

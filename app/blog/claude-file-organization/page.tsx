@@ -29,9 +29,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'How to organize files with Claude: a practical guide',
+  title: 'How to organize files with Claude',
   description:
-    'Claude is great at reasoning about files — but it needs a safe execution layer to actually move them. Here is how to connect Claude to your filesystem without the risk.',
+    'Claude is great at reasoning about files — but it needs a safe execution layer to move them. Here is how to connect Claude to your filesystem safely.',
+  alternates: { canonical: '/blog/claude-file-organization' },
 };
 
 export default function Post() {

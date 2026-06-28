@@ -8,6 +8,7 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Changelog',
   description: `${site.name} release notes.`,
+  alternates: { canonical: '/changelog' },
 };
 
 const fallbackEntries = [

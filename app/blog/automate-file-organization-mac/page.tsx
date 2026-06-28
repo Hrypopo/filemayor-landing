@@ -24,9 +24,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'How to automate file organization on Mac (without breaking anything)',
+  title: 'How to automate file organization on Mac',
   description:
     'Three approaches to automatic file organization on macOS — folder actions, Hazel rules, and AI-planned CLI tools — with honest tradeoffs for each.',
+  alternates: { canonical: '/blog/automate-file-organization-mac' },
 };
 
 const howToSchema = {

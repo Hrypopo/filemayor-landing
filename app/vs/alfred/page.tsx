@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs Alfred — 2025 Comparison',
   description:
-    'Alfred is a Mac launcher with workflows. FileMayor is a cross-platform filesystem organiser with AI planning and full rollback. Honest comparison — features, pricing, when to use each.',
+    'Alfred is a Mac launcher with workflows. FileMayor is a cross-platform file organizer with AI planning and full rollback. Compare features and pricing.',
+  alternates: { canonical: '/vs/alfred' },
 };
 
 const faqSchema = {

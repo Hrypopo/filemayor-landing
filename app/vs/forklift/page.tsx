@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs ForkLift — 2025 Comparison',
   description:
-    'ForkLift is a dual-pane Mac file manager and remote client. FileMayor is a cross-platform AI-planned filesystem organiser with rollback. Honest comparison — features, pricing, when to use each.',
+    'ForkLift is a dual-pane Mac file manager and remote client. FileMayor is a cross-platform AI-planned file organizer with rollback. Compare features and pricing.',
+  alternates: { canonical: '/vs/forklift' },
 };
 
 const faqSchema = {
@@ -57,7 +58,7 @@ const matrix = [
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', fl: '✗' },
   { row: 'Remote connections', fm: '✗ Local / mounted only', fl: '✓ SFTP, WebDAV, S3, cloud mounts' },
   { row: 'Duplicate detection', fm: '✓ Content-hash deduplication', fl: '△ Has a dedicated dupe finder' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', fl: '✗' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', fl: '✗' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', fl: '✗' },
   { row: 'Best for', fm: 'Organising and curating folders at scale, safely', fl: 'Manual file management and remote transfers' },
 ];

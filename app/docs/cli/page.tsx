@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: 'CLI reference',
   description:
     'All 15 FileMayor CLI commands with syntax, examples, and exit codes.',
+  alternates: { canonical: '/docs/cli' },
 };
 
 interface Command {

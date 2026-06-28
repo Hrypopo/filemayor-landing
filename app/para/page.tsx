@@ -7,7 +7,7 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'PARA Method, Automated — Sort Your Files by Actionability',
   description:
-    'Automate the PARA method (Projects, Areas, Resources, Archives) on your filesystem. FileMayor scaffolds the four folders and sorts files by actionability with one reversible command. Free on Mac, Windows, Linux.',
+    'Automate the PARA method on your filesystem. FileMayor scaffolds Projects, Areas, Resources, Archives and sorts files by actionability — one reversible command.',
   alternates: { canonical: `${site.url}/para` },
 };
 

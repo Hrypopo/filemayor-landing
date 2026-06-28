@@ -7,7 +7,8 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Use FileMayor through your LLM',
   description:
-    'Install the FileMayor skill in Claude, Cowork, or any LLM agent. Lets your assistant organize files for you, safely, with the full Curative Triad workflow intact.',
+    'Install the FileMayor skill in Claude, Cowork, or any LLM agent. Lets your assistant organize files safely, with the full Curative Triad workflow intact.',
+  alternates: { canonical: '/skill' },
 };
 
 const triggers = [

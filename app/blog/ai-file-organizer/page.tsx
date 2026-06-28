@@ -24,9 +24,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'AI file organizers in 2025: which ones actually work?',
+  title: 'AI file organizers in 2025: do they work?',
   description:
     'An honest look at AI-powered file organizers — what they promise, where they fall short, and what to look for before trusting one with your filesystem.',
+  alternates: { canonical: '/blog/ai-file-organizer' },
 };
 
 export default function Post() {

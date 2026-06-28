@@ -15,7 +15,8 @@ const breadcrumb = {
 export const metadata: Metadata = {
   title: 'The best file organizer for Mac in 2025',
   description:
-    'An honest, opinionated guide to the best Mac file organizers in 2025 — Hazel, CleanMyMac, ForkLift, Marta, GrandPerspective, and FileMayor — and how to pick the right one.',
+    'An honest guide to the best Mac file organizers in 2025 — Hazel, CleanMyMac, ForkLift, Marta, GrandPerspective, and FileMayor — and how to pick.',
+  alternates: { canonical: '/blog/best-file-organizer-mac-2025' },
 };
 
 const articleSchema = {

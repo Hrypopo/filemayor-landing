@@ -4,9 +4,10 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'FileMayor vs macOS Finder — AI file organisation vs drag and drop',
+  title: 'FileMayor vs macOS Finder for file organisation',
   description:
     'Finder is fine for individual files. FileMayor handles the folders you have been ignoring for years — with AI planning, bulk operations, and a full undo.',
+  alternates: { canonical: '/vs/finder' },
 };
 
 const schema = {

@@ -29,9 +29,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'MCP server for filesystem access: safe file operations for Claude',
+  title: 'MCP server for filesystem access',
   description:
-    'How to wire a filesystem MCP server into Claude Desktop so your AI agent can organize, clean, and manage files safely — with a rollback journal and no raw shell access.',
+    'How to wire a filesystem MCP server into Claude Desktop so your AI can organize, clean, and manage files safely — with a rollback journal, not raw shell.',
+  alternates: { canonical: '/blog/mcp-server-filesystem' },
 };
 
 export default function Post() {
