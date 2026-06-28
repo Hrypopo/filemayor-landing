@@ -7,7 +7,8 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Use FileMayor through your LLM',
   description:
-    'Install the FileMayor skill in Claude, Cowork, or any LLM agent. Lets your assistant organize files for you, safely, with the full Curative Triad workflow intact.',
+    'Install the FileMayor skill in Claude, Cowork, or any LLM agent. Lets your assistant organize files safely, with the full Curative Triad workflow intact.',
+  alternates: { canonical: '/skill' },
 };
 
 const triggers = [
@@ -143,7 +144,7 @@ rm -rf /tmp/fm-skill`}
               Cowork users: install via plugin marketplace (search FileMayor), or copy the
               skill folder into your local Cowork skills directory using the same pattern.
               Other MCP-compatible clients can paste the SKILL.md contents into a system
-              prompt — a dedicated MCP server is in progress.
+              prompt — or use the dedicated MCP server, <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[12px]">npx -y filemayor-mcp</code>.
             </p>
           </div>
         </section>

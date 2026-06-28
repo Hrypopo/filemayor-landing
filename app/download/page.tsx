@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'Download',
   description:
     'Download FileMayor free for macOS, Windows, and Linux — or install via npm. AI-powered file organization with full rollback. No subscription required.',
+  alternates: { canonical: '/download' },
 };
 
 

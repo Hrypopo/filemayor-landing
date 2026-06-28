@@ -4,9 +4,10 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'FileMayor MCP Server — Let your AI organise your filesystem, safely',
+  title: 'FileMayor MCP Server',
   description:
-    'The FileMayor MCP server lets Claude, Cursor, Zed, and any MCP-aware client diagnose folders, plan moves, and apply them with full rollback. Local-only execution, no data leaves the machine.',
+    'The FileMayor MCP server lets Claude, Cursor, Zed, and any MCP client diagnose folders, plan moves, and apply them with full rollback. Local-only execution.',
+  alternates: { canonical: '/mcp' },
 };
 
 const SNIPPET = `{

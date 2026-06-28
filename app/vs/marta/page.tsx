@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs Marta — 2025 Comparison',
   description:
-    'Marta is a fast keyboard-driven dual-pane Mac file manager. FileMayor is a cross-platform AI-planned filesystem organiser with rollback. Honest comparison — features, pricing, when to use each.',
+    'Marta is a keyboard-driven dual-pane Mac file manager. FileMayor is a cross-platform AI-planned file organizer with rollback. Compare features and pricing.',
+  alternates: { canonical: '/vs/marta' },
 };
 
 const faqSchema = {
@@ -57,7 +58,7 @@ const matrix = [
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', ma: '✗' },
   { row: 'Interface', fm: 'Command bar + plan review', ma: '✓ Fast dual-pane, fully keyboard-driven' },
   { row: 'Duplicate detection', fm: '✓ Content-hash deduplication', ma: '✗' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', ma: 'Scriptable via config / VFS' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', ma: 'Scriptable via config / VFS' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', ma: '✗' },
   { row: 'Best for', fm: 'Organising and curating folders at scale, safely', ma: 'Fast manual navigation and file manipulation' },
 ];

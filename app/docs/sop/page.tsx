@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: 'SOP format',
   description:
     'Write filing rules in plain English. The SOP parser turns them into deterministic actions.',
+  alternates: { canonical: '/docs/sop' },
 };
 
 const example = `# Personal Filing SOP

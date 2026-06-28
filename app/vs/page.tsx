@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'FileMayor vs — Comparisons',
   description:
     'Honest comparisons of FileMayor against Hazel, CleanMyMac, Dropzone, GrandPerspective, and more.',
+  alternates: { canonical: '/vs' },
 };
 
 const comparisons = [

@@ -100,9 +100,10 @@ const faqSchema = {
 };
 
 export const metadata: Metadata = {
-  title: 'How to automate the PARA method (Projects, Areas, Resources, Archives)',
+  title: 'How to automate the PARA method',
   description:
-    'PARA organizes by actionability, not file type — but the upkeep is the hard part. Automate the PARA method on your files with one reversible command using FileMayor.',
+    'PARA organizes by actionability, not file type — but the upkeep is the hard part. Automate it on your files with one reversible FileMayor command.',
+  alternates: { canonical: '/blog/automate-para-method' },
 };
 
 export default function Post() {

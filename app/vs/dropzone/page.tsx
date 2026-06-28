@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs Dropzone 4 — 2025 Comparison',
   description:
-    'Dropzone handles drag-and-drop to destinations. FileMayor handles bulk AI-planned operations with a full rollback journal. Honest comparison — features, pricing, when to use each.',
+    'Dropzone routes drag-and-drop files. FileMayor runs bulk AI-planned operations with a full rollback journal. Compare features, pricing, and when to use each.',
+  alternates: { canonical: '/vs/dropzone' },
 };
 
 const faqSchema = {
@@ -63,7 +64,7 @@ const matrix = [
   { row: 'Bulk operations', fm: '✓ Thousands of files, AI-curated', dz: '✗ One file / group at a time via drag' },
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', dz: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', dz: '✗' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', dz: '✗' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', dz: '✗' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', dz: '✗' },
   { row: 'Custom automation', fm: 'Watch mode, scheduled scans, SOP scripts, cron', dz: 'Custom actions (Python / JS) per droplet' },
   { row: 'Best for', fm: 'Organising and curating folders at scale, safely', dz: 'Quick one-shot file routing to preset destinations' },

@@ -7,6 +7,7 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Privacy',
   description: `${site.name}'s privacy policy. Files never leave your machine.`,
+  alternates: { canonical: '/privacy' },
 };
 
 export default function PrivacyPage() {
@@ -68,9 +69,9 @@ export default function PrivacyPage() {
                 <div>
                   <dt className="font-display text-[19px] font-normal text-text">Email address</dt>
                   <dd className="mt-1.5">
-                    Collected only when you subscribe to the mailing list or activate a
-                    license key. Used for license delivery, release notifications, and
-                    customer support. Never sold, never used for marketing without explicit
+                    Collected only when you subscribe to the mailing list (or, optionally,
+                    when you register a license key). Used for release notifications and
+                    support. Never sold, never used for marketing without explicit
                     opt-in.
                   </dd>
                 </div>
@@ -128,7 +129,8 @@ export default function PrivacyPage() {
                 <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[14px]">filemayor explain</code>,{' '}
                 <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[14px]">filemayor cure</code>, or
                 use the SOP parser, file metadata is sent to the configured AI provider
-                (Gemini 2.0 Flash by default). What this includes:
+                (Claude, Gemini, or OpenAI — whichever key you set; when Claude is your MCP
+                client, no third-party provider is involved). What this includes:
               </p>
               <ul className="mt-4 space-y-2 text-[15.5px] leading-relaxed">
                 <li className="flex gap-3">

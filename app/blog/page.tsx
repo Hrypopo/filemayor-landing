@@ -4,9 +4,10 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Blog — AI File Organization Guides, CLI Tips & MCP Tutorials',
+  title: 'Blog — File Organization Guides & MCP Tips',
   description:
-    'Practical guides on organizing files with AI, cleaning up Downloads, deduplicating folders, using FileMayor with Claude Desktop and Cursor, and building with the MCP server.',
+    'Practical guides on organizing files with AI, cleaning up Downloads, deduplicating folders, and using FileMayor with Claude and the MCP server.',
+  alternates: { canonical: '/blog' },
 };
 
 export const posts = [
@@ -85,7 +86,7 @@ export const posts = [
   {
     slug: 'three-dependencies',
     kicker: 'Engineering · trust',
-    title: 'Why FileMayor has three dependencies (and you don\'t need more).',
+    title: 'Why FileMayor has four dependencies (and you don\'t need more).',
     dek: 'Most modern tools are dependency forests. FileMayor was built with a different constraint.',
     date: '2026.04.26',
     readTime: '5 min read',

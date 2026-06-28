@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs Hazel — 2025 Comparison',
   description:
-    'Hazel is a respected Mac rules engine. FileMayor is a cross-platform AI-planned filesystem tool with full rollback. Honest comparison — features, pricing, when to use each.',
+    'Hazel is a Mac rules engine. FileMayor is a cross-platform AI-planned file organizer with full rollback. Compare features, pricing, and when to use each.',
+  alternates: { canonical: '/vs/hazel' },
 };
 
 const faqSchema = {
@@ -64,7 +65,7 @@ const matrix = [
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', hz: '✗ No native undo for batched moves' },
   { row: 'Watch mode', fm: '✓ Yes — free', hz: '✓ Yes — core feature' },
   { row: 'AppleScript integration', fm: '✗', hz: '✓ Yes — full macOS automation' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', hz: 'Shell scripts via rules only' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', hz: 'Shell scripts via rules only' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', hz: '✗' },
   { row: 'Telemetry', fm: '✓ None', hz: '✓ None' },
   { row: 'Best for', fm: 'AI-planned ops on any OS, with safety + rollback', hz: 'Mac power users who want precise explicit rules' },

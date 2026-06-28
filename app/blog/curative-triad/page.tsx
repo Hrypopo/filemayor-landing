@@ -12,9 +12,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'The Curative Triad: separating planning from execution',
+  title: 'The Curative Triad: plan vs. execution',
   description:
     'Most file tools act immediately. FileMayor introduces a boundary between understanding, planning, and action.',
+  alternates: { canonical: '/blog/curative-triad' },
 };
 
 const jsonLd = {

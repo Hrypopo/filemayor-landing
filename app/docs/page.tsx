@@ -15,13 +15,14 @@ const breadcrumb = {
 export const metadata: Metadata = {
   title: 'Documentation',
   description: 'FileMayor CLI reference, SOP format, security architecture.',
+  alternates: { canonical: '/docs' },
 };
 
 const sections = [
   {
     href: '/docs/cli',
     label: 'CLI reference',
-    desc: 'All 14 commands. Flags, examples, exit codes.',
+    desc: 'All 15 commands. Flags, examples, exit codes.',
   },
   {
     href: '/docs/sop',

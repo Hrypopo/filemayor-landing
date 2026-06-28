@@ -4,9 +4,10 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'FileMayor vs Shell Scripts / Bash — Which is better for organising files?',
+  title: 'FileMayor vs Bash for file organisation',
   description:
-    'Shell scripts are powerful but brittle, require upfront knowledge, and have no undo. FileMayor gives you the same control — in plain English, with a full journal and one-command rollback.',
+    'Shell scripts are powerful but brittle and have no undo. FileMayor gives you the same control in plain English, with a full journal and one-command rollback.',
+  alternates: { canonical: '/vs/bash' },
 };
 
 const schema = {
@@ -16,6 +17,7 @@ const schema = {
   description: 'A direct comparison of FileMayor vs writing Bash or shell scripts for organising your filesystem.',
   author: { '@type': 'Organization', name: 'FileMayor' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 const rows = [

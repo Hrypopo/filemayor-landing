@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs Alfred — 2025 Comparison',
   description:
-    'Alfred is a Mac launcher with workflows. FileMayor is a cross-platform filesystem organiser with AI planning and full rollback. Honest comparison — features, pricing, when to use each.',
+    'Alfred is a Mac launcher with workflows. FileMayor is a cross-platform file organizer with AI planning and full rollback. Compare features and pricing.',
+  alternates: { canonical: '/vs/alfred' },
 };
 
 const faqSchema = {
@@ -56,7 +57,7 @@ const matrix = [
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', al: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', al: '✗' },
   { row: 'App launching / search', fm: '✗ Filesystem command bar only', al: '✓ Core feature' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', al: 'Via workflows / shell scripts' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', al: 'Via workflows / shell scripts' },
   { row: 'MCP / AI tool integration', fm: '✓ Claude Desktop, Cursor, Zed', al: '✗' },
   { row: 'Best for', fm: 'Organising and curating folders at scale, safely', al: 'Launching, searching, and keystroke automation' },
 ];

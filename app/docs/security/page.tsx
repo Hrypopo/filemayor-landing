@@ -15,9 +15,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'Security Policy · FileMayor',
+  title: 'Security Policy',
   description:
     'FileMayor Security Policy — scope, data handling, the six-layer Chevza Doctrine, responsible disclosure, and contact information.',
+  alternates: { canonical: '/docs/security' },
 };
 
 const EFFECTIVE_DATE = 'May 2025';

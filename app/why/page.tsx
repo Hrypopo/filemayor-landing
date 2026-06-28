@@ -5,9 +5,10 @@ import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Why FileMayor · The case for a different kind of file tool',
+  title: 'Why FileMayor',
   description:
     'The filesystem is the original productivity layer. Every other tool builds on top of it. Why FileMayor exists, what it refuses to do, and why that matters.',
+  alternates: { canonical: '/why' },
 };
 
 const pillars = [

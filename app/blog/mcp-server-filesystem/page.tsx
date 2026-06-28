@@ -29,9 +29,10 @@ const breadcrumb = {
 };
 
 export const metadata: Metadata = {
-  title: 'MCP server for filesystem access: safe file operations for Claude',
+  title: 'MCP server for filesystem access',
   description:
-    'How to wire a filesystem MCP server into Claude Desktop so your AI agent can organize, clean, and manage files safely — with a rollback journal and no raw shell access.',
+    'How to wire a filesystem MCP server into Claude Desktop so your AI can organize, clean, and manage files safely — with a rollback journal, not raw shell.',
+  alternates: { canonical: '/blog/mcp-server-filesystem' },
 };
 
 export default function Post() {
@@ -154,13 +155,13 @@ export default function Post() {
         <H3>3. Restart Claude Desktop</H3>
         <P>
           After restarting, open a new conversation and look for the hammer icon (🔧). You
-          should see 14 FileMayor tools available. Ask Claude to diagnose a folder:
+          should see 15 FileMayor tools available. Ask Claude to diagnose a folder:
         </P>
         <Pre>{`Diagnose my Downloads folder and tell me what's taking up the most space.`}</Pre>
 
         <H2>The tools Claude gets</H2>
         <P>
-          The server exposes 14 tools. The key ones for filesystem management:
+          The server exposes 15 tools. The key ones for filesystem management:
         </P>
         <Ul>
           <Li>

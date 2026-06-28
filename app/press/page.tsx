@@ -5,9 +5,10 @@ import { Footer } from '@/components/Footer';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Press Kit · FileMayor',
+  title: 'Press Kit',
   description:
     'FileMayor press kit — product description, brand assets, colors, founder bio, and media contact for journalists and directory listings.',
+  alternates: { canonical: '/press' },
 };
 
 const brandColors = [

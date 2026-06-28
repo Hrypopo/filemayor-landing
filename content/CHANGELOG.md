@@ -2,6 +2,22 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.0.7] — 2026-06-28
+
+### 🗂️ PARA method — sort by actionability
+- **New `filemayor para <dir>` command** — sorts a folder into Projects / Areas / Resources / Archives (the PARA framework by Tiago Forte) by *actionability* rather than file type. Deterministic and reversible; every move is labelled with its reason.
+- **`filemayor init --para`** scaffolds the four folders with plain-English teaching READMEs.
+- **`filemayor_para` MCP tool** exposes the deterministic PARA plan (no AI key needed); Claude can also do semantic PARA and apply.
+- _PARA is a method by Tiago Forte. FileMayor automates it and is not affiliated with or endorsed by him._
+
+### 🤖 Real multi-provider AI planning
+- `filemayor_plan` now dispatches to **Anthropic (Claude), Gemini, or OpenAI** by whichever key is set — no longer Gemini-only. Surface-consistency tests guard against version/claim/provider drift.
+
+## [4.0.6] — 2026-06-21
+
+### 🔧 Consistency
+- Unified CLI and MCP package versions; `--audit` now derives version and source line count at runtime so trust reports can't drift out of date.
+
 ## [4.0.5] — 2026-06-09
 
 ### 🎉 Everything is free

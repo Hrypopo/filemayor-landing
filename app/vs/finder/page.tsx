@@ -4,9 +4,10 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'FileMayor vs macOS Finder — AI file organisation vs drag and drop',
+  title: 'FileMayor vs macOS Finder for file organisation',
   description:
     'Finder is fine for individual files. FileMayor handles the folders you have been ignoring for years — with AI planning, bulk operations, and a full undo.',
+  alternates: { canonical: '/vs/finder' },
 };
 
 const schema = {
@@ -16,6 +17,7 @@ const schema = {
   description: 'A direct comparison of FileMayor vs macOS Finder for organising large, messy folder structures.',
   author: { '@type': 'Organization', name: 'FileMayor' },
   publisher: { '@type': 'Organization', name: 'FileMayor', url: 'https://filemayor.com' },
+  image: { '@type': 'ImageObject', url: 'https://filemayor.com/opengraph-image', width: 1200, height: 630 },
 };
 
 const rows = [

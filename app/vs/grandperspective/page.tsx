@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'FileMayor vs GrandPerspective — 2025 Comparison',
   description:
-    'GrandPerspective shows you where your disk space went. FileMayor shows you — then fixes it, with AI planning and full rollback. Honest comparison — features, pricing, when to use each.',
+    'GrandPerspective shows where your disk space went. FileMayor shows you — then fixes it, with AI planning and full rollback. Compare features and pricing.',
+  alternates: { canonical: '/vs/grandperspective' },
 };
 
 const faqSchema = {
@@ -64,7 +65,7 @@ const matrix = [
   { row: 'AI planning', fm: '✓ Curative Triad — explain → cure → apply', gp: '✗' },
   { row: 'Rollback', fm: '✓ Full session journal · undo --all', gp: 'N/A — no actions taken' },
   { row: 'Duplicate detection', fm: '✓ Content-hash deduplication', gp: '✗' },
-  { row: 'CLI access', fm: '✓ 14 commands, --json everywhere', gp: '✗' },
+  { row: 'CLI access', fm: '✓ 15 commands, --json everywhere', gp: '✗' },
   { row: 'Disk visualisation', fm: 'Text diagnosis (size, age, duplicates)', gp: '✓ Interactive treemap' },
   { row: 'Watch mode', fm: '✓ Yes — free, real-time folder monitoring', gp: '✗' },
   { row: 'Best for', fm: 'Finding the problem and fixing it, safely', gp: 'Understanding where disk space is consumed' },

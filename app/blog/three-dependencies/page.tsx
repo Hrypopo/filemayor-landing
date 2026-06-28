@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   title: 'Why FileMayor ships four runtime dependencies',
   description:
     'Most modern tools are dependency forests. FileMayor was built with a different constraint.',
+  alternates: { canonical: '/blog/three-dependencies' },
 };
 
 export default function Post() {
