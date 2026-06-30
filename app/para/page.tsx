@@ -43,7 +43,7 @@ const faqSchema = {
       name: 'What is the PARA method?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PARA is an organizing framework by Tiago Forte that sorts everything by actionability into four buckets: Projects (active efforts with a deadline), Areas (ongoing responsibilities), Resources (reference material), and Archives (inactive items). FileMayor automates it for the files on your computer.',
+        text: 'PARA is an organizing framework that sorts everything by actionability into four buckets: Projects (active efforts with a deadline), Areas (ongoing responsibilities), Resources (reference material), and Archives (inactive items). FileMayor automates it for the files on your computer.',
       },
     },
     {
@@ -60,14 +60,6 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'No. The deterministic PARA sorter runs entirely on your machine and makes no network calls. Optional AI refinement (via Claude through the MCP server) shares only file metadata — names, sizes, paths — never file contents.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Is FileMayor affiliated with Tiago Forte or Building a Second Brain?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'No. PARA is a method created by Tiago Forte. FileMayor is an independent tool that automates it for files on disk and is not affiliated with, sponsored by, or endorsed by Tiago Forte or Forte Labs.',
       },
     },
   ],
