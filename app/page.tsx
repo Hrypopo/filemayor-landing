@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
+import { HeroProof } from '@/components/HeroProof';
 import { WhatsNew } from '@/components/WhatsNew';
 import { MissionControl } from '@/components/MissionControl';
 import { MCPSection } from '@/components/MCPSection';
@@ -23,6 +24,7 @@ export default function HomePage() {
       <Nav />
       <main id="main">
         <Hero />
+        <HeroProof />
         <WhatsNew />
         <MissionControl />
         <MCPSection />

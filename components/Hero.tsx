@@ -14,7 +14,7 @@ export function Hero() {
               <span className="relative inline-block size-1.5 rounded-full bg-accent">
                 <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
               </span>
-              v{site.version} · 100% free · reversible
+              AI file organizer · Mac · Windows · Linux
             </span>
 
             <h1 className="h-display text-[clamp(52px,7.5vw,104px)]">
