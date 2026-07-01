@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
-import { Newsreader, Geist, Geist_Mono } from 'next/font/google';
+import { Fraunces, Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { site } from '@/lib/site';
@@ -45,10 +45,13 @@ const webSiteSchema = {
   author: { '@type': 'Organization', name: site.name },
 };
 
-const newsreader = Newsreader({
+// Fraunces — a variable editorial serif with optical sizing (opsz), so the
+// big hero headline gets high-contrast display cuts while smaller headings
+// stay readable. Gives the site a crafted, bespoke feel.
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
+  axes: ['opsz'],
   variable: '--font-display',
   display: 'swap',
 });
@@ -150,7 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <head>
