@@ -1,3 +1,5 @@
+import { Reveal } from './Reveal';
+
 export const faqItems = [
   {
     q: 'Is it really free?',
@@ -28,7 +30,7 @@ export function FAQ() {
       className="section-divider section-pad-sm"
       aria-labelledby="answers-heading"
     >
-      <div className="container-prose max-w-prose">
+      <Reveal className="container-prose max-w-prose">
         <div className="section-label">Answers</div>
         <h2
           id="answers-heading"
@@ -57,7 +59,7 @@ export function FAQ() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </section>
   );
 }
