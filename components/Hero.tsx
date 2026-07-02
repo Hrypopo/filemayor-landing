@@ -1,67 +1,50 @@
 import Link from 'next/link';
 import { site } from '@/lib/site';
-import { LiveTerminal } from './LiveTerminal';
-import { CommandBar } from './CommandBar';
+import { HeroDemo } from './HeroDemo';
 import { InstallButton } from './InstallButton';
-
-const surfaces = ['CLI', 'Desktop', 'PWA'];
 
 export function Hero() {
   return (
     <section className="grid-bg relative overflow-hidden pb-24 pt-28 md:pb-32 md:pt-36">
       <div className="container-prose relative z-[1]">
-        <span className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
-          <span className="relative inline-block size-1.5 rounded-full bg-accent">
-            <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
-          </span>
-          v{site.version} · 100% free · fully reversible
-        </span>
-
-        <p className="mb-5 max-w-2xl font-display text-[clamp(20px,2vw,26px)] italic leading-snug text-text-2">
-          {site.hook}
-        </p>
-
-        <h1 className="h-display max-w-[16ch] text-[clamp(56px,9vw,128px)]">
-          Your folders,{' '}
-          <em className="text-accent-gradient italic">on command.</em>
-        </h1>
-
-        <p className="mt-8 max-w-xl text-lg leading-relaxed text-text-2 md:text-xl">
-          {site.description}
-        </p>
-
-        <div className="mt-6 font-mono text-[14px] tracking-[0.02em] text-text-3 md:text-[15px]">
-          <span className="text-text-2">scan</span>{' '}
-          <span aria-hidden>→</span> <span className="text-text-2">explain</span>{' '}
-          <span aria-hidden>→</span> <span className="text-text-2">cure</span>{' '}
-          <span aria-hidden>→</span> <span className="text-text-2">apply</span>{' '}
-          <span aria-hidden>→</span> <span className="text-text-2">undo</span>
-        </div>
-
-        <div className="mt-12 flex flex-wrap items-center gap-3">
-          <Link href="/download" className="btn btn-primary">
-            Download {site.name}
-            <span aria-hidden>→</span>
-          </Link>
-          <InstallButton />
-        </div>
-
-        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
-          <span>Available on</span>
-          {surfaces.map((s, i) => (
-            <span key={s} className="flex items-center gap-3">
-              <span className="text-text-2">{s}</span>
-              {i < surfaces.length - 1 && <span aria-hidden>·</span>}
+        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+          {/* Left — copy, trimmed to the essentials */}
+          <div>
+            <span className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.06] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
+              <span className="relative inline-block size-1.5 rounded-full bg-accent">
+                <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
+              </span>
+              AI file organizer · Mac · Windows · Linux
             </span>
-          ))}
-          <span aria-hidden>·</span>
-          <span className="text-text-2">Mac · Windows · Linux</span>
-          <span aria-hidden>·</span>
-          <span className="text-accent">Every feature free</span>
-        </div>
 
-        <CommandBar className="mt-14 max-w-[760px]" />
-        <LiveTerminal className="mt-6 max-w-[760px]" />
+            <h1 className="h-display text-[clamp(52px,7.5vw,104px)]">
+              Your folders,{' '}
+              <em className="text-accent-gradient italic">on command.</em>
+            </h1>
+
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-2 md:text-xl">
+              The AI file organiser that shows you the plan before it moves a
+              thing — then undoes the whole session with one command.
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link href="/download" className="btn btn-primary">
+                Download {site.name}
+                <span aria-hidden>→</span>
+              </Link>
+              <InstallButton />
+            </div>
+
+            <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
+              Free forever · Mac · Windows · Linux
+              <span className="mx-2 text-border-strong" aria-hidden>·</span>
+              CLI · Desktop · <span className="text-text-2">MCP for Claude</span>
+            </p>
+          </div>
+
+          {/* Right — self-playing product demo (the attention engager) */}
+          <HeroDemo className="w-full" />
+        </div>
       </div>
     </section>
   );

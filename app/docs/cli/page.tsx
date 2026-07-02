@@ -79,7 +79,7 @@ const tools: Command[] = [
     name: 'para',
     signature: 'filemayor para <dir> [--archive-after <n>]',
     description:
-      'Sort by actionability using the PARA method (Projects, Areas, Resources, Archives). Deterministic — labels every move with its reason, then apply with `filemayor apply`. No AI key needed. PARA is a method by Tiago Forte; FileMayor automates it.',
+      'Sort by actionability using the PARA method (Projects, Areas, Resources, Archives). Deterministic — labels every move with its reason, then apply with `filemayor apply`. No AI key needed.',
     example: 'filemayor para ~/Documents',
   },
   {
