@@ -46,10 +46,10 @@ const triad: Command[] = [
   },
   {
     name: 'cure',
-    signature: 'filemayor cure <dir> [--prompt "..."]',
+    signature: 'filemayor cure <dir> [--prompt "..."] [--para]',
     description:
-      'Generate a curative plan. Proposes specific moves with rationale. Writes nothing — outputs the plan only. Apply it with `filemayor apply` or discard.',
-    example: 'filemayor cure ~/Downloads --prompt "organize by type"',
+      'Generate a curative plan. Proposes specific moves with rationale. Writes nothing — outputs the plan only. `--para` asks the AI to sort by actionability into the four PARA buckets. Apply with `filemayor apply` or discard.',
+    example: 'filemayor cure ~/Downloads --para',
   },
   {
     name: 'apply',
@@ -60,10 +60,10 @@ const triad: Command[] = [
   },
   {
     name: 'undo',
-    signature: 'filemayor undo [--all]',
+    signature: 'filemayor undo [--list | --session <id> | --all]',
     description:
-      'Reverse moves. Without flags, reverses the most recent operation. `--all` reverses the entire session. Persists across crashes.',
-    example: 'filemayor undo --all',
+      'Reverse moves and deletions. Plain `undo` reverses the most recent session; `--list` shows undoable history; `--session <id>` reverses a specific past session; `--all` reverses everything. Restores trashed files too. Persists across crashes.',
+    example: 'filemayor undo --list',
   },
 ];
 
@@ -106,15 +106,15 @@ const tools: Command[] = [
     name: 'dedupe',
     signature: 'filemayor dedupe <dir>',
     description:
-      'Remove duplicates safely. Keeps the canonical copy (oldest, or matching a heuristic), trashes the rest. Journaled.',
+      'Remove duplicates safely — matched by content hash, not filename. Keeps the oldest copy; the rest go to FileMayor’s trash, journaled, so `filemayor undo` restores them.',
     example: 'filemayor dedupe ~/Photos',
   },
   {
     name: 'watch',
-    signature: 'filemayor watch <dir>',
+    signature: 'filemayor watch <dir> [--para]',
     description:
-      'Live auto-organize. Monitors a folder; routes new arrivals to their correct homes in real-time.',
-    example: 'filemayor watch ~/Downloads',
+      'Live auto-organize. Monitors a folder; routes new arrivals to their correct homes in real-time. `--para` routes each new file into Projects / Areas / Resources / Archives by actionability — journaled, so undo works.',
+    example: 'filemayor watch ~/Downloads --para',
   },
 ];
 
