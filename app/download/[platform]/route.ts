@@ -5,18 +5,15 @@
  *   /download/windows → 302 → latest .exe
  *   /download/linux   → 302 → latest .AppImage (or .deb fallback)
  *
- * Source of truth: GitHub Releases on the public `filemayor-landing` repo.
- * The release-landing-sync workflow keeps that repo's releases in lockstep
- * with the private `FileMayor` repo's build pipeline.
+ * Source of truth: GitHub Releases on the public `FileMayor` repo, where
+ * the build-desktop workflow publishes the DMG/exe/AppImage/deb assets.
+ * (Historically these were mirrored to the landing repo while FileMayor
+ * was private; the roles are now reversed — the landing repo is private
+ * and FileMayor is public, so we query FileMayor directly. Assets on a
+ * private repo's releases are auth-gated and would 404 for visitors.)
  *
- * Why query the PUBLIC repo: assets on a private repo's releases are auth-
- * gated, so a redirect would land on a 404 for unauthenticated visitors.
- * Mirroring to the public landing repo gives us unauthenticated browser_
- * download_urls that work for everyone.
- *
- * If a sync hasn't happened yet (no releases on landing repo), the route
- * falls back to the GitHub releases UI so the visitor still gets somewhere
- * useful instead of a 404.
+ * If the release lookup fails, the route falls back to the GitHub
+ * releases UI so the visitor still gets somewhere useful instead of a 404.
  */
 
 import { NextResponse } from 'next/server';
@@ -39,9 +36,9 @@ type Release = {
 };
 
 const RELEASES_API =
-  'https://api.github.com/repos/Hrypopo/filemayor-landing/releases/latest';
+  'https://api.github.com/repos/Hrypopo/FileMayor/releases/latest';
 
-const RELEASES_UI = 'https://github.com/Hrypopo/filemayor-landing/releases/latest';
+const RELEASES_UI = 'https://github.com/Hrypopo/FileMayor/releases/latest';
 
 type Platform = 'mac' | 'macos' | 'darwin' | 'windows' | 'win' | 'linux';
 

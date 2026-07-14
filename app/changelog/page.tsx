@@ -126,10 +126,10 @@ export default async function ChangelogPage() {
               <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-text-3">
                 Source:{' '}
                 <Link
-                  href="https://github.com/Hrypopo/filemayor-landing/blob/main/content/CHANGELOG.md"
+                  href="https://github.com/Hrypopo/FileMayor/blob/main/CHANGELOG.md"
                   className="text-text-2 hover:text-accent"
                 >
-                  content/CHANGELOG.md
+                  CHANGELOG.md
                 </Link>
               </p>
             )}
