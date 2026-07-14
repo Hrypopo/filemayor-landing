@@ -108,9 +108,9 @@ export default function SkillPage() {
                   Drop in the skill.
                 </h3>
                 <code className="mt-5 block whitespace-pre-wrap break-all rounded-md border border-border bg-bg px-3 py-2.5 font-mono text-[12px] leading-relaxed text-text">
-{`git clone https://github.com/Hrypopo/filemayor-landing.git /tmp/fm-skill
+{`git clone --depth 1 https://github.com/Hrypopo/FileMayor.git /tmp/fm-skill
 mkdir -p ~/.claude/skills
-cp -r /tmp/fm-skill/skill ~/.claude/skills/filemayor
+cp -r /tmp/fm-skill/.claude/skills/filemayor ~/.claude/skills/filemayor
 rm -rf /tmp/fm-skill`}
                 </code>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-text-3">
@@ -226,10 +226,10 @@ rm -rf /tmp/fm-skill`}
             <ul className="mt-6 space-y-3 text-[15px] leading-relaxed text-text-2">
               <li>
                 <Link
-                  href="https://github.com/Hrypopo/filemayor-landing/tree/main/skill"
+                  href="https://github.com/Hrypopo/FileMayor/tree/main/.claude/skills/filemayor"
                   className="font-mono text-[14px] text-accent hover:underline"
                 >
-                  github.com/Hrypopo/filemayor-landing/tree/main/skill
+                  github.com/Hrypopo/FileMayor · .claude/skills/filemayor
                 </Link>{' '}
                 — the skill source. Inspect <code className="font-mono text-[14px]">SKILL.md</code> before installing.
               </li>
