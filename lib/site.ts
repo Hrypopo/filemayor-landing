@@ -12,7 +12,7 @@ export const site = {
     org: 'Hrypopo',
     landing: 'https://github.com/Hrypopo/filemayor-landing',
     app: 'https://github.com/Hrypopo/FileMayor',
-    releases: 'https://github.com/Hrypopo/FileMayor/releases/latest',
+    releases: 'https://github.com/Hrypopo/filemayor-landing/releases/latest',
   },
   author: {
     name: 'Lehlohonolo Goodwill Nchefu',
