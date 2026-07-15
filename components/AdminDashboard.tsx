@@ -25,7 +25,7 @@ interface Stats {
   github: { stars: number; forks: number; issues: number } | null;
   subscribers: { configured: boolean; count?: number | null; active?: number };
   telemetry: {
-    configured: boolean; total?: number;
+    configured: boolean; unavailable?: boolean; total?: number;
     byCommand?: { cmd: string; n: number }[];
     byOs?: { os: string; n: number }[];
     byDay?: { day: string; n: number }[];
@@ -217,6 +217,14 @@ export function AdminDashboard() {
         </div>
       </div>
 
+      {/* Refresh errors are surfaced here — otherwise a failed refresh would
+          silently show stale data with a stale timestamp. */}
+      {error && (
+        <div className="mb-6 rounded-lg border border-danger/40 bg-danger/[0.06] px-4 py-3 text-sm text-danger">
+          Last refresh failed: {error} — showing the previous snapshot.
+        </div>
+      )}
+
       {/* Stat tiles */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <Tile label="npm · 30 days" value={fmt(stats.npm.month)} hint={`week ${fmt(stats.npm.week)} · year ${fmt(stats.npm.year)}`} />
@@ -240,7 +248,15 @@ export function AdminDashboard() {
 
       {/* Telemetry */}
       <div className="mt-6">
-        {t.configured ? (
+        {t.configured && t.unavailable ? (
+          <div className="rounded-xl border border-warn/40 bg-warn/[0.06] p-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-warn">CLI telemetry — store unreachable</p>
+            <p className="mt-3 text-sm leading-relaxed text-text-2">
+              KV is configured but the read timed out or errored. Counters are still being
+              written; hit Refresh, or check the Upstash dashboard.
+            </p>
+          </div>
+        ) : t.configured ? (
           <div className="grid gap-6 md:grid-cols-2">
             <div className="md:col-span-2">
               <DailyLine title={`CLI pings · daily (total ${fmt(t.total)})`} data={t.byDay ?? []} />
