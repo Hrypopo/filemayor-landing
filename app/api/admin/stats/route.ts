@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHash, timingSafeEqual } from 'node:crypto';
 
 // Admin analytics aggregator. Server-side so API secrets (Resend) never
 // reach the browser. Gated by the ADMIN_KEY env var — requests must send
@@ -7,7 +8,17 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 const PKGS = ['filemayor', 'filemayor-mcp'] as const;
-const GH_REPO = 'Hrypopo/FileMayor';
+// The PUBLIC repo — FileMayor is private, so an unauthenticated GitHub API
+// call against it 404s. The landing repo is the public one.
+const GH_REPO = 'Hrypopo/filemayor-landing';
+
+/** Constant-time key check that also hides length (compares SHA-256 digests). */
+function keyMatches(provided: string | null, expected: string): boolean {
+  if (!provided) return false;
+  const a = createHash('sha256').update(provided).digest();
+  const b = createHash('sha256').update(expected).digest();
+  return timingSafeEqual(a, b);
+}
 
 const CLI_CMDS = [
   'scan', 'analyze', 'organize', 'para', 'clean', 'watch', 'undo', 'init',
@@ -35,14 +46,15 @@ function kvConfig() {
 /** MGET over the Upstash REST API; returns numbers keyed by the input names. */
 async function kvGetNumbers(keys: string[]): Promise<Record<string, number> | null> {
   const kv = kvConfig();
-  if (!kv || keys.length === 0) return kv ? {} : null;
+  if (!kv) return null;                 // not configured
+  if (keys.length === 0) return {};
   try {
     const res = await fetch(`${kv.url}/mget/${keys.map(encodeURIComponent).join('/')}`, {
       headers: { Authorization: `Bearer ${kv.token}` },
       signal: AbortSignal.timeout(4000),
       cache: 'no-store',
     });
-    if (!res.ok) return {};
+    if (!res.ok) return null;           // reachable-but-error → surface as unavailable
     const data = await res.json(); // { result: (string|null)[] }
     const out: Record<string, number> = {};
     keys.forEach((k, i) => {
@@ -51,19 +63,19 @@ async function kvGetNumbers(keys: string[]): Promise<Record<string, number> | nu
     });
     return out;
   } catch {
-    return {};
+    return null;                        // timeout/network → unavailable, not "all zeros"
   }
 }
 
 async function npmStats() {
-  const [pkg, week, month, year, range] = await Promise.all([
+  const [pkg, week, month, year, range, mcpMonth] = await Promise.all([
     json(`https://registry.npmjs.org/filemayor`),
     json(`https://api.npmjs.org/downloads/point/last-week/filemayor`),
     json(`https://api.npmjs.org/downloads/point/last-month/filemayor`),
     json(`https://api.npmjs.org/downloads/point/last-year/filemayor`),
     json(`https://api.npmjs.org/downloads/range/last-month/filemayor`),
+    json(`https://api.npmjs.org/downloads/point/last-month/filemayor-mcp`),
   ]);
-  const mcpMonth = await json(`https://api.npmjs.org/downloads/point/last-month/filemayor-mcp`);
   return {
     latest: pkg?.['dist-tags']?.latest ?? null,
     versions: pkg?.versions ? Object.keys(pkg.versions).length : null,
@@ -119,7 +131,9 @@ async function telemetryStats() {
     ...days.map((d) => `fm:t:day:${d}`),
   ];
   const nums = await kvGetNumbers(keys);
-  if (!nums) return { configured: false as const };
+  // kv is set (checked above) but the read failed → distinct "unavailable" state,
+  // not silent all-zeros that looks like "no pings yet".
+  if (!nums) return { configured: true as const, unavailable: true as const };
 
   return {
     configured: true as const,
@@ -140,7 +154,7 @@ export async function GET(req: NextRequest) {
   if (!adminKey) {
     return NextResponse.json({ error: 'ADMIN_KEY not configured on the server' }, { status: 503 });
   }
-  if (req.headers.get('x-admin-key') !== adminKey) {
+  if (!keyMatches(req.headers.get('x-admin-key'), adminKey)) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 

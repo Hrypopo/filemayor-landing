@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { after } from 'next/server';
+
+// A version string only counts if it looks like real semver — otherwise a
+// caller could POST random `v` values forever and grow Redis keys without
+// bound (each fm:t:v:<v> is a distinct permanent key).
+const SEMVER = /^\d{1,3}\.\d{1,3}\.\d{1,3}(?:-[0-9A-Za-z.]{1,12})?$/;
 
 // Anonymous CLI telemetry endpoint.
 // Payload: { v: string, os: string, arch: string, cmd: string }
@@ -33,11 +39,12 @@ async function kvIncrement(cmd: string, osName: string, v: string) {
     ['INCR', 'fm:t:total'],
     ['INCR', `fm:t:cmd:${cmd}`],
     ['INCR', `fm:t:os:${osName}`],
-    ['INCR', `fm:t:v:${v}`],
     ['INCR', `fm:t:day:${day}`],
     // Bounded key space: day keys expire after 100 days.
     ['EXPIRE', `fm:t:day:${day}`, String(100 * 24 * 3600)],
   ];
+  // Only track real semver versions — keeps the fm:t:v:* keyspace bounded.
+  if (SEMVER.test(v)) pipeline.splice(3, 0, ['INCR', `fm:t:v:${v}`]);
   try {
     await fetch(`${kv.url}/pipeline`, {
       method: 'POST',
@@ -73,12 +80,19 @@ export async function POST(req: NextRequest) {
     ts: new Date().toISOString(),
   }));
 
-  await kvIncrement(cmd, osName, v);
+  // Persist AFTER the response is sent so the CLI's ping never waits on Redis
+  // (the CLI has a short client-side timeout; a slow KV write shouldn't make
+  // telemetry look broken). Falls back to inline await if `after` is absent.
+  if (typeof after === 'function') {
+    after(kvIncrement(cmd, osName, v));
+  } else {
+    await kvIncrement(cmd, osName, v);
+  }
 
   return new NextResponse(null, { status: 204 });
 }
 
 // No GET — only POST accepted
 export async function GET() {
-  return new NextResponse(null, { status: 405 });
+  return new NextResponse(null, { status: 405, headers: { Allow: 'POST' } });
 }
