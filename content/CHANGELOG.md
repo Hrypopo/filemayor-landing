@@ -2,21 +2,36 @@
 
 All notable changes to FileMayor will be documented in this file.
 
-## [4.0.7] — 2026-06-28
+## [4.0.10] — 2026-07-15
+
+### 🛟 Reversibility hardening
+- **Cross-device undo no longer strands files.** Deleting or moving a file across a filesystem boundary (external drive, separate mount, tmpfs) already fell back to copy+remove on the way out — but `undo` used a plain rename, which throws `EXDEV` across devices and left the file sitting in the trash. Both directions now share the cross-device fallback, so every deletion stays truly reversible regardless of where the file lived.
+- **Deterministic rollback order for same-millisecond operations.** Chained moves (A→B→C) that were journaled within the same millisecond tied on the ISO timestamp and could reverse in the wrong order, stranding the file. A monotonic per-write sequence now breaks those ties in true write order.
+- **`undo --session` with no id fails loudly** instead of silently undoing the most recent session (the bare flag parsed to `true` and fell through to the default scope). It now exits non-zero with a hint to run `undo --list`.
+
+## [4.0.9] — 2026-07-03
+
+### ♻️ Deletions are now truly reversible
+- **Trash-based deletes everywhere** — `clean`, `dedupe`, watch delete-rules, and the `filemayor_delete_files` MCP tool now move files to a durable FileMayor trash (`~/.filemayor-trash`) instead of unlinking permanently. Every removal is journaled, so `filemayor undo` restores it. (Previously the internal trash sat in the OS temp dir — wiped on reboot — and delete journaling was a no-op, so undo could never restore a deletion.)
+
+### 🕘 Undo history
+- **`filemayor undo --list`** shows every undoable session (id, time, moves/deletes); **`undo --session <id>`** reverses a specific past session; **`undo --all`** reverses everything. Plain `undo` now reverses only the *most recent* session instead of unwinding the entire journal.
+
+### 🔍 Honest, fast duplicate detection
+- **Dedupe is now genuinely content-hash based** (it previously matched on size+name, despite the docs saying "hash-based"). Three-stage pipeline — size buckets → 64 KB partial hash → full streamed hash with bounded-concurrency I/O — keeps it fast on very large folders. Identical files with different names are now caught; same-name-different-content files are no longer false-positived.
+
+### 🗂️ PARA, continuous and semantic
+- **`filemayor watch <dir> --para`** — new files auto-route into Projects / Areas / Resources / Archives as they land, journaled (undo works). The "a system that stays tidy" workflow.
+- **`filemayor cure <dir> --para`** — semantic PARA via any AI provider: the planner receives a hard PARA destination contract and the plan validator now recognises moves *into* the four buckets as intentional re-filing rather than "domain scattering". The CLI `cure` also drops its stale Gemini-only gate: first key of Anthropic / Gemini / OpenAI wins, with the free FileMayor proxy as fallback.
+
+## [4.0.8] — 2026-06-28
 
 ### 🗂️ PARA method — sort by actionability
-- **New `filemayor para <dir>` command** — sorts a folder into Projects / Areas / Resources / Archives (the PARA framework by Tiago Forte) by *actionability* rather than file type. Deterministic and reversible; every move is labelled with its reason.
-- **`filemayor init --para`** scaffolds the four folders with plain-English teaching READMEs.
-- **`filemayor_para` MCP tool** exposes the deterministic PARA plan (no AI key needed); Claude can also do semantic PARA and apply.
-- _PARA is a method by Tiago Forte. FileMayor automates it and is not affiliated with or endorsed by him._
-
-### 🤖 Real multi-provider AI planning
-- `filemayor_plan` now dispatches to **Anthropic (Claude), Gemini, or OpenAI** by whichever key is set — no longer Gemini-only. Surface-consistency tests guard against version/claim/provider drift.
-
-## [4.0.6] — 2026-06-21
-
-### 🔧 Consistency
-- Unified CLI and MCP package versions; `--audit` now derives version and source line count at runtime so trust reports can't drift out of date.
+- **New `filemayor para <dir>` command** — sorts a folder into Projects / Areas / Resources / Archives (the PARA framework) by *actionability* rather than file type. Deterministic and read-only: it reasons from recency, file category, folder-name keywords, and project substrates, and **labels every move with the reason it chose** (e.g. "Not modified in 18 months"). Output is the same reversible plan shape as `cure` — review, then `filemayor apply`, undo anytime.
+- **`filemayor init --para`** — scaffolds the four PARA folders with plain-English teaching READMEs so a first-timer who has never heard of PARA understands each bucket.
+- **`filemayor_para` MCP tool** — exposes the deterministic PARA plan (plus a ready-to-apply `moves` array) to any MCP client, no AI key required. When Claude is the client it can also do *semantic* PARA: reason about true Projects-vs-Areas-vs-Resources itself, then apply.
+- **Config** — new `para:` section (archive threshold, active window, renamable bucket folders, area/resource/project keyword lists) and a `--para` config preset.
+- Engine respects project substrates (`.git`, `package.json`, `.als`…): a code/music project moves intact into Projects, never shredded file-by-file. Files already inside a PARA folder are left untouched (idempotent).
 
 ## [4.0.5] — 2026-06-09
 
