@@ -2,6 +2,14 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.0.11] — 2026-07-20
+
+### 🧱 No file left behind — on any platform
+- **Moves never overwrite.** POSIX rename silently destroys an existing destination file (Windows errors instead) — so a move onto an occupied path was data loss on Mac/Linux and a hard failure on Windows. Every engine rename now lands beside an existing file as `name (1).ext` instead of over it, and the journal records the real destination so undo stays exact.
+- **Undo never overwrites either.** Restoring a file to a path where you've since created a *new* file now restores it beside the newer file instead of clobbering it.
+- **Windows lock resilience.** Renames retry briefly on `EPERM`/`EBUSY` — antivirus and indexer scans hold transient locks that made operations fail spuriously on Windows.
+- **Watch-rule moves are now journaled.** The watcher's `move` rule used a raw rename (not undoable, could overwrite, no cross-device fallback); it now goes through the same journaled engine as everything else.
+
 ## [4.0.10] — 2026-07-15
 
 ### 🛟 Reversibility hardening
