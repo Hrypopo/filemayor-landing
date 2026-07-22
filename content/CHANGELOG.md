@@ -2,6 +2,13 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.0.12] — 2026-07-21
+
+### ⚡ 5× faster duplicate detection
+- **`dedupe`/`duplicates` is ~5× faster on real-world folders** (benchmarked: 3.1s → 0.6s on a 20,000-file tree, identical results). Three compounding fixes: small files (≤64 KB) are hashed with direct reads instead of round-tripping Node's 4-thread I/O pool — measured 12× faster for that pass alone; files that fit inside the 64 KB head sample skip the second full-read pass entirely (the head hash already covers the whole file); and large-file hashing concurrency was raised 8 → 32.
+- **Scanner is leaner on big trees** — extension filters and ignore globs are compiled once per scan instead of re-built per file (filtered scans ~33% faster), and directories no longer cost an extra `lstat` each.
+- New regression tests pin the tricky large-file paths: identical >64 KB files are still caught, and same-head/different-tail files are still rejected.
+
 ## [4.0.11] — 2026-07-20
 
 ### 🧱 No file left behind — on any platform
