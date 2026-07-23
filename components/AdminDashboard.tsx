@@ -269,10 +269,14 @@ export function AdminDashboard() {
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-warn">CLI telemetry — storage not configured</p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-2">
               Pings reach <code className="font-mono">/api/ping</code> but only land in Vercel logs.
-              To unlock per-command / per-OS / per-day analytics here: create a free Upstash Redis
-              database, then add <code className="font-mono">UPSTASH_REDIS_REST_URL</code> and{' '}
-              <code className="font-mono">UPSTASH_REDIS_REST_TOKEN</code> to the Vercel project env
-              and redeploy. Counting starts immediately — no code changes needed.
+              To unlock per-command / per-OS / per-day analytics here:{' '}
+              <strong className="text-text">the one-click way</strong> — in Vercel, open{' '}
+              <span className="font-mono">Storage → Create → KV</span>, connect it to this project,
+              and redeploy; Vercel injects <code className="font-mono">KV_REST_API_URL</code> and{' '}
+              <code className="font-mono">KV_REST_API_TOKEN</code>, which this endpoint already reads.
+              Or add <code className="font-mono">UPSTASH_REDIS_REST_URL</code> /{' '}
+              <code className="font-mono">UPSTASH_REDIS_REST_TOKEN</code> from any Upstash database by hand.
+              Either way, counting starts immediately — no code changes needed.
             </p>
           </div>
         )}
