@@ -2,6 +2,20 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.0.14] — 2026-07-22
+
+### 🍎 macOS correctness + tested-on-every-platform CI
+- **macOS: the security jailer no longer falsely rejects legitimate operations.** Two real bugs, caught the first time the test suite ran on a real Mac: (1) a destination that didn't exist yet was never symlink-resolved, so under macOS's symlinked paths (`/var` → `/private/var`, i.e. every temp location) it could never match the jail root — every new-file destination was refused; (2) the system-zone protection blocked the entire macOS user temp tree (it resolves inside `/private/var`). Both fixed strictly by removing false *rejections* — `/etc`, `/usr`, and the rest of the protected zones still block, verified by the same suite.
+- **CI now runs the full engine suite + e2e pipeline on Windows, macOS, and Linux for every change.** Cross-platform behavior (no-clobber renames, cross-device fallbacks, lock retries) is a machine-checked fact on real runners, not an assumption. (The first Windows run also exposed that the test step silently never ran under PowerShell — fixed.)
+
+## [4.0.13] — 2026-07-22
+
+### 🖥️ The desktop app and MCP servers get the same guarantees as the CLI
+- **Desktop System Cleaner deletes are now trash-based and journaled.** This was the one remaining surface that deleted permanently (`unlink`) — `filemayor undo` can now reverse desktop cleanups too.
+- **Desktop moves go through the journaled engine**: no-clobber (an occupied destination gets `name (N).ext` beside it instead of being silently overwritten), cross-device safe, resilient to transient Windows locks — and recorded in the master journal, so the CLI's `undo` sees desktop actions.
+- **Desktop and MCP undo never overwrite.** Restoring a move onto a path where a *new* file now exists lands beside it. The old blanket copy-fallback — which turned Windows' "destination exists" refusal into an overwrite — is gone; copying now happens only for genuine cross-device renames.
+- **`apply_plan` in the CLI's MCP server is now actually journaled.** It claimed "all moves are journaled, call undo to reverse" while writing no journal entries; moves now route through the engine, making the claim true.
+
 ## [4.0.12] — 2026-07-21
 
 ### ⚡ 5× faster duplicate detection
