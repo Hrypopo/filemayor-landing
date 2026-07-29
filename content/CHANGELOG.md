@@ -2,6 +2,23 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.0.16] — 2026-07-29
+
+### 🛠️ The desktop app actually uses the safe engine now
+This is the real fix behind "the desktop engine is useless — it just makes folders, loses files, does the opposite of organising." The desktop **Organize** was a separate, naive reimplementation in the UI that bypassed the real engine entirely:
+- **It had no project protection** — it flattened *everything* into category folders, shredding nested/project folders. It now runs the same **substrate-protected** engine as the CLI: code projects and their contents are left intact.
+- **It swallowed move errors and always showed "Success!"** — even when nothing moved (hence empty folders). It now reports the **real** number moved and failed, and every move is **journaled and reversible from the app's Undo**.
+- **Scan is now a true preview** — it shows the exact plan the engine will run, and touches nothing until you click Organize.
+- **Terminal**: "Dedupe" and "Apply" printed `undefined`/`NaN` result counts, and "Clean" was a dead button — all three now read the correct fields and work.
+- **Workspace/Analyze**: junk category sizes and the total rendered blank; fixed. Progress no longer shows "[object Object]".
+
+## [4.0.15] — 2026-07-28
+
+### 🛟 Critical desktop fix — Organize is safe again
+- **The desktop "Organize" was firing its file moves detached, with no plan and no results.** `organize()` is async, but the Electron handler called it without `await` — so the preview's file count was always 0 (the bulk-safety gate silently never fired), and the real run executed in the background while the UI showed nothing. That is the "it just makes folders / files vanish / does the opposite of organising" behaviour. The handler now awaits the plan, shows it before touching anything, enforces the bulk gate on the real count, and returns the actual results. **No files were ever deleted — `organize` only ever moves through the reversible engine — but the missing feedback made moved files look lost.**
+- **The desktop "Undo" now reverses an Organize.** The app's Undo read a separate history file, while Organize/dedupe/clean journal to the master journal — so Undo couldn't reverse an organize at all. "Undo everything" now drains the master journal (the same source the CLI's `filemayor undo` uses), so every engine action is reversible from the app.
+- Regression tests pin both: `organize()` must be awaited and return a real plan, and an organize run loses zero files and fully reverses.
+
 ## [4.0.14] — 2026-07-22
 
 ### 🍎 macOS correctness + tested-on-every-platform CI
