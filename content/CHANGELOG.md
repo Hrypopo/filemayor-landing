@@ -2,6 +2,13 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.1.0] — 2026-07-29
+
+### 🧭 Multi-machine safety, real auto-updates, and a calmer look
+- **Undo is now scoped to the machine that made the change.** The journal lives in your home dir, which corporate setups roam / OneDrive-sync between machines — so an undo on your work PC could try to replay moves recorded on your personal PC (paths that don't exist there). Every entry now records its host; undo and the session list only ever act on operations made on *this* machine. (Pre-4.1.0 entries stay undoable.)
+- **Auto-update actually works now.** The updater was pointed at the private source repo (so update checks 404'd for everyone) and the build never shipped electron-updater's manifest files. Both fixed: updates now come from the public release, with the `latest*.yml` manifests published alongside the binaries — installed apps will self-update going forward.
+- **Desktop UI, first pass:** removed the drifting multi-colour "mesh" background and the heavy frosted-glass cards for calmer, solid surfaces with hairline borders — a step away from the generic template look toward the site's identity. (A deeper visual/branding pass is in progress.)
+
 ## [4.0.16] — 2026-07-29
 
 ### 🛠️ The desktop app actually uses the safe engine now
