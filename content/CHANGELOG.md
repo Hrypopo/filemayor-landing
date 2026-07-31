@@ -2,6 +2,15 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.2.0] — 2026-07-29
+
+### 🎨 Desktop identity — off the template, onto "operator console"
+The desktop app's whole visual system was the generic dark-glass-SaaS default (near-black + gold + a cyan pop, three drifting "mesh" gradient blobs, heavy frosted-glass cards, animated gradient text). Replaced it with an identity that matches the product and the site:
+- **Palette:** warm ink + a single gold accent, with verdigris reserved for the "safe / reversible" semantic — on considered warm neutrals, not cold blue-black. The light theme is warm paper, matching filemayor.com.
+- **Type:** system **monospace** for the brand, headings, labels and badges (the "command bar for your filesystem" identity), system sans for body — no web-font dependency, so nothing silently falls back offline.
+- **Surfaces:** solid cards with hairline borders instead of frosted glass; one quiet static accent wash instead of animated mesh; crisp solid-gold buttons instead of shimmering gradients.
+Every view re-skins through the shared design tokens, so the change is coherent app-wide. (Per-view layout polish continues from here.)
+
 ## [4.1.0] — 2026-07-29
 
 ### 🧭 Multi-machine safety, real auto-updates, and a calmer look
