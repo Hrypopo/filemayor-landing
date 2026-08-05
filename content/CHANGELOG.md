@@ -2,6 +2,11 @@
 
 All notable changes to FileMayor will be documented in this file.
 
+## [4.2.1] — 2026-07-30
+
+### ✨ Ambient background
+- The desktop app gets a faint animated **Vanta NET** background — a slow gold "graph of points" behind the UI, themed to the palette (gold on ink; darker gold on warm paper in light mode). It's deliberately quiet (low opacity), disabled under *prefers-reduced-motion*, and lazy-loaded so three.js never touches the app's startup bundle. If WebGL isn't available it simply doesn't render — nothing depends on it.
+
 ## [4.2.0] — 2026-07-29
 
 ### 🎨 Desktop identity — off the template, onto "operator console"
