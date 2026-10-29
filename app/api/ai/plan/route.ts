@@ -7,7 +7,8 @@
  *
  * Key resolution (in priority order):
  *   1. X-Gemini-Key header — user-supplied BYOK key (no rate limiting applied)
- *   2. GEMINI_API_KEY env var — server-side hosted key (rate limited, free tier only)
+ *   2. ANTHROPIC_API_KEY, else GEMINI_API_KEY env var — server-side hosted key
+ *      (rate limited, free tier only). See lib/ai-json.ts.
  *
  * When a user supplies their own key the request is forwarded directly;
  * no server-side API costs are incurred and the monthly quota is not consumed.
@@ -20,11 +21,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyLicenseJwt } from '@/lib/license';
 import { checkRateLimit } from '@/lib/rate-limit';
+import { completeJson, aiConfigured } from '@/lib/ai-json';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-
-const GEMINI_URL =
-  'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 const SYSTEM_PROMPT = `You are FileMayor's AI planning engine. Given a description of a messy folder and a user's intent, output a structured JSON plan.
 
@@ -45,18 +44,6 @@ interface PlanRequestBody {
   prompt: string;
   context: Record<string, unknown>;
   deviceId?: string;
-}
-
-interface GeminiResponse {
-  candidates?: Array<{
-    content?: {
-      parts?: Array<{ text?: string }>;
-    };
-  }>;
-  error?: {
-    message?: string;
-    code?: number;
-  };
 }
 
 interface PlanOperation {
@@ -83,14 +70,6 @@ function isJwt(token: string): boolean {
 /** Validate a user-supplied Gemini key: must start with AIza and be ≥ 20 chars. */
 function isValidGeminiKey(key: string): boolean {
   return /^AIza[A-Za-z0-9_-]{20,}$/.test(key.trim());
-}
-
-/** Strip markdown code fences from Gemini's response text. */
-function stripCodeFences(text: string): string {
-  return text
-    .replace(/^```(?:json)?\s*/i, '')
-    .replace(/\s*```\s*$/, '')
-    .trim();
 }
 
 // ─── Route handler ────────────────────────────────────────────────────────────
@@ -175,81 +154,27 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     remainingCalls = result.remaining;
   }
 
-  // ── Resolve Gemini key ──────────────────────────────────────────────────────
-  const geminiKey = usingByok ? byokKey : (process.env.GEMINI_API_KEY ?? null);
-  if (!geminiKey) {
+  // ── Call the model (user's Gemini key, else server Claude/Gemini key) ──────
+  if (!usingByok && !aiConfigured()) {
     return NextResponse.json(
       { error: 'AI service temporarily unavailable' },
       { status: 503, headers },
     );
   }
 
-  // ── Call Gemini ─────────────────────────────────────────────────────────────
-  let geminiRes: Response;
+  let plan: AIPlan;
   try {
-    geminiRes = await fetch(`${GEMINI_URL}?key=${geminiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              { text: SYSTEM_PROMPT },
-              {
-                text: `User request: ${body.prompt}\n\nFolder context: ${JSON.stringify(body.context)}`,
-              },
-            ],
-          },
-        ],
-      }),
-    });
-  } catch {
-    return NextResponse.json({ error: 'AI service temporarily unavailable' }, { status: 503, headers });
-  }
-
-  if (!geminiRes.ok) {
-    let geminiError: unknown = null;
-    try {
-      geminiError = (await geminiRes.json()) as unknown;
-    } catch {
-      geminiError = await geminiRes.text().catch(() => null);
-    }
-    return NextResponse.json(
-      { error: 'AI service error', details: geminiError },
-      { status: 502, headers },
-    );
-  }
-
-  // ── Parse Gemini response ───────────────────────────────────────────────────
-  let geminiData: GeminiResponse;
-  try {
-    geminiData = (await geminiRes.json()) as GeminiResponse;
-  } catch {
-    return NextResponse.json({ error: 'AI service error', details: 'Unreadable response' }, { status: 502, headers });
-  }
-
-  const rawText =
-    geminiData.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
-
-  if (!rawText) {
-    return NextResponse.json(
-      { error: 'AI service error', details: 'Empty response from model' },
-      { status: 502, headers },
-    );
-  }
-
-  // ── Parse the plan JSON ─────────────────────────────────────────────────────
-  let plan: AIPlan | null = null;
-  try {
-    plan = JSON.parse(stripCodeFences(rawText)) as AIPlan;
-  } catch {
-    return NextResponse.json(
+    plan = (await completeJson(
       {
-        plan: null,
-        rawResponse: rawText,
-        error: 'Could not parse plan as JSON',
+        system: SYSTEM_PROMPT,
+        user: `User request: ${body.prompt}\n\nFolder context: ${JSON.stringify(body.context)}`,
       },
-      { status: 200, headers },
+      usingByok ? byokKey : null,
+    )) as AIPlan;
+  } catch (err) {
+    return NextResponse.json(
+      { error: 'AI service error', details: err instanceof Error ? err.message : String(err) },
+      { status: 502, headers },
     );
   }
 
