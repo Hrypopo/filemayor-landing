@@ -38,12 +38,12 @@ function currentMonthKey(): string {
 
 // ─── Layer 1: burst check ─────────────────────────────────────────────────────
 
-async function checkBurst(identifier: string, redis: Redis): Promise<boolean> {
-  const key = `ai:burst:${identifier}`;
+async function checkBurst(identifier: string, redis: Redis, o: Required<RateLimitOptions>): Promise<boolean> {
+  const key = `${o.namespace}:burst:${identifier}`;
   try {
     const count = await redis.incr(key);
-    if (count === 1) await redis.expire(key, BURST_WINDOW_SECONDS);
-    return count <= BURST_LIMIT;
+    if (count === 1) await redis.expire(key, o.burstWindowSeconds);
+    return count <= o.burstLimit;
   } catch {
     return true; // fail-open
   }
@@ -51,20 +51,20 @@ async function checkBurst(identifier: string, redis: Redis): Promise<boolean> {
 
 // ─── Layer 2: monthly quota ───────────────────────────────────────────────────
 
-async function checkMonthlyQuota(identifier: string, redis: Redis): Promise<{
+async function checkMonthlyQuota(identifier: string, redis: Redis, o: Required<RateLimitOptions>): Promise<{
   allowed: boolean;
   remaining: number;
 }> {
-  const key = `ai:rl:${identifier}:${currentMonthKey()}`;
+  const key = `${o.namespace}:rl:${identifier}:${currentMonthKey()}`;
   try {
     const count = await redis.incr(key);
     if (count === 1) await redis.expire(key, MONTHLY_KEY_TTL_SECONDS);
     return {
-      allowed: count <= MONTHLY_LIMIT,
-      remaining: Math.max(0, MONTHLY_LIMIT - count),
+      allowed: count <= o.monthlyLimit,
+      remaining: Math.max(0, o.monthlyLimit - count),
     };
   } catch {
-    return { allowed: true, remaining: MONTHLY_LIMIT }; // fail-open
+    return { allowed: true, remaining: o.monthlyLimit }; // fail-open
   }
 }
 
@@ -74,18 +74,33 @@ export type RateLimitResult =
   | { allowed: true; remaining: number | null }
   | { allowed: false; reason: 'burst' | 'quota'; remaining: number };
 
-export async function checkRateLimit(identifier: string): Promise<RateLimitResult> {
+/** Per-route limits. Defaults match /api/ai/plan. */
+export interface RateLimitOptions {
+  namespace?: string;
+  monthlyLimit?: number;
+  burstLimit?: number;
+  burstWindowSeconds?: number;
+}
+
+export async function checkRateLimit(identifier: string, options: RateLimitOptions = {}): Promise<RateLimitResult> {
+  const o: Required<RateLimitOptions> = {
+    namespace: 'ai',
+    monthlyLimit: MONTHLY_LIMIT,
+    burstLimit: BURST_LIMIT,
+    burstWindowSeconds: BURST_WINDOW_SECONDS,
+    ...options,
+  };
   const config = getRedisConfig();
   if (!config) return { allowed: true, remaining: null };
 
   const redis = new Redis(config);
 
-  const burstOk = await checkBurst(identifier, redis);
+  const burstOk = await checkBurst(identifier, redis, o);
   if (!burstOk) {
     return { allowed: false, reason: 'burst', remaining: 0 };
   }
 
-  const { allowed, remaining } = await checkMonthlyQuota(identifier, redis);
+  const { allowed, remaining } = await checkMonthlyQuota(identifier, redis, o);
   if (!allowed) {
     return { allowed: false, reason: 'quota', remaining: 0 };
   }
